@@ -1,0 +1,363 @@
+// DOM elements
+const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
+const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+const navLinks = document.querySelectorAll('.nav-link');
+const statNumber = document.querySelector('.stat-number');
+const canvas = document.getElementById('particles-canvas');
+const ctx = canvas.getContext('2d');
+
+// Mobile menu functionality
+function toggleMobileMenu() {
+    mobileMenuOverlay.classList.toggle('active');
+    document.body.style.overflow = mobileMenuOverlay.classList.contains('active') ? 'hidden' : '';
+}
+
+function closeMobileMenu() {
+    mobileMenuOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+// Event listeners for mobile menu
+mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+mobileMenuOverlay.addEventListener('click', (e) => {
+    if (e.target === mobileMenuOverlay) {
+        closeMobileMenu();
+    }
+});
+
+// Close mobile menu when clicking nav links
+mobileNavLinks.forEach(link => {
+    link.addEventListener('click', closeMobileMenu);
+});
+
+// Smooth scrolling for navigation links
+function smoothScroll(target) {
+    const element = document.querySelector(target);
+    if (element) {
+        const headerHeight = document.querySelector('.header').offsetHeight;
+        const elementPosition = element.offsetTop - headerHeight;
+        
+        window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+        });
+    }
+}
+
+// Add smooth scrolling to all nav links
+[...navLinks, ...mobileNavLinks].forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = link.getAttribute('href');
+        if (target.startsWith('#')) {
+            smoothScroll(target);
+        }
+    });
+});
+
+// Animated counter for streams
+function animateCounter() {
+    const target = parseInt(statNumber.dataset.target);
+    const duration = 2000; // 2 seconds
+    const start = Date.now();
+    const startValue = 0;
+
+    function updateCounter() {
+        const elapsed = Date.now() - start;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing function for smooth animation
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+        const currentValue = Math.floor(startValue + (target - startValue) * easeOutQuart);
+        
+        statNumber.textContent = currentValue.toLocaleString('pt-BR');
+        
+        if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+        } else {
+            statNumber.textContent = target.toLocaleString('pt-BR');
+        }
+    }
+    
+    updateCounter();
+}
+
+// Particle system for background
+class Particle {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.speedY = (Math.random() - 0.5) * 0.5;
+        this.opacity = Math.random() * 0.5 + 0.1;
+        this.connections = [];
+    }
+    
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        
+        // Wrap around edges
+        if (this.x < 0) this.x = canvas.width;
+        if (this.x > canvas.width) this.x = 0;
+        if (this.y < 0) this.y = canvas.height;
+        if (this.y > canvas.height) this.y = 0;
+    }
+    
+    draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0, 212, 255, ${this.opacity})`;
+        ctx.fill();
+    }
+}
+
+// Initialize particles
+let particles = [];
+const particleCount = 50;
+
+function initParticles() {
+    particles = [];
+    for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+    }
+}
+
+function drawConnections() {
+    for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < 100) {
+                const opacity = (100 - distance) / 100 * 0.1;
+                ctx.beginPath();
+                ctx.moveTo(particles[i].x, particles[i].y);
+                ctx.lineTo(particles[j].x, particles[j].y);
+                ctx.strokeStyle = `rgba(0, 212, 255, ${opacity})`;
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+        }
+    }
+}
+
+function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+    });
+    
+    drawConnections();
+    requestAnimationFrame(animateParticles);
+}
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    initParticles();
+}
+
+// Scroll animations
+function handleScrollAnimations() {
+    const elements = document.querySelectorAll('.glass-card, .section-title');
+    
+    elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+            element.classList.add('animate-on-scroll', 'animated');
+        }
+    });
+}
+
+// Intersection Observer for better performance
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in-up');
+            
+            // Trigger counter animation when hero section is visible
+            if (entry.target.classList.contains('hero')) {
+                setTimeout(animateCounter, 500);
+            }
+        }
+    });
+}, observerOptions);
+
+// Observe elements for animations
+function initObserver() {
+    const elementsToObserve = document.querySelectorAll('.service-card, .artist-card, .about-card, .hero');
+    elementsToObserve.forEach(el => observer.observe(el));
+}
+
+// Header background opacity on scroll
+function handleHeaderScroll() {
+    const header = document.querySelector('.header');
+    const scrolled = window.pageYOffset;
+    const rate = scrolled * -0.5;
+    
+    if (scrolled > 100) {
+        header.style.background = 'rgba(10, 10, 15, 0.95)';
+    } else {
+        header.style.background = 'rgba(10, 10, 15, 0.8)';
+    }
+}
+
+// Add glow effect to buttons on mouse move
+function addButtonGlowEffect() {
+    const buttons = document.querySelectorAll('.btn--primary');
+    
+    buttons.forEach(button => {
+        button.addEventListener('mousemove', (e) => {
+            const rect = button.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            button.style.setProperty('--mouse-x', `${x}px`);
+            button.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
+}
+
+// Add CSS for button glow effect
+function addGlowEffectCSS() {
+    const style = document.createElement('style');
+    style.textContent = `
+        .btn--primary {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn--primary::before {
+            content: '';
+            position: absolute;
+            top: var(--mouse-y, 50%);
+            left: var(--mouse-x, 50%);
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .btn--primary:hover::before {
+            opacity: 1;
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Initialize everything when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize canvas and particles
+    resizeCanvas();
+    animateParticles();
+    
+    // Initialize scroll animations
+    initObserver();
+    
+    // Add button glow effects
+    addButtonGlowEffect();
+    addGlowEffectCSS();
+    
+    // Add scroll event listeners
+    window.addEventListener('scroll', () => {
+        handleScrollAnimations();
+        handleHeaderScroll();
+    });
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        resizeCanvas();
+    });
+    
+    // Add stagger animation to service cards
+    const serviceCards = document.querySelectorAll('.service-card');
+    serviceCards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+    });
+});
+
+// Add loading animation
+window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+    
+    // Add CSS for loading animation
+    const style = document.createElement('style');
+    style.textContent = `
+        body {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        body.loaded {
+            opacity: 1;
+        }
+        
+        .hero-content {
+            transform: translateY(30px);
+            opacity: 0;
+            animation: heroFadeIn 1s ease 0.3s forwards;
+        }
+        
+        @keyframes heroFadeIn {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+});
+
+// Add parallax effect to hero section
+function addParallaxEffect() {
+    const hero = document.querySelector('.hero');
+    
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * -0.5;
+        
+        if (hero) {
+            hero.style.transform = `translateY(${rate}px)`;
+        }
+    });
+}
+
+// Initialize parallax
+addParallaxEffect();
+
+// Add smooth hover transitions
+const style = document.createElement('style');
+style.textContent = `
+    * {
+        transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    }
+    
+    .glass-card {
+        transform-style: preserve-3d;
+    }
+    
+    .service-card:hover {
+        transform: translateY(-10px) rotateX(5deg);
+    }
+    
+    .artist-card:hover {
+        transform: translateY(-8px) scale(1.02);
+    }
+`;
+document.head.appendChild(style);
