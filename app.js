@@ -6,6 +6,7 @@ const navLinks = document.querySelectorAll('.nav-link');
 const statNumber = document.querySelector('.stat-number');
 const canvas = document.getElementById('particles-canvas');
 const ctx = canvas.getContext('2d');
+const contactForm = document.querySelector('.contact-form'); // Novo: formulário de contato
 
 // Mobile menu functionality
 function toggleMobileMenu() {
@@ -58,6 +59,11 @@ function smoothScroll(target) {
 
 // Animated counter for streams
 function animateCounter() {
+    // Verifica se o elemento statNumber e o dataset.target existem
+    if (!statNumber || !statNumber.dataset.target) {
+        console.warn("Elemento .stat-number ou data-target não encontrado para a animação do contador.");
+        return;
+    }
     const target = parseInt(statNumber.dataset.target);
     const duration = 2000; // 2 seconds
     const start = Date.now();
@@ -116,7 +122,7 @@ class Particle {
 
 // Initialize particles
 let particles = [];
-const particleCount = 50;
+const particleCount = 50; // Mantido em 50 para boa performance padrão
 
 function initParticles() {
     particles = [];
@@ -158,12 +164,14 @@ function animateParticles() {
 }
 
 function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    initParticles();
+    if (canvas) { // Verifica se o canvas existe
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        initParticles();
+    }
 }
 
-// Scroll animations
+// Scroll animations (ainda presente para elementos não observados pelo IntersectionObserver)
 function handleScrollAnimations() {
     const elements = document.querySelectorAll('.glass-card, .section-title');
     
@@ -190,23 +198,30 @@ const observer = new IntersectionObserver((entries) => {
             
             // Trigger counter animation when hero section is visible
             if (entry.target.classList.contains('hero')) {
-                setTimeout(animateCounter, 500);
+                // Apenas animar se ainda não foi animado para evitar repetições
+                if (!entry.target.dataset.animated) {
+                    setTimeout(animateCounter, 500);
+                    entry.target.dataset.animated = 'true'; // Marca como animado
+                }
             }
+        } else {
+            // Opcional: remover a classe quando sai da visualização para permitir re-animação
+            // entry.target.classList.remove('fade-in-up');
         }
     });
 }, observerOptions);
 
 // Observe elements for animations
 function initObserver() {
-    const elementsToObserve = document.querySelectorAll('.service-card, .artist-card, .about-card, .hero');
+    const elementsToObserve = document.querySelectorAll('.service-card, .artist-card, .about-card, .hero, .composers-content');
     elementsToObserve.forEach(el => observer.observe(el));
 }
 
 // Header background opacity on scroll
 function handleHeaderScroll() {
     const header = document.querySelector('.header');
+    if (!header) return; // Garante que o header existe
     const scrolled = window.pageYOffset;
-    const rate = scrolled * -0.5;
     
     if (scrolled > 100) {
         header.style.background = 'rgba(10, 10, 15, 0.95)';
@@ -231,13 +246,14 @@ function addButtonGlowEffect() {
     });
 }
 
-// Add CSS for button glow effect
+// Add CSS for button glow effect (pode ser movido para style.css para melhor organização)
 function addGlowEffectCSS() {
     const style = document.createElement('style');
     style.textContent = `
         .btn--primary {
             position: relative;
             overflow: hidden;
+            z-index: 1; /* Garante que o pseudo-elemento esteja atrás do texto */
         }
         
         .btn--primary::before {
@@ -252,6 +268,7 @@ function addGlowEffectCSS() {
             opacity: 0;
             transition: opacity 0.3s ease;
             pointer-events: none;
+            z-index: -1; /* Garante que o pseudo-elemento esteja atrás do conteúdo */
         }
         
         .btn--primary:hover::before {
@@ -260,6 +277,28 @@ function addGlowEffectCSS() {
     `;
     document.head.appendChild(style);
 }
+
+// Handle contact form submission (simples, sem envio real para o servidor)
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault(); // Impede o envio padrão do formulário
+        
+        // Coleta os dados do formulário
+        const name = contactForm.querySelector('#name').value;
+        const email = contactForm.querySelector('#email').value;
+        const message = contactForm.querySelector('#message').value;
+        
+        // Aqui você enviaria os dados para um serviço de backend (e.g., Formspree, Netlify Forms, sua API)
+        console.log('Dados do formulário:', { name, email, message });
+        
+        // Exemplo de feedback para o usuário
+        alert('Sua mensagem foi enviada! Em breve entraremos em contato.');
+        
+        // Limpa o formulário
+        contactForm.reset();
+    });
+}
+
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
@@ -276,7 +315,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Add scroll event listeners
     window.addEventListener('scroll', () => {
-        handleScrollAnimations();
+        handleScrollAnimations(); // Pode ser menos crítico com o IntersectionObserver, mas ainda útil para alguns elementos.
         handleHeaderScroll();
     });
     
@@ -285,7 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
         resizeCanvas();
     });
     
-    // Add stagger animation to service cards
+    // Add stagger animation to service cards (ainda relevante)
     const serviceCards = document.querySelectorAll('.service-card');
     serviceCards.forEach((card, index) => {
         card.style.animationDelay = `${index * 0.1}s`;
@@ -296,7 +335,7 @@ document.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
     
-    // Add CSS for loading animation
+    // Add CSS for loading animation (pode ser movido para style.css)
     const style = document.createElement('style');
     style.textContent = `
         body {
@@ -330,7 +369,7 @@ function addParallaxEffect() {
     
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
-        const rate = scrolled * -0.5;
+        const rate = scrolled * -0.2; // Taxa de parallax ajustada para um efeito mais suave
         
         if (hero) {
             hero.style.transform = `translateY(${rate}px)`;
@@ -341,9 +380,9 @@ function addParallaxEffect() {
 // Initialize parallax
 addParallaxEffect();
 
-// Add smooth hover transitions
-const style = document.createElement('style');
-style.textContent = `
+// Add smooth hover transitions (pode ser movido para style.css para melhor organização)
+const globalStyle = document.createElement('style');
+globalStyle.textContent = `
     * {
         transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
     }
@@ -360,4 +399,4 @@ style.textContent = `
         transform: translateY(-8px) scale(1.02);
     }
 `;
-document.head.appendChild(style);
+document.head.appendChild(globalStyle);
