@@ -246,28 +246,6 @@ function addButtonGlowEffect() {
     });
 }
 
-// Handle contact form submission (simples, sem envio real para o servidor)
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault(); // Impede o envio padrão do formulário
-        
-        // Coleta os dados do formulário
-        const name = contactForm.querySelector('#name').value;
-        const email = contactForm.querySelector('#email').value;
-        const message = contactForm.querySelector('#message').value;
-        
-        // Aqui você enviaria os dados para um serviço de backend (e.g., Formspree, Netlify Forms, sua API)
-        console.log('Dados do formulário:', { name, email, message });
-        
-        // Exemplo de feedback para o usuário
-        alert('Sua mensagem foi enviada! Em breve entraremos em contato.');
-        
-        // Limpa o formulário
-        contactForm.reset();
-    });
-}
-
-
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize canvas and particles
