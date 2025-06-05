@@ -109,7 +109,7 @@
                 <div class="service-card glass-card">
                     <div class="service-icon">📊</div>
                     <h3 class="service-title">Assessoria Musical</h3>
-                    <div class="service-price">R$ 1.000/H</div>
+                    <div class="service-price">R$ 1.000H</div>
                     <p class="service-description">Consultoria especializada e estratégica para impulsionar e gerenciar sua carreira musical.</p>
                 </div>
                 <div class="service-card glass-card">
@@ -193,51 +193,60 @@
     <footer id="contato" class="footer">
         <div class="container">
             <div class="footer-content glass-card">
-                <div class="footer-section contact-info">
-                    <h3 class="footer-title">Contato</h3>
-                    <div class="contact-item">
-                        <span class="contact-icon">📱</span>
-                        <a href="https://wa.me/5561982115374" target="_blank" class="contact-link">(61) 98211-5374</a>
+                <!-- Coluna da esquerda: Informações de Contato e Redes Sociais -->
+                <div class="footer-left">
+                    <div class="footer-section contact-info">
+                        <h3 class="footer-title">Conecte-se Conosco</h3>
+                        <p class="contact-intro">Estamos prontos para transformar sua música!</p>
+                        <div class="contact-item">
+                            <span class="contact-icon">📱</span>
+                            <a href="https://wa.me/5561982115374" target="_blank" class="contact-link">(61) 98211-5374</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">✉️</span>
+                            <a href="mailto:gravadoraatocamusic@gmail.com" class="contact-link">gravadoraatocamusic@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <span class="contact-icon">📍</span>
+                            <span class="contact-text">Brasília, DF</span>
+                        </div>
                     </div>
-                    <div class="contact-item">
-                        <span class="contact-icon">✉️</span>
-                        <a href="mailto:gravadoraatocamusic@gmail.com" class="contact-link">gravadoraatocamusic@gmail.com</a>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon">📍</span>
-                        <span class="contact-text">Brasília, DF</span>
+                    <div class="footer-section social-media">
+                        <h3 class="footer-title">Siga-nos</h3>
+                        <a href="https://www.instagram.com/atoca.music" target="_blank" class="social-link">
+                            <span class="social-icon">📸</span>
+                            @atoca.music
+                        </a>
                     </div>
                 </div>
-                <div class="footer-section social-media">
-                    <h3 class="footer-title">Redes Sociais</h3>
-                    <a href="https://www.instagram.com/atoca.music" target="_blank" class="social-link">
-                        <span class="social-icon">📸</span>
-                        @atoca.music
-                    </a>
+
+                <!-- Coluna da direita: Formulário de Contato -->
+                <div class="footer-right">
+                    <div class="footer-section contact-form-section">
+                        <h3 class="footer-title">Envie uma Mensagem</h3>
+                        <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                            <!-- Este campo é para o Netlify Forms Honeypot -->
+                            <input type="hidden" name="form-name" value="contact" />
+                            <p class="hidden">
+                                <label>Não preencha este campo: <input name="bot-field" /></label>
+                            </p>
+                            <div class="form-group">
+                                <label for="name" class="sr-only">Nome</label>
+                                <input type="text" id="name" name="name" class="form-control" placeholder="Seu Nome" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="sr-only">E-mail</label>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="Seu E-mail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message" class="sr-only">Mensagem</label>
+                                <textarea id="message" name="message" class="form-control" rows="4" placeholder="Sua Mensagem" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn--primary btn--full-width">Enviar Mensagem</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="footer-section contact-form-section">
-    <h3 class="footer-title">Envie uma Mensagem</h3>
-    <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-        <!-- Este campo é para o Netlify Forms Honeypot, ajuda a filtrar spam de bots -->
-        <input type="hidden" name="form-name" value="contact" />
-        <p class="hidden">
-            <label>Não preencha este campo: <input name="bot-field" /></label>
-        </p>
-        <div class="form-group">
-            <label for="name" class="sr-only">Nome</label>
-            <input type="text" id="name" name="name" class="form-control" placeholder="Seu Nome" required>
-        </div>
-        <div class="form-group">
-            <label for="email" class="sr-only">E-mail</label>
-            <input type="email" id="email" name="email" class="form-control" placeholder="Seu E-mail" required>
-        </div>
-        <div class="form-group">
-            <label for="message" class="sr-only">Mensagem</label>
-            <textarea id="message" name="message" class="form-control" rows="4" placeholder="Sua Mensagem" required></textarea>
-        </div>
-        <button type="submit" class="btn btn--primary btn--full-width">Enviar Mensagem</button>
-    </form>
-</div>
+            </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 ATOCAMUSIC. Todos os direitos reservados.</p>
             </div>
