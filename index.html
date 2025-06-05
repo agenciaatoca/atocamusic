@@ -3,244 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ATOCAMUSIC - Produção Musical Profissional</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <title>ATOCAMUSIC - Produção Musical Profissional e Assessoria em Brasília</title>
+    <meta name="description" content="ATOCAMUSIC: Produção Musical Profissional, Gestão e Assessoria em Brasília, DF. Gravação, Mixagem, Masterização, Distribuição Digital e Direitos Autorais. Transforme sua música!">
+    <meta name="keywords" content="estúdio de gravação Brasília, produção musical DF, mixagem e masterização, direitos autorais música, distribuição digital música, assessoria musical, gravar música, estúdio de áudio, produtora musical, carreira musical">
+    <link rel="canonical" href="https://www.seusite.com.br/"> <meta property="og:title" content="ATOCAMUSIC - Produção Musical Profissional e Assessoria">
+    <meta property="og:description" content="Transforme sua visão musical em realidade sonora com a ATOCAMUSIC. Soluções completas para artistas independentes e gestão de carreira.">
+    <meta property="og:image" content="https://www.seusite.com.br/assets/images/atocamusic-banner.jpg"> <meta property="og:url" content="https://www.seusite.com.br/"> <meta property="og:type" content="website">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ATOCAMUSIC - Produção Musical Profissional e Assessoria">
+    <meta name="twitter:description" content="Transforme sua visão musical em realidade sonora com a ATOCAMUSIC. Soluções completas para artistas independentes e gestão de carreira.">
+    <meta name="twitter:image" content="https://www.seusite.com.br/assets/images/atocamusic-twitter-card.jpg"> <link rel="icon" type="image/png" href="/favicon.png"> <link rel="apple-touch-icon" href="/apple-touch-icon.png"> <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Preload para a fonte principal para melhor performance -->
     <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp5F8_zV3Fc.woff2" as="font" type="font/woff2" crossorigin>
-    <!-- Link para o arquivo de estilos CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Canvas para partículas -->
     <canvas id="particles-canvas"></canvas>
 
-    <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="nav-brand">
                 <h1 class="logo">ATOCAMUSIC</h1>
                 <span class="tagline">seu mundo da música</span>
             </div>
-            <nav class="nav">
-                <ul class="nav-list">
+            <nav class="nav" aria-label="Navegação Principal"> <ul class="nav-list">
                     <li><a href="#home" class="nav-link">Home</a></li>
                     <li><a href="#servicos" class="nav-link">Serviços</a></li>
                     <li><a href="#artistas" class="nav-link">Artistas</a></li>
                     <li><a href="#compositores" class="nav-link">Compositores</a></li>
                     <li><a href="#sobre" class="nav-link">Quem Somos</a></li>
                     <li><a href="#contato" class="nav-link">Contato</a></li>
+                    <li><a href="#tour-virtual" class="nav-link">Tour Virtual</a></li>
                 </ul>
             </nav>
-            <button class="mobile-menu-btn" aria-label="Menu">
-                <span></span>
+            <button class="mobile-menu-btn" aria-label="Abrir Menu"> <span></span>
                 <span></span>
                 <span></span>
             </button>
         </div>
     </header>
 
-    <!-- Mobile Menu Overlay -->
     <div class="mobile-menu-overlay">
-        <nav class="mobile-nav">
-            <ul class="mobile-nav-list">
+        <nav class="mobile-nav" aria-label="Menu Mobile"> <ul class="mobile-nav-list">
                 <li><a href="#home" class="mobile-nav-link">Home</a></li>
                 <li><a href="#servicos" class="mobile-nav-link">Serviços</a></li>
                 <li><a href="#artistas" class="mobile-nav-link">Artistas</a></li>
                 <li><a href="#compositores" class="mobile-nav-link">Compositores</a></li>
                 <li><a href="#sobre" class="mobile-nav-link">Quem Somos</a></li>
                 <li><a href="#contato" class="mobile-nav-link">Contato</a></li>
+                <li><a href="#tour-virtual" class="mobile-nav-link">Tour Virtual</a></li>
             </ul>
         </nav>
     </div>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
                 <h2 class="hero-title">Produção Musical Profissional,<br>Gestão e Assessoria Musical</h2>
-                <div class="hero-stats">
+                <p class="hero-subtitle">Transforme sua visão em realidade sonora e impulsione sua carreira.</p> <div class="hero-stats">
                     <div class="stat-item">
                         <span class="stat-number" data-target="1000000">0</span>
                         <span class="stat-label">streams com nossos artistas</span>
                     </div>
                 </div>
-                <button class="hero-cta btn btn--primary">Comece Agora</button>
+                <a href="#servicos" class="hero-cta btn btn--primary">Descubra Nossos Serviços</a>
             </div>
         </div>
     </section>
 
-    <!-- Serviços -->
     <section id="servicos" class="services">
         <div class="container">
-            <h2 class="section-title">Nossos Serviços</h2>
-            <div class="services-grid">
+            <h2 class="section-title">Nossos Serviços Criativos</h2> <div class="services-grid">
                 <div class="service-card glass-card">
-                    <div class="service-icon">🎵</div>
-                    <h3 class="service-title">Produção Musical</h3>
-                    <div class="service-price">R$ A partir de R$ 149,00</div>
-                    <p class="service-description"><i>POR FAIXA!</i> <br>Arranjos personalizados com qualidade profissional para transformar sua visão em realidade sonora.</p>
+                    <div class="service-icon" aria-hidden="true">🎵</div>
+                    <h3 class="service-title">Produção Musical Completa</h3>
+                    <p class="service-description"><i>POR FAIXA!</i> <br>Arranjos personalizados e produção executiva para transformar sua visão em realidade sonora de alta qualidade.</p>
+                    <div class="service-price">A partir de <span>R$ 149,00</span></div> <a href="#contato" class="btn btn--secondary btn--small">Orçar Produção</a>
                 </div>
                 <div class="service-card glass-card">
-                    <div class="service-icon">🎙️</div>
-                    <h3 class="service-title">Gravação</h3>
-                    <div class="service-price">A partir de R$ 50,00</div>
-                    <p class="service-description">Estúdios equipados com tecnologia de ponta para capturar a essência da sua performance.</p>
+                    <div class="service-icon" aria-hidden="true">🎙️</div>
+                    <h3 class="service-title">Gravação de Áudio Profissional</h3>
+                    <p class="service-description">Estúdios equipados com tecnologia de ponta para capturar a essência e a emoção da sua performance vocal e instrumental.</p>
+                    <div class="service-price">A partir de <span>R$ 50,00</span></div>
+                    <a href="#contato" class="btn btn--secondary btn--small">Agendar Gravação</a>
                 </div>
                 <div class="service-card glass-card">
-                    <div class="service-icon">🎚️</div>
-                    <h3 class="service-title">Mixagem e Masterização</h3>
-                    <div class="service-price">A partir de R$ 150,00</div>
-                    <p class="service-description">Finalização profissional com os melhores plugins, garantindo que sua música soe impecável em qualquer plataforma.</p>
+                    <div class="service-icon" aria-hidden="true">🎚️</div>
+                    <h3 class="service-title">Mixagem e Masterização Premium</h3>
+                    <p class="service-description">Finalização profissional com os melhores plugins e engenheiros, garantindo que sua música soe impecável em qualquer plataforma.</p>
+                    <div class="service-price">A partir de <span>R$ 150,00</span></div>
+                    <a href="#contato" class="btn btn--secondary btn--small">Solicitar Mix/Master</a>
                 </div>
                 <div class="service-card glass-card">
-                    <div class="service-icon">🎙️</div>
-                    <h3 class="service-title">Afinação de Voz</h3>
-                    <div class="service-price">A partir de R$ 50,00</div>
-                    <p class="service-description">Sua voz é o coração da sua música. Garanta que ela brilhe com clareza, precisão e emoção.</p>
+                    <div class="service-icon" aria-hidden="true">🎤</div> <h3 class="service-title">Afinação de Voz e Edição</h3>
+                    <p class="service-description">Sua voz é o coração da sua música. Garanta que ela brilhe com clareza, precisão e emoção, sem perder a naturalidade.</p>
+                    <div class="service-price">A partir de <span>R$ 50,00</span></div>
+                    <a href="#contato" class="btn btn--secondary btn--small">Detalhes Afinação</a>
                 </div>
                 <div class="service-card glass-card">
-                    <div class="service-icon">📱</div>
-                    <h3 class="service-title">Distribuição Digital</h3>
-                    <div class="service-price">R$ 500</div>
-                    <p class="service-description">Sua música em mais de 100 plataformas digitais, alcançando milhões de ouvintes globalmente.</p>
+                    <div class="service-icon" aria-hidden="true">📲</div> <h3 class="service-title">Distribuição Digital Global</h3>
+                    <p class="service-description">Sua música em mais de 100 plataformas digitais (Spotify, Deezer, TikTok, etc.), alcançando milhões de ouvintes globalmente.</p>
+                    <div class="service-price">Valor Fixo: <span>R$ 500,00</span></div>
+                    <a href="#contato" class="btn btn--secondary btn--small">Distribuir Agora</a>
                 </div>
                 <div class="service-card glass-card">
-                    <div class="service-icon">📊</div>
-                    <h3 class="service-title">Assessoria Musical</h3>
-                    <div class="service-price">R$ 1.000H</div>
-                    <p class="service-description">Consultoria especializada e estratégica para impulsionar e gerenciar sua carreira musical.</p>
+                    <div class="service-icon" aria-hidden="true">📈</div> <h3 class="service-title">Assessoria e Gestão Musical</h3>
+                    <p class="service-description">Consultoria especializada e estratégica para impulsionar e gerenciar sua carreira musical, do planejamento à execução.</p>
+                    <div class="service-price"><span>A partir de R$ 1.000,00/H</span></div> <a href="#contato" class="btn btn--secondary btn--small">Fale com um Assessor</a>
                 </div>
                 <div class="service-card glass-card">
-                    <div class="service-icon">⚖️</div>
-                    <h3 class="service-title">Direitos Autorais</h3>
-                    <div class="service-price"><em>CONSULTAR</em></div>
-                    <p class="service-description">Gestão completa de direitos e royalties para proteger suas criações e garantir sua remuneração justa com suporte jurídico.</p>
+                    <div class="service-icon" aria-hidden="true">⚖️</div>
+                    <h3 class="service-title">Direitos Autorais e Royalties</h3>
+                    <p class="service-description">Gestão completa de direitos autorais e royalties para proteger suas criações e garantir sua remuneração justa com suporte jurídico.</p>
+                    <div class="service-price"><span>CONSULTAR</span></div>
+                    <a href="#contato" class="btn btn--secondary btn--small">Agendar Consultoria</a>
                 </div>
                 <div class="service-card glass-card">
-                    <div class="service-icon">📜</div>
-                    <h3 class="service-title">Licenciamento Cover</h3>
-                    <div class="service-price">A partir de R$ 100,00</div>
-                    <p class="service-description">Autorização legal simplificada para suas regravações, evitando problemas futuros e garantindo seus royalties.</p>
+                    <div class="service-icon" aria-hidden="true">📝</div> <h3 class="service-title">Licenciamento de Covers Simplificado</h3>
+                    <p class="service-description">Autorização legal e descomplicada para suas regravações, evitando problemas futuros e garantindo seus royalties de cover.</p>
+                    <div class="service-price">A partir de <span>R$ 100,00</span></div>
+                    <a href="#contato" class="btn btn--secondary btn--small">Saiba Mais</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Artistas -->
     <section id="artistas" class="artists">
         <div class="container">
-            <h2 class="section-title">Nossos Artistas</h2>
+            <h2 class="section-title">Conheça Nossos Artistas em Destaque</h2>
             <div class="artists-grid">
                 <div class="artist-card glass-card">
                     <div class="artist-genre">Gospel</div>
                     <h3 class="artist-name">Louvor e Adoração Vida</h3>
+                    <div class="artist-media">
+                        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/SEU_ID_DO_ARTISTA?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    </div>
                     <a href="https://www.instagram.com/louvoreadoracaovida" target="_blank" class="artist-link btn btn--secondary">
-                        Instagram
+                        <span class="social-icon">📸</span> Instagram
+                    </a>
+                    <a href="#" target="_blank" class="artist-link btn btn--secondary">
+                        <span class="social-icon">▶️</span> YouTube
                     </a>
                 </div>
                 <div class="artist-card glass-card coming-soon">
                     <div class="artist-genre">Sertanejo</div>
                     <h3 class="artist-name">Em breve</h3>
-                    <div class="coming-soon-text">Novidades chegando! <br>Assine nossa newsletter para ser o primeiro a saber!</div>
+                    <div class="coming-soon-text">Novidades musicais chegando! <br>Assine nossa newsletter para ser o primeiro a saber!</div>
+                    <a href="#newsletter-modal" class="btn btn--primary btn--small open-newsletter-modal">Receber Novidades</a>
                 </div>
-            </div>
+                </div>
+            <div class="section-cta">
+                <a href="#" class="btn btn--primary">Ver Portfólio Completo</a> </div>
         </div>
     </section>
 
-    <!-- Compositores -->
     <section id="compositores" class="composers">
         <div class="container">
             <div class="composers-content glass-card">
                 <h2 class="section-title">Oportunidades para Compositores</h2>
                 <p class="composers-text">
-                    Transforme sua criatividade em oportunidade. Conectamos compositores talentosos 
-                    com artistas em busca de material original. Junte-se à nossa rede e veja suas 
-                    composições ganharem vida no mercado musical. Entre em contato para saber como!
+                    Transforme sua criatividade em oportunidade. Conectamos compositores talentosos
+                    com artistas em busca de material original. Junte-se à nossa rede e veja suas
+                    composições ganharem vida no mercado musical.
                 </p>
-                <a href="#contato" class="btn btn--primary">Quero Participar</a>
+                <p class="composers-text-highlight">Envie-nos sua demo e saiba como podemos impulsionar sua carreira!</p> <a href="#contato" class="btn btn--primary">Quero Participar</a>
             </div>
         </div>
     </section>
 
-    <!-- Quem Somos -->
     <section id="sobre" class="about">
         <div class="container">
-            <h2 class="section-title">Quem Somos</h2>
-            <div class="about-grid">
+            <h2 class="section-title">ATOCAMUSIC: Nossa História e Paixão</h2> <div class="about-grid">
                 <div class="about-card glass-card">
-                    <h3 class="about-card-title">Missão</h3>
-                    <p class="about-card-text">Democratizar o acesso ao mercado musical brasileiro, oferecendo soluções completas e acessíveis para artistas independentes realizarem seus sonhos musicais</p>
+                    <h3 class="about-card-title">Nossa Missão</h3>
+                    <p class="about-card-text">Democratizar o acesso ao mercado musical brasileiro, oferecendo soluções completas e acessíveis para artistas independentes realizarem seus sonhos musicais, com foco na qualidade e no suporte integral.</p>
                 </div>
                 <div class="about-card glass-card">
-                    <h3 class="about-card-title">Visão</h3>
-                    <p class="about-card-text">Ser a principal referência em gestão e assessoria musical no Brasil</p>
+                    <h3 class="about-card-title">Nossa Visão</h3>
+                    <p class="about-card-text">Ser a principal referência em gestão, produção e assessoria musical no Brasil, reconhecida pela inovação, excelência e impacto positivo na carreira de artistas e compositores.</p>
                 </div>
                 <div class="about-card glass-card">
-                    <h3 class="about-card-title">Valores</h3>
+                    <h3 class="about-card-title">Nossos Valores</h3>
                     <ul class="about-values">
-                        <li>Excelência Artística</li>
-                        <li>Transparência Comercial</li>
-                        <li>Inovação Tecnológica</li>
-                    </ul>
+                        <li>Excelência Artística: Qualidade impecável em cada produção.</li>
+                        <li>Transparência Comercial: Relações justas e claras com todos.</li>
+                        <li>Inovação Tecnológica: Sempre na vanguarda das ferramentas e processos.</li>
+                        <li>Paixão pela Música: O amor pela arte nos impulsiona.</li> </ul>
                 </div>
+                <div class="about-card glass-card about-team-card">
+                    <h3 class="about-card-title">Nossa Equipe</h3>
+                    <p class="about-card-text">Conheça os profissionais apaixonados que estão por trás do seu sucesso. Engenheiros de som, produtores, assessores... Somos um time dedicado à sua arte.</p>
+                    <a href="#equipe" class="btn btn--secondary btn--small">Conhecer a Equipe</a> </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <section id="tour-virtual" class="tour-virtual">
+        <div class="container">
+            <h2 class="section-title">Explore Nosso Estúdio em Tour Virtual</h2>
+            <div class="tour-virtual-content glass-card">
+                <p class="tour-virtual-text">Em breve, você poderá caminhar virtualmente por nossos ambientes de gravação, sala de controle e áreas de lounge. Prepare-se para uma experiência imersiva!</p>
+                <div class="video-placeholder">
+                    <img src="https://via.placeholder.com/800x450?text=Tour+Virtual+do+Estudio" alt="Placeholder para Tour Virtual do Estúdio ATOCAMUSIC" class="tour-placeholder-img">
+                </div>
+                <p class="tour-virtual-text">Queremos que você sinta a energia do nosso espaço antes mesmo de nos visitar. Descubra os equipamentos e a atmosfera ideal para sua próxima produção.</p>
+                <a href="#contato" class="btn btn--primary">Agendar Visita Presencial</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="testemunhos" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">O Que Dizem Nossos Artistas</h2>
+            <div class="testimonials-slider">
+                <div class="testimonial-card glass-card">
+                    <p class="testimonial-quote">"A ATOCAMUSIC transformou minha música! A qualidade da produção e a assessoria são incomparáveis. Recomendo muito!"</p>
+                    <div class="testimonial-author">
+                        <img src="https://via.placeholder.com/60" alt="Foto do Artista X" class="author-avatar">
+                        <span class="author-name">Artista X</span>
+                        <span class="author-title">Cantor e Compositor</span>
+                    </div>
+                    <a href="#" target="_blank" class="btn btn--secondary btn--small testimonial-project-link">Ouvir Projeto</a>
+                </div>
+                </div>
+        </div>
+    </section>
+
+
     <footer id="contato" class="footer">
         <div class="container">
             <div class="footer-content glass-card">
-                <!-- Coluna da esquerda: Informações de Contato e Redes Sociais -->
                 <div class="footer-left">
                     <div class="footer-section contact-info">
                         <h3 class="footer-title">Conecte-se Conosco</h3>
-                        <p class="contact-intro">Estamos prontos para transformar sua música!</p>
+                        <p class="contact-intro">Estamos prontos para transformar sua música e sua carreira!</p>
                         <div class="contact-item">
-                            <span class="contact-icon">📱</span>
+                            <span class="contact-icon" aria-hidden="true">📱</span>
                             <a href="https://wa.me/5561982115374" target="_blank" class="contact-link">(61) 98211-5374</a>
                         </div>
                         <div class="contact-item">
-                            <span class="contact-icon">✉️</span>
+                            <span class="contact-icon" aria-hidden="true">✉️</span>
                             <a href="mailto:gravadoraatocamusic@gmail.com" class="contact-link">gravadoraatocamusic@gmail.com</a>
                         </div>
                         <div class="contact-item">
-                            <span class="contact-icon">📍</span>
-                            <span class="contact-text">Brasília, DF</span>
+                            <span class="contact-icon" aria-hidden="true">📍</span>
+                            <a href="https://www.google.com/maps/search/Brasília,+DF" target="_blank" class="contact-link">Brasília, DF</a>
                         </div>
                     </div>
                     <div class="footer-section social-media">
-                        <h3 class="footer-title">Siga-nos</h3>
-                        <a href="https://www.instagram.com/atoca.music" target="_blank" class="social-link">
-                            <span class="social-icon">📸</span>
+                        <h3 class="footer-title">Siga-nos nas Redes Sociais</h3>
+                        <a href="https://www.instagram.com/atoca.music" target="_blank" class="social-link" aria-label="Instagram da Atoca Music">
+                            <span class="social-icon" aria-hidden="true">📸</span>
                             @atoca.music
+                        </a>
+                        <a href="https://www.tiktok.com/@atoca.music" target="_blank" class="social-link" aria-label="TikTok da Atoca Music">
+                            <span class="social-icon" aria-hidden="true">🎵</span>
+                            @atoca.music_tiktok
                         </a>
                     </div>
                 </div>
 
-                <!-- Coluna da direita: Formulário de Contato -->
                 <div class="footer-right">
                     <div class="footer-section contact-form-section">
-                        <h3 class="footer-title">Envie uma Mensagem</h3>
+                        <h3 class="footer-title">Envie sua Mensagem para a ATOCAMUSIC</h3>
                         <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                            <!-- Este campo é para o Netlify Forms Honeypot -->
                             <input type="hidden" name="form-name" value="contact" />
                             <p class="hidden">
                                 <label>Não preencha este campo: <input name="bot-field" /></label>
                             </p>
                             <div class="form-group">
-                                <label for="name" class="sr-only">Nome</label>
-                                <input type="text" id="name" name="name" class="form-control" placeholder="Seu Nome" required>
+                                <label for="name" class="sr-only">Nome Completo</label>
+                                <input type="text" id="name" name="name" class="form-control" placeholder="Seu Nome Completo" required>
                             </div>
                             <div class="form-group">
-                                <label for="email" class="sr-only">E-mail</label>
-                                <input type="email" id="email" name="email" class="form-control" placeholder="Seu E-mail" required>
+                                <label for="email" class="sr-only">Seu Melhor E-mail</label>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="Seu Melhor E-mail" required>
                             </div>
                             <div class="form-group">
-                                <label for="message" class="sr-only">Mensagem</label>
-                                <textarea id="message" name="message" class="form-control" rows="4" placeholder="Sua Mensagem" required></textarea>
+                                <label for="phone" class="sr-only">Telefone (Opcional)</label>
+                                <input type="tel" id="phone" name="phone" class="form-control" placeholder="Seu Telefone (Opcional)">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject" class="sr-only">Assunto da Mensagem</label>
+                                <input type="text" id="subject" name="subject" class="form-control" placeholder="Assunto (Ex: Orçamento de Mixagem)" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message" class="sr-only">Sua Mensagem</label>
+                                <textarea id="message" name="message" class="form-control" rows="5" placeholder="Descreva seu projeto ou dúvida..." required></textarea>
                             </div>
                             <button type="submit" class="btn btn--primary btn--full-width">Enviar Mensagem</button>
                         </form>
@@ -248,12 +299,26 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 ATOCAMUSIC. Todos os direitos reservados.</p>
-            </div>
+                <p>&copy; 2025 ATOCAMUSIC. Todos os direitos reservados. | <a href="/politica-de-privacidade.html">Política de Privacidade</a></p> </div>
         </div>
     </footer>
 
-    <!-- Link para o arquivo JavaScript externo -->
+    <div id="newsletter-modal" class="modal-overlay">
+        <div class="modal-content glass-card">
+            <button class="close-modal-btn" aria-label="Fechar"></button>
+            <h3 class="modal-title">Receba Nossas Novidades Musicais!</h3>
+            <p class="modal-description">Fique por dentro dos lançamentos, dicas exclusivas e promoções da ATOCAMUSIC.</p>
+            <form class="newsletter-form" name="newsletter" method="POST" data-netlify="true">
+                <input type="hidden" name="form-name" value="newsletter" />
+                <div class="form-group">
+                    <label for="newsletter-email" class="sr-only">Seu E-mail</label>
+                    <input type="email" id="newsletter-email" name="email" class="form-control" placeholder="Seu E-mail" required>
+                </div>
+                <button type="submit" class="btn btn--primary btn--full-width">Assinar Newsletter</button>
+            </form>
+        </div>
+    </div>
+
     <script src="app.js"></script>
 </body>
 </html>
