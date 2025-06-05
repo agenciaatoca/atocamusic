@@ -6,7 +6,7 @@ const navLinks = document.querySelectorAll('.nav-link');
 const statNumber = document.querySelector('.stat-number');
 const canvas = document.getElementById('particles-canvas');
 const ctx = canvas.getContext('2d');
-const contactForm = document.querySelector('.contact-form'); // Adicionado: formulário de contato
+const contactForm = document.querySelector('.contact-form'); // Seleção do formulário de contato
 
 // Mobile menu functionality
 function toggleMobileMenu() {
@@ -245,6 +245,10 @@ function addButtonGlowEffect() {
         });
     });
 }
+
+// Handle contact form submission (removido para Netlify Forms)
+// O JavaScript para o formulário de contato foi removido daqui para que o Netlify Forms possa gerenciá-lo diretamente
+// via os atributos HTML 'data-netlify="true"'.
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
