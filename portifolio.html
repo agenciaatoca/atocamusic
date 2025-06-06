@@ -4,21 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio Completo - ATOCAMUSIC</title>
+    <meta name="description" content="Explore o portfólio completo da ATOCAMUSIC: projetos de produção musical, mixagem, masterização e assessoria que transformaram carreiras.">
+    <meta name="keywords" content="portfólio musical, produção musical, mixagem, masterização, artistas produzidos, sucessos musicais, estúdio de gravação projetos, cases de sucesso">
+    <link rel="canonical" href="https://www.agenciaatoca.github.io/portifolio.html"> 
+
+    <meta property="og:title" content="Portfólio ATOCAMUSIC - Transformando Visões Musicais">
+    <meta property="og:description" content="Veja os projetos de sucesso da ATOCAMUSIC e ouça a qualidade de nosso trabalho em produção, mixagem e masterização.">
+    <meta property="og:image" content="https://www.agenciaatoca.github.io/assets/images/portifolio-banner.jpg"> <meta property="og:url" content="https://www.agenciaatoca.github.io/portifolio.html">
+    <meta property="og:type" content="article"> <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp5F8_zV3Fc.woff2" as="font" type="font/woff2" crossorigin>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link rel="stylesheet" href="style.css">
-</head>
+
+    </head>
 <body>
-    <header>
-        </header>
+    <canvas id="particles-canvas"></canvas>
 
-    <main>
-        <h1>Nosso Portfólio Completo</h1>
-        <p>Aqui você encontrará todos os nossos projetos e sucessos.</p>
-        </main>
+    <header class="header">
+        <div class="container">
+            <div class="nav-brand">
+                <h1 class="logo">ATOCAMUSIC</h1>
+                <span class="tagline">seu mundo da música</span>
+            </div>
+            <nav class="nav" aria-label="Navegação Principal">
+                <ul class="nav-list">
+                    <li><a href="index.html#home" class="nav-link">Home</a></li> <li><a href="index.html#servicos" class="nav-link">Serviços</a></li>
+                    <li><a href="index.html#artistas" class="nav-link">Artistas</a></li>
+                    <li><a href="index.html#compositores" class="nav-link">Compositores</a></li>
+                    <li><a href="index.html#sobre" class="nav-link">Quem Somos</a></li>
+                    <li><a href="#contato" class="nav-link">Contato</a></li> <li><a href="portifolio.html" class="nav-link active">Portfólio</a></li> </ul>
+            </nav>
+            <button class="mobile-menu-btn" aria-label="Abrir Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
 
-    <footer>
-        </footer>
+    <div class="mobile-menu-overlay">
+        <nav class="mobile-nav" aria-label="Menu Mobile">
+            <ul class="mobile-nav-list">
+                <li><a href="index.html#home" class="mobile-nav-link">Home</a></li>
+                <li><a href="index.html#servicos" class="mobile-nav-link">Serviços</a></li>
+                <li><a href="index.html#artistas" class="mobile-nav-link">Artistas</a></li>
+                <li><a href="index.html#compositores" class="mobile-nav-link">Compositores</a></li>
+                <li><a href="index.html#sobre" class="mobile-nav-link">Quem Somos</a></li>
+                <li><a href="#contato" class="mobile-nav-link">Contato</a></li>
+                <li><a href="portifolio.html" class="mobile-nav-link active">Portfólio</a></li>
+            </ul>
+        </nav>
+    </div>
 
-    <script src="app.js"></script>
-</body>
-</html>
+    <section class="hero hero--small">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="hero-title">Nosso Portfólio de Sucesso</h2>
+                <p class="hero-subtitle">Ouça e veja a qualidade das produções que impulsionaram a carreira de diversos artistas.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="portfolio-filters">
+        <div class="container">
+            <h3 class="section-subtitle">Filtrar por:</h3>
+            <div class="filters-grid">
+                <button class="btn btn--secondary filter-btn active" data-filter="all">Todos</button>
+                <button class="btn btn--secondary filter-btn" data-filter="producao">Produção Musical</button>
+                <button class="btn btn--secondary filter-btn" data-filter="mixagem">Mixagem & Masterização</button>
+                <button class="btn btn--secondary filter-btn" data-filter="assessoria">Assessoria Musical</button>
+                <button class="btn btn--secondary filter-btn" data-filter="gospel">Gênero: Gospel</button>
+                <button class="btn btn--secondary filter-btn" data-filter="sertanejo">Gênero: Sertanejo</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio-projects" class="portfolio-projects">
+        <div class="container">
+            <div class="projects-grid">
+
+                <div class="project-card glass-card" data-category="producao gospel">
+                    <div class="project-media">
+                        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/SEU_ID_DO_ARTISTA?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                        </div>
+                    <div class="project-content">
+                        <span class="project-category">Produção Musical & Gospel</span>
+                        <h3 class="project-title">Louvor e Adoração Vida - Álbum "Renovo"</h3>
+                        <p class="project-description">Produção completa do álbum, incluindo arranjos, gravação e direção artística. Um projeto que alcançou milhões de streams.</p>
+                        <ul class="project-details">
+                            <li><i class="fa-solid fa-microphone-alt"></i> Gravação</li>
+                            <li><i class="fa-solid fa-sliders-h"></i> Mixagem & Masterização</li>
+                            <li><i class="fa-solid fa-music"></i> Arranjos</li>
+                            <li><i class="fa-solid fa-award"></i> Produção Executiva</li>
+                        </ul>
+                        <div class="project-links">
+                            <a href="https://www.instagram.com/louvoreadoracaovida" target="_blank" class="btn btn--secondary btn--small">
+                                <i class="fa-brands fa-instagram"></i> Instagram do Artista
+                            </a>
+                            <a href="
