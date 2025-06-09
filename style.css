@@ -86,6 +86,19 @@
   --container-sm: 640px; --container-md: 768px; --container-lg: 1024px; --container-xl: 1280px;
 }
 
+/* === CORREÇÃO 3: Header fixo e visível === */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  background: rgba(10, 10, 15, 0.8); /* Transparente inicial, alterado no scroll via JS */
+  transition: background 0.3s ease;
+  padding: 1rem 0;
+  backdrop-filter: blur(10px);
+}
+
 /* Cores do modo escuro (Dark Mode) */
 @media (prefers-color-scheme: dark) {
   :root {
