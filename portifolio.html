@@ -9,471 +9,284 @@
     <meta name="keywords" content="portfólio musical, produções ATOCAMUSIC, mixagem, masterização, artistas produzidos, estúdio de gravação">
     <link rel="canonical" href="https://www.agenciaatoca.github.io/portifolio.html"> 
 
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'bg-primary': '#e5e5d1',
+              'bg-secondary': '#1A1A2E',
+              'accent-cyan': '#00E4FF',
+              'accent-purple': '#9B5CF6',
+              'accent-green': '#00FF99',
+              'text-light': '#FFFFFF',
+              'text-muted': '#B0B0B0',
+              'glass-bg': 'rgba(255, 255, 255, 0.08)',
+              'glass-border': 'rgba(255, 255, 255, 0.15)',
+            },
+            fontFamily: {
+                inter: ['Inter', 'sans-serif'],
+            },
+            keyframes: {
+                fadeInUp: {
+                    '0%': { opacity: '0', transform: 'translateY(20px)' },
+                    '100%': { opacity: '1', transform: 'translateY(0)' },
+                },
+                glow: {
+                    '0%, 100%': { boxShadow: '0 0 15px rgba(0, 228, 255, 0.4)' },
+                    '50%': { boxShadow: '0 0 25px rgba(0, 228, 255, 0.7)' },
+                },
+                pulseGlow: {
+                    '0%, 100%': { boxShadow: '0 0 10px rgba(0, 228, 255, 0.3)' },
+                    '50%': { boxShadow: '0 0 20px rgba(0, 228, 255, 0.6)' },
+                }
+            },
+            animation: {
+                fadeInUp: 'fadeInUp 0.8s ease-out forwards',
+                glow: 'glow 2s infinite alternate',
+                pulseGlow: 'pulseGlow 2s infinite alternate',
+            }
+          }
+        }
+      }
+    </script>
+
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Google Fonts - Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="preload" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp5F8_zV3Fc.woff2" as="font" type="font/woff2" crossorigin>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <style>
-        /* Variáveis de Cores e Fontes (Copie do seu style.css para consistência) */
-        :root {
-            --bg-primary: #0A0A0F;
-            --bg-secondary: #1A1A2E;
-            --accent-cyan: #00E4FF;
-            --accent-purple: #9B5CF6;
-            --accent-green: #00FF99;
-            --text-primary: #FFFFFF;
-            --text-secondary: #B0B0B0;
-            --glass-bg: rgba(255, 255, 255, 0.08);
-            --glass-border: rgba(255, 255, 255, 0.15);
-            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
-            --font-family-base: "Inter", sans-serif;
-            --radius-md: 16px;
-            --space-16: 16px; --space-24: 24px; --space-32: 32px; --space-40: 40px;
-            --font-size-base: 15px; --font-size-md: 16px; --font-size-lg: 18px;
-            --font-size-xl: 20px; --font-size-2xl: 24px; --font-size-3xl: 32px; --font-size-4xl: 48px;
-            --font-weight-light: 300; --font-weight-normal: 400; --font-weight-medium: 500; --font-weight-semibold: 600; --font-weight-bold: 700;
-            --duration-normal: 400ms;
-            --ease-standard: cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-
-        /* Estilos Globais */
-        html {
-            font-size: var(--font-size-base);
-            font-family: var(--font-family-base);
-            line-height: 1.6;
-            color: var(--text-primary);
-            background-color: var(--bg-primary);
-            -webkit-font-smoothing: antialiased;
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            opacity: 0; /* Para animação de carregamento */
-            transition: opacity 0.7s var(--ease-standard);
-        }
-        body.loaded { opacity: 1; }
-
-        *, *::before, *::after { box-sizing: inherit; }
-
-        h1, h2, h3, h4, h5, h6 {
-            margin: 0;
-            font-weight: var(--font-weight-semibold);
-            line-height: 1.2;
-            color: var(--text-primary);
-        }
-        h1 { font-size: var(--font-size-4xl); margin-bottom: var(--space-24); }
-        h2 { font-size: var(--font-size-3xl); margin-bottom: var(--space-20); }
-        h3 { font-size: var(--font-size-2xl); margin-bottom: var(--space-16); }
-
-        p { margin-bottom: var(--space-16); color: var(--text-secondary); }
-
-        a {
-            color: var(--accent-cyan);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-        a:hover { color: var(--text-primary); }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 var(--space-24);
-        }
-
-        .section-title {
-            font-size: clamp(2.5rem, 5vw, 3.8rem);
-            font-weight: var(--font-weight-light);
-            text-align: center;
-            margin-bottom: 5rem;
-            color: var(--text-primary);
-        }
-
-        /* Estilo do cabeçalho flutuante (floating menu) */
-        .header {
-            position: fixed; /* Torna o cabeçalho flutuante */
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            background: rgba(10, 10, 15, 0.95); /* Fundo escuro semi-transparente */
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            transition: background 0.3s ease, backdrop-filter 0.3s ease;
-            padding: var(--space-24) 0;
-        }
-
-        .header .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .nav-brand {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .logo {
-            font-size: var(--font-size-2xl);
-            font-weight: var(--font-weight-bold);
-            color: var(--accent-cyan);
-            letter-spacing: 0.1em;
-        }
-
-        .tagline {
-            font-size: var(--font-size-sm);
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            margin-top: -5px;
-        }
-
-        .nav-list {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            gap: var(--space-32);
-        }
-
-        .nav-link {
-            color: var(--text-primary);
-            font-weight: var(--font-weight-medium);
-            font-size: var(--font-size-lg);
-            position: relative;
-            padding: var(--space-4) 0;
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent-cyan);
-            transition: width 0.3s ease;
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
-
-        /* Estilos específicos do Portfólio */
-        .portfolio-hero {
-            background-color: var(--bg-secondary);
-            padding: 10rem 0 6rem; /* Mais padding para espaçar do header fixo */
-            text-align: center;
-        }
-
-        .portfolio-hero-title {
-            font-size: clamp(3rem, 7vw, 5rem);
-            color: var(--text-primary);
-            margin-bottom: var(--space-16);
-        }
-
-        .portfolio-intro {
-            font-size: var(--font-size-lg);
-            color: var(--text-secondary);
-            max-width: 800px;
-            margin: 0 auto var(--space-40);
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 3rem;
-            padding: 6rem 0;
-        }
-
-        .portfolio-card {
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-radius: var(--radius-md);
-            box-shadow: var(--glass-shadow);
-            overflow: hidden; /* Garante que a imagem não vaze */
-            transition: transform 0.3s var(--ease-standard), box-shadow 0.3s var(--ease-standard);
-            will-change: transform, box-shadow;
-            display: flex;
-            flex-direction: column; /* Conteúdo em coluna dentro do card */
-            justify-content: space-between; /* Espaço entre imagem/conteúdo/botão */
-        }
-
-        .portfolio-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(0, 228, 255, 0.3);
-        }
-
-        .portfolio-thumbnail {
-            width: 100%;
-            height: 250px; /* Altura fixa para as miniaturas */
-            object-fit: cover; /* Recorta a imagem para cobrir o espaço */
-            display: block;
-        }
-
-        .portfolio-content {
-            padding: var(--space-24);
-        }
-
-        .portfolio-title {
-            font-size: var(--font-size-xl);
-            color: var(--accent-cyan);
-            margin-bottom: var(--space-8);
-        }
-
-        .portfolio-genre {
-            font-size: var(--font-size-md);
-            color: var(--text-secondary);
-            margin-bottom: var(--space-16);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .portfolio-description {
-            font-size: var(--font-size-base);
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: var(--space-24);
-        }
-
-        .portfolio-links {
-            padding: 0 var(--space-24) var(--space-24); /* Padding apenas nas laterais e inferior */
-            display: flex;
-            gap: var(--space-16);
-            flex-wrap: wrap;
-            justify-content: center; /* Centraliza botões */
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.8rem 1.8rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1rem;
-            font-weight: 500;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s var(--ease-standard);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .btn--primary {
-            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 100%);
-            color: var(--bg-primary);
-            box-shadow: 0 8px 25px rgba(0, 228, 255, 0.3);
-        }
-
-        .btn--primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0, 228, 255, 0.4);
-        }
-
-        .btn--secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-primary);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .btn--secondary:hover {
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 0 15px rgba(0, 228, 255, 0.4);
-        }
-
-        .btn .fa-brands, .btn .fa-solid {
-            margin-right: 0.5rem; /* Espaçamento entre ícone e texto do botão */
-        }
-
-        /* Rodapé básico para este exemplo */
-        .footer {
-            background: var(--bg-secondary);
-            padding: 3rem 0;
-            text-align: center;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .header .nav { display: none; }
-            .header .mobile-menu-btn { display: flex; } /* Mostra o botão do menu mobile */
-            .portfolio-hero { padding: 8rem 0 4rem; }
-            .portfolio-hero-title { font-size: 2.5rem; }
-            .portfolio-intro { font-size: var(--font-size-base); padding: 0 var(--space-16); }
-            .portfolio-grid { grid-template-columns: 1fr; gap: 2rem; padding: 4rem 0; }
-            .portfolio-card { margin-bottom: 2rem; }
-            .portfolio-links { flex-direction: column; align-items: center; }
-            .btn { width: 100%; margin-bottom: 1rem; }
-        }
-
-        /* Animações (mantido simples para este exemplo) */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-on-load {
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-    </style>
+    
+    <!-- Link para o arquivo CSS personalizado (style.css) -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="font-inter bg-bg-primary text-text-light min-h-screen flex flex-col loaded">
 
-    <header class="header">
-        <div class="container">
-            <div class="nav-brand">
-                <h1 class="logo">ATOCAMUSIC</h1>
-                <span class="tagline">seu mundo da música</span>
+    <!-- Canvas para partículas de fundo (se desejar no portfólio também) -->
+    <canvas id="particles-canvas" class="fixed inset-0 w-full h-full z-0"></canvas>
+
+    <!-- Cabeçalho Fixo -->
+    <header class="header fixed top-0 left-0 w-full z-50 py-6 transition-all duration-300 ease-in-out bg-bg-primary bg-opacity-80 backdrop-blur-md shadow-lg">
+        <div class="container mx-auto flex justify-between items-center px-4 md:px-8">
+            <div class="nav-brand flex flex-col items-start">
+                <h1 class="logo text-3xl md:text-4xl font-extrabold text-accent-cyan tracking-widest leading-none">ATOCAMUSIC</h1>
+                <span class="tagline text-xs md:text-sm text-text-muted uppercase tracking-widest mt-1">seu mundo da música</span>
             </div>
-            <nav class="nav" aria-label="Navegação Principal">
-                <ul class="nav-list">
-                    <li><a href="index.html" class="nav-link">Home</a></li>
-                    <li><a href="index.html#servicos" class="nav-link">Serviços</a></li>
-                    <li><a href="index.html#artistas" class="nav-link">Artistas</a></li>
-                    <li><a href="index.html#compositores" class="nav-link">Compositores</a></li>
-                    <li><a href="index.html#sobre" class="nav-link">Quem Somos</a></li>
-                    <li><a href="index.html#contato" class="nav-link">Contato</a></li>
-                    <li><a href="portifolio.html" class="nav-link active">Portfólio</a></li> </ul>
+            <nav class="hidden md:flex space-x-8 lg:space-x-12" aria-label="Navegação Principal">
+                <ul class="flex items-center space-x-8">
+                    <li><a href="index.html" class="nav-link text-lg text-text-light font-medium relative py-1 hover:text-accent-cyan transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent-cyan after:transition-all after:duration-300 hover:after:w-full">Home</a></li>
+                    <li><a href="index.html#servicos" class="nav-link text-lg text-text-light font-medium relative py-1 hover:text-accent-cyan transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent-cyan after:transition-all after:duration-300 hover:after:w-full">Serviços</a></li>
+                    <li><a href="index.html#artistas" class="nav-link text-lg text-text-light font-medium relative py-1 hover:text-accent-cyan transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent-cyan after:transition-all after:duration-300 hover:after:w-full">Artistas</a></li>
+                    <li><a href="index.html#compositores" class="nav-link text-lg text-text-light font-medium relative py-1 hover:text-accent-cyan transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent-cyan after:transition-all after:duration-300 hover:after:w-full">Compositores</a></li>
+                    <li><a href="index.html#sobre" class="nav-link text-lg text-text-light font-medium relative py-1 hover:text-accent-cyan transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent-cyan after:transition-all after:duration-300 hover:after:w-full">Sobre Nós</a></li>
+                    <li><a href="index.html#contato" class="nav-link text-lg text-text-light font-medium relative py-1 hover:text-accent-cyan transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent-cyan after:transition-all after:duration-300 hover:after:w-full">Contato</a></li>
+                    <li><a href="index.html#tour-virtual" class="nav-link text-lg text-text-light font-medium relative py-1 hover:text-accent-cyan transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent-cyan after:transition-all after:duration-300 hover:after:w-full">O Estúdio</a></li>
+                    <li><a href="portifolio.html" class="nav-link text-lg text-text-light font-medium relative py-1 hover:text-accent-cyan transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent-cyan after:transition-all after:duration-300 hover:after:w-full active">Portfólio</a></li>
+                </ul>
             </nav>
-            <button class="mobile-menu-btn" aria-label="Abrir Menu">
-                <span></span><span></span><span></span>
+            <button class="mobile-menu-btn md:hidden flex flex-col space-y-1 p-2 focus:outline-none focus:ring-2 focus:ring-accent-cyan rounded-md" aria-label="Abrir Menu">
+                <span class="block w-6 h-0.5 bg-text-light transition-all duration-300"></span>
+                <span class="block w-6 h-0.5 bg-text-light transition-all duration-300"></span>
+                <span class="block w-6 h-0.5 bg-text-light transition-all duration-300"></span>
             </button>
         </div>
     </header>
 
-    <div class="mobile-menu-overlay"  /* Este estilo oculta a overlay no HTML */">
-        <nav class="mobile-nav" aria-label="Menu Mobile">
-            <ul class="mobile-nav-list">
-                <li><a href="index.html" class="mobile-nav-link">Home</a></li>
-                <li><a href="index.html#servicos" class="mobile-nav-link">Serviços</a></li>
-                <li><a href="index.html#artistas" class="mobile-nav-link">Artistas</a></li>
-                <li><a href="index.html#compositores" class="mobile-nav-link">Compositores</a></li>
-                <li><a href="index.html#sobre" class="mobile-nav-link">Quem Somos</a></li>
-                <li><a href="index.html#contato" class="mobile-nav-link">Contato</a></li>
-                <li><a href="portifolio.html" class="mobile-nav-link active">Portfólio</a></li>
+    <!-- Overlay do Menu Mobile -->
+    <div class="mobile-menu-overlay fixed inset-0 bg-bg-primary bg-opacity-95 backdrop-blur-xl z-40 flex flex-col items-center justify-center transform translate-x-full transition-transform duration-500 ease-in-out">
+        <nav class="mobile-nav text-center" aria-label="Menu Mobile">
+            <ul class="mobile-nav-list flex flex-col space-y-6">
+                <li><a href="index.html" class="mobile-nav-link text-2xl text-text-light font-medium py-2 hover:text-accent-cyan transition-colors duration-300">Home</a></li>
+                <li><a href="index.html#servicos" class="mobile-nav-link text-2xl text-text-light font-medium py-2 hover:text-accent-cyan transition-colors duration-300">Serviços</a></li>
+                <li><a href="index.html#artistas" class="mobile-nav-link text-2xl text-text-light font-medium py-2 hover:text-accent-cyan transition-colors duration-300">Artistas</a></li>
+                <li><a href="index.html#compositores" class="mobile-nav-link text-2xl text-text-light font-medium py-2 hover:text-accent-cyan transition-colors duration-300">Compositores</a></li>
+                <li><a href="index.html#sobre" class="mobile-nav-link text-2xl text-text-light font-medium py-2 hover:text-accent-cyan transition-colors duration-300">Sobre Nós</a></li>
+                <li><a href="index.html#contato" class="mobile-nav-link text-2xl text-text-light font-medium py-2 hover:text-accent-cyan transition-colors duration-300">Contato</a></li>
+                <li><a href="index.html#tour-virtual" class="mobile-nav-link text-2xl text-text-light font-medium py-2 hover:text-accent-cyan transition-colors duration-300">O Estúdio</a></li>
+                <li><a href="portifolio.html" class="mobile-nav-link text-2xl text-text-light font-medium py-2 hover:text-accent-cyan transition-colors duration-300 active">Portfólio</a></li>
             </ul>
         </nav>
     </div>
 
-    <main>
-        <section class="portfolio-hero">
-            <div class="container animate-on-load">
-                <h1 class="portfolio-hero-title">Nosso Legado Sonoro: Projetos que Transformamos</h1>
-                <p class="portfolio-intro">Explore uma amostra selecionada dos nossos trabalhos de produção musical, mixagem, masterização e assessoria, que ajudaram artistas a alcançar novos patamares.</p>
+    <main class="flex-grow z-10">
+        <section class="portfolio-hero bg-bg-secondary py-32 md:py-48 text-center relative z-10">
+            <div class="container mx-auto px-4 md:px-8 animate-fadeInUp">
+                <h1 class="portfolio-hero-title text-4xl md:text-6xl lg:text-7xl font-light leading-tight mb-6 text-text-light">Nosso Legado Sonoro: Projetos que Transformamos</h1>
+                <p class="portfolio-intro text-lg md:text-xl text-text-muted max-w-4xl mx-auto mb-10 font-light">Explore uma amostra selecionada dos nossos trabalhos de produção musical, mixagem, masterização e assessoria, que ajudaram artistas a alcançar novos patamares.</p>
             </div>
         </section>
 
-        <section class="portfolio-grid">
-            <div class="container">
-                <div class="portfolio-card animate-on-load">
-                    <img src="https://via.placeholder.com/600x250/000000/FFFFFF?text=Album+Cover+01" alt="Capa do Álbum Artista X" class="portfolio-thumbnail">
-                    <div class="portfolio-content">
-                        <h3 class="portfolio-title">"Caminhos da Fé" - Artista X</h3>
-                        <p class="portfolio-genre">Gênero: Gospel</p>
-                        <p class="portfolio-description">Produção musical completa, gravação de vocais e masterização. Um projeto emocionante que alcançou +500K streams.</p>
-                    </div>
-                    <div class="portfolio-links">
-                        <a href="https://open.spotify.com/track/EXEMPLO" target="_blank" class="btn btn--primary"><i class="fa-brands fa-spotify"></i> Ouvir no Spotify</a>
-                        <a href="https://www.youtube.com/watch?v=EXEMPLO" target="_blank" class="btn btn--secondary"><i class="fa-brands fa-youtube"></i> Ver Vídeo</a>
-                    </div>
-                </div>
-
-                <div class="portfolio-card animate-on-load">
-                    <img src="https://via.placeholder.com/600x250/000000/FFFFFF?text=Album+Cover+02" alt="Capa do Álbum Banda Y" class="portfolio-thumbnail">
-                    <div class="portfolio-content">
-                        <h3 class="portfolio-title">"Eco Urbano" - Banda Y</h3>
-                        <p class="portfolio-genre">Gênero: Rock Alternativo</p>
-                        <p class="portfolio-description">Mixagem detalhada e masterização para EP, com foco na dinâmica e clareza dos instrumentos. Recebeu ótima crítica especializada.</p>
-                    </div>
-                    <div class="portfolio-links">
-                        <a href="https://open.spotify.com/album/EXEMPLO" target="_blank" class="btn btn--primary"><i class="fa-brands fa-spotify"></i> Ouvir no Spotify</a>
-                        <a href="https://www.instagram.com/banday/" target="_blank" class="btn btn--secondary"><i class="fa-brands fa-instagram"></i> Perfil da Banda</a>
+        <section class="portfolio-grid py-20 md:py-32 bg-bg-primary relative z-10">
+            <div class="container mx-auto px-4 md:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-12">
+                <!-- Card de Portfólio 1 -->
+                <div class="portfolio-card glass-card rounded-2xl shadow-xl overflow-hidden transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-accent-cyan/30 animate-fadeInUp">
+                    <img src="https://placehold.co/600x250/1A1A2E/00E4FF?text=Album+Cover+01" alt="Capa do Álbum Artista X" class="portfolio-thumbnail w-full h-64 object-cover block">
+                    <div class="portfolio-content p-8 flex flex-col justify-between flex-grow">
+                        <div>
+                            <h3 class="portfolio-title text-2xl font-medium mb-2 text-accent-cyan">"Caminhos da Fé" - Artista X</h3>
+                            <p class="portfolio-genre text-sm text-text-muted uppercase tracking-wider mb-4">Gênero: Gospel</p>
+                            <p class="portfolio-description text-text-muted leading-relaxed mb-6">Produção musical completa, gravação de vocais e masterização. Um projeto emocionante que alcançou +500K streams.</p>
+                        </div>
+                        <div class="portfolio-links flex flex-wrap justify-center gap-4 mt-auto">
+                            <a href="https://open.spotify.com/track/EXEMPLO" target="_blank" class="btn btn--primary flex items-center gap-2 px-6 py-3 text-lg font-medium rounded-full"><i class="fa-brands fa-spotify"></i> Ouvir no Spotify</a>
+                            <a href="https://www.youtube.com/watch?v=EXEMPLO" target="_blank" class="btn btn--secondary flex items-center gap-2 px-6 py-3 text-lg font-medium rounded-full"><i class="fa-brands fa-youtube"></i> Ver Vídeo</a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="portfolio-card animate-on-load">
-                    <img src="https://via.placeholder.com/600x250/000000/FFFFFF?text=Coming+Soon" alt="Capa do Single Cantor Z" class="portfolio-thumbnail">
-                    <div class="portfolio-content">
-                        <h3 class="portfolio-title">"Meu Novo Eu" - Cantor Z</h3>
-                        <p class="portfolio-genre">Gênero: Sertanejo Universitário</p>
-                        <p class="portfolio-description">Produção e arranjos de um single promissor. Lançamento em breve, com grande expectativa no mercado.</p>
-                    </div>
-                    <div class="portfolio-links">
-                        <a href="index.html#contato" class="btn btn--primary"><i class="fa-solid fa-microphone"></i> Agendar Sessão</a>
-                        <a href="index.html#newsletter-modal" class="btn btn--secondary open-newsletter-modal"><i class="fa-solid fa-bell"></i> Receber Novidades</a>
+                <!-- Card de Portfólio 2 -->
+                <div class="portfolio-card glass-card rounded-2xl shadow-xl overflow-hidden transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-accent-cyan/30 animate-fadeInUp">
+                    <img src="https://placehold.co/600x250/1A1A2E/00E4FF?text=Album+Cover+02" alt="Capa do Álbum Banda Y" class="portfolio-thumbnail w-full h-64 object-cover block">
+                    <div class="portfolio-content p-8 flex flex-col justify-between flex-grow">
+                        <div>
+                            <h3 class="portfolio-title text-2xl font-medium mb-2 text-accent-cyan">"Eco Urbano" - Banda Y</h3>
+                            <p class="portfolio-genre text-sm text-text-muted uppercase tracking-wider mb-4">Gênero: Rock Alternativo</p>
+                            <p class="portfolio-description text-text-muted leading-relaxed mb-6">Mixagem detalhada e masterização para EP, com foco na dinâmica e clareza dos instrumentos. Recebeu ótima crítica especializada.</p>
+                        </div>
+                        <div class="portfolio-links flex flex-wrap justify-center gap-4 mt-auto">
+                            <a href="https://open.spotify.com/album/EXEMPLO" target="_blank" class="btn btn--primary flex items-center gap-2 px-6 py-3 text-lg font-medium rounded-full"><i class="fa-brands fa-spotify"></i> Ouvir no Spotify</a>
+                            <a href="https://www.instagram.com/banday/" target="_blank" class="btn btn--secondary flex items-center gap-2 px-6 py-3 text-lg font-medium rounded-full"><i class="fa-brands fa-instagram"></i> Perfil da Banda</a>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Card de Portfólio 3 -->
+                <div class="portfolio-card glass-card rounded-2xl shadow-xl overflow-hidden transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-accent-cyan/30 animate-fadeInUp">
+                    <img src="https://placehold.co/600x250/1A1A2E/00E4FF?text=Coming+Soon" alt="Capa do Single Cantor Z" class="portfolio-thumbnail w-full h-64 object-cover block">
+                    <div class="portfolio-content p-8 flex flex-col justify-between flex-grow">
+                        <div>
+                            <h3 class="portfolio-title text-2xl font-medium mb-2 text-accent-cyan">"Meu Novo Eu" - Cantor Z</h3>
+                            <p class="portfolio-genre text-sm text-text-muted uppercase tracking-wider mb-4">Gênero: Sertanejo Universitário</p>
+                            <p class="portfolio-description text-text-muted leading-relaxed mb-6">Produção e arranjos de um single promissor. Lançamento em breve, com grande expectativa no mercado.</p>
+                        </div>
+                        <div class="portfolio-links flex flex-wrap justify-center gap-4 mt-auto">
+                            <a href="index.html#contato" class="btn btn--primary flex items-center gap-2 px-6 py-3 text-lg font-medium rounded-full"><i class="fa-solid fa-microphone"></i> Agendar Sessão</a>
+                            <a href="#newsletter-modal" class="btn btn--secondary flex items-center gap-2 px-6 py-3 text-lg font-medium rounded-full open-newsletter-modal"><i class="fa-solid fa-bell"></i> Receber Novidades</a>
+                        </div>
+                    </div>
                 </div>
+            </div>
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 ATOCAMUSIC. Todos os direitos reservados. | <a href="index.html#contato">Contato</a></p>
+    <!-- Rodapé (Mesmo do index.html para consistência) -->
+    <footer id="contato" class="footer bg-bg-primary py-20 relative z-10">
+        <div class="container mx-auto px-4 md:px-8">
+            <div class="footer-content glass-card p-8 md:p-12 rounded-2xl shadow-xl flex flex-col lg:flex-row justify-between items-start gap-12 lg:gap-16">
+                <!-- Informações de Contato e Redes Sociais -->
+                <div class="footer-left-combined flex flex-col gap-10 flex-1 min-w-[300px]">
+                    <div class="footer-section contact-info">
+                        <h3 class="footer-title text-3xl font-medium mb-6 text-accent-cyan">Conecte-se Conosco</h3>
+                        <p class="contact-intro text-lg text-text-muted mb-8 leading-relaxed">Estamos prontos para transformar sua música e sua carreira!</p>
+                        <div class="space-y-4">
+                            <div class="contact-item flex items-center gap-4">
+                                <span class="social-icon text-accent-green text-3xl"><i class="fa-brands fa-whatsapp"></i></span>
+                                <a href="https://wa.me/5561982115374" target="_blank" class="contact-link text-text-muted text-lg hover:text-accent-cyan transition-colors duration-300">(61) 98211-5374</a>
+                            </div>
+                            <div class="contact-item flex items-center gap-4">
+                                <span class="social-icon text-accent-green text-3xl"><i class="fa-solid fa-envelope"></i></span>
+                                <a href="mailto:gravadoraatocamusic@gmail.com" class="contact-link text-text-muted text-lg hover:text-accent-cyan transition-colors duration-300">gravadoraatocamusic@gmail.com</a>
+                            </div>
+                            <div class="contact-item flex items-center gap-4">
+                                <span class="social-icon text-accent-green text-3xl"><i class="fa-solid fa-location-dot"></i></span>
+                                <a href="https://www.google.com/maps/place/ATOCAMUSIC/@-15.682958,-48.2054179,17z/data=!3m1!4b1!4m6!3m5!1s0x935a6d14cb2c2639:0x97f48753052eb3e2!8m2!3d-15.6829581!4d-48.200547!16s%2Fg%2F11qsp20s6t?entry=ttu&g_ep=EgoyMDI1MDYwMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="contact-link text-text-muted text-lg hover:text-accent-cyan transition-colors duration-300">Setor Tradicional, Brazlândia-DF</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fusion Social Networks Wrapper -->
+                    <div class="footer-section fusion-social-networks-wrapper">
+                        <h3 class="footer-title text-3xl font-medium mb-6 text-accent-cyan">Acesse Nossas Redes Sociais</h3> 
+                        <div class="flex flex-wrap gap-6 justify-center lg:justify-start">
+                            <a href="https://www.instagram.com/atoca.music" target="_blank" class="social-link w-16 h-16 rounded-full bg-glass-bg flex items-center justify-center transform transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-accent-purple/40" aria-label="Instagram da Atoca Music">
+                                <i class="fa-brands fa-instagram text-4xl text-text-light hover:text-pink-500 transition-colors duration-300"></i>
+                            </a>
+                            <a href="https://www.tiktok.com/@atoca.music" target="_blank" class="social-link w-16 h-16 rounded-full bg-glass-bg flex items-center justify-center transform transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-accent-purple/40" aria-label="TikTok da Atoca Music">
+                                <i class="fa-brands fa-tiktok text-4xl text-text-light hover:text-gray-400 transition-colors duration-300"></i>
+                            </a>
+                            <a href="https://www.youtube.com/@atocamusic" target="_blank" class="social-link w-16 h-16 rounded-full bg-glass-bg flex items-center justify-center transform transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-accent-purple/40" aria-label="YouTube da Atoca Music">
+                                <i class="fa-brands fa-youtube text-4xl text-text-light hover:text-red-600 transition-colors duration-300"></i>
+                            </a>
+                            <a href="https://www.facebook.com/atocamusic" target="_blank" class="social-link w-16 h-16 rounded-full bg-glass-bg flex items-center justify-center transform transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-accent-purple/40" aria-label="Facebook da Atoca Music">
+                                <i class="fa-brands fa-facebook-f text-4xl text-text-light hover:text-blue-600 transition-colors duration-300"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div> 
+                
+                <!-- Formulário de Contato -->
+                <div class="footer-right flex-1 min-w-[300px] lg:max-w-xl">
+                    <div class="footer-section contact-form-section">
+                        <h3 class="footer-title text-3xl font-medium mb-6 text-accent-cyan">Envie sua Mensagem para a ATOCAMUSIC</h3>
+                        <form class="contact-form space-y-6" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                            <input type="hidden" name="form-name" value="contact" />
+                            <p class="hidden">
+                                <label>Não preencha este campo: <input name="bot-field" /></label>
+                            </p>
+                            <div class="form-group">
+                                <label for="name" class="sr-only">Nome Completo</label>
+                                <input type="text" id="name" name="name" class="form-control w-full p-4 rounded-lg bg-glass-bg border border-glass-border text-text-light placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent-cyan transition-colors duration-300" placeholder="Seu Nome Completo" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="sr-only">Seu Melhor E-mail</label>
+                                <input type="email" id="email" name="email" class="form-control w-full p-4 rounded-lg bg-glass-bg border border-glass-border text-text-light placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent-cyan transition-colors duration-300" placeholder="Seu Melhor E-mail" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="sr-only">Telefone (Opcional)</label>
+                                <input type="tel" id="phone" name="phone" class="form-control w-full p-4 rounded-lg bg-glass-bg border border-glass-border text-text-light placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent-cyan transition-colors duration-300" placeholder="Seu Telefone (Opcional)">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject" class="sr-only">Assunto da Mensagem</label>
+                                <input type="text" id="subject" name="subject" class="form-control w-full p-4 rounded-lg bg-glass-bg border border-glass-border text-text-light placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent-cyan transition-colors duration-300" placeholder="Assunto (Ex: Orçamento de Mixagem)" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message" class="sr-only">Sua Mensagem</label>
+                                <textarea id="message" name="message" class="form-control w-full p-4 rounded-lg bg-glass-bg border border-glass-border text-text-light placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent-cyan transition-colors duration-300 min-h-[120px]" rows="5" placeholder="Descreva seu projeto ou dúvida..." required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn--primary w-full py-4 text-xl font-semibold rounded-full relative overflow-hidden group">
+                                Enviar Mensagem
+                                <span class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Direitos Autorais -->
+            <div class="footer-bottom text-center text-text-muted text-sm mt-12 pt-8 border-t border-glass-border">
+                <p>&copy; 2025 ATOCAMUSIC. Todos os direitos reservados. | <a href="/politica-de-privacidade.html" class="text-text-muted hover:text-accent-cyan transition-colors duration-300 underline">Política de Privacidade</a></p> 
+            </div>
         </div>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Animação de carregamento da página
-            document.body.classList.add('loaded');
+    <!-- Modal de Newsletter (Mesmo do index.html para consistência) -->
+    <div id="newsletter-modal" class="modal-overlay fixed inset-0 bg-black bg-opacity-80 backdrop-blur-xl z-[999] flex items-center justify-center opacity-0 invisible transition-all duration-300">
+        <div class="modal-content glass-card p-8 md:p-10 max-w-lg w-11/12 rounded-3xl text-center relative transform translate-y-8 opacity-0 transition-all duration-300">
+            <button class="close-modal-btn absolute top-4 right-4 text-text-muted text-4xl leading-none bg-transparent border-none cursor-pointer p-2 hover:text-accent-cyan transform hover:rotate-90 transition-all duration-300" aria-label="Fechar">×</button>
+            <h3 class="modal-title text-3xl font-medium mb-4 text-accent-cyan">Receba Nossas Novidades Musicais!</h3>
+            <p class="modal-description text-text-muted text-lg mb-8 leading-relaxed">Fique por dentro dos lançamentos, dicas exclusivas e promoções da ATOCAMUSIC.</p>
+            <form class="newsletter-form space-y-6" name="newsletter" method="POST" data-netlify="true">
+                <input type="hidden" name="form-name" value="newsletter" />
+                <p class="hidden">
+                    <label>Não preencha este campo: <input name="bot-field" /></label>
+                </p>
+                <div class="form-group">
+                    <label for="newsletter-email" class="sr-only">Seu E-mail</label>
+                    <input type="email" id="newsletter-email" name="email" class="form-control w-full p-4 rounded-lg bg-glass-bg border border-glass-border text-text-light placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent-cyan transition-colors duration-300" placeholder="Seu E-mail" required>
+                </div>
+                <button type="submit" class="btn btn--primary w-full py-4 text-xl font-semibold rounded-full relative overflow-hidden group">
+                    Assinar Newsletter
+                    <span class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
+                </button>
+            </form>
+        </div>
+    </div>
 
-            // Funcionalidade de menu mobile (Simplificada para este arquivo)
-            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-            const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
-            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-
-            if (mobileMenuBtn && mobileMenuOverlay) {
-                mobileMenuBtn.addEventListener('click', () => {
-                    mobileMenuOverlay.classList.toggle('active');
-                    document.body.style.overflow = mobileMenuOverlay.classList.contains('active') ? 'hidden' : '';
-                });
-
-                mobileMenuOverlay.addEventListener('click', (e) => {
-                    if (e.target === mobileMenuOverlay) {
-                        mobileMenuOverlay.classList.remove('active');
-                        document.body.style.overflow = '';
-                    }
-                });
-            }
-
-            mobileNavLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenuOverlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                });
-            });
-
-            // Adiciona classe 'active' ao link de Portfólio no menu
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                if (link.getAttribute('href') === 'portifolio.html') {
-                    link.classList.add('active');
-                } else if (link.getAttribute('href') === 'index.html' && window.location.pathname === '/') {
-                    link.classList.add('active'); // Para o caso do index.html ser a raiz
-                }
-            });
-
-            // Exemplo de animação simples para cards do portfólio no carregamento
-            const portfolioCards = document.querySelectorAll('.portfolio-card');
-            portfolioCards.forEach((card, index) => {
-                card.style.animationDelay = `${index * 0.15}s`;
-            });
-        });
-    </script>
+    <!-- Link para o arquivo JavaScript (app.js) -->
+    <script src="app.js"></script>
 </body>
 </html>
