@@ -261,7 +261,7 @@ const observer = new IntersectionObserver((entries) => {
 // Observa elementos para animações
 function initObserver() {
     const elementsToObserve = document.querySelectorAll(
-        '.service-card, .artist-card, .about-card, .composers-content, .tour-virtual-content, .footer-content, .portfolio-card'
+        '.hero, .service-card, .artist-card, .about-card, .composers-content, .tour-virtual-content, .footer-content, .portfolio-card'
     );
     elementsToObserve.forEach(el => observer.observe(el));
 }
