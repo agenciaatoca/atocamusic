@@ -215,8 +215,10 @@ body {
   overflow-x: hidden;
   opacity: 0; /* Começa invisível para animação de carregamento */
   transition: opacity 0.5s ease;
-  /* NOVO FUNDO GRADIENTE */
-  background: radial-gradient(at 50% 100%, #1a1a2e 0%, #0a0a0f 70%), linear-gradient(to top left, #002430 0%, #001c2a 50%, #001220 100%);
+  /* NOVO FUNDO GRADIENTE MAIS DINÂMICO */
+  background: radial-gradient(at 80% 20%, rgba(0, 228, 255, 0.08) 0%, transparent 50%), /* Cian glow top right */
+              radial-gradient(at 20% 80%, rgba(155, 92, 246, 0.08) 0%, transparent 50%), /* Purple glow bottom left */
+              linear-gradient(to bottom, #0A0A0F 0%, #1A1A2E 100%); /* Main dark background gradient */
   background-attachment: fixed; /* Mantém o gradiente fixo no fundo */
   background-size: cover; /* Garante que o gradiente cubra toda a área */
 }
