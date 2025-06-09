@@ -5,32 +5,28 @@ const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 const navLinks = document.querySelectorAll('.nav-link');
 const statNumber = document.querySelector('.stat-number');
 const canvas = document.getElementById('particles-canvas');
-const ctx = canvas ? canvas.getContext('2d') : null; // Verifica se canvas existe
-const contactForm = document.querySelector('.contact-form');
+const ctx = canvas.getContext('2d');
 
-// Novo: Elementos do Modal de Newsletter
+// Elementos do Modal de Newsletter
 const newsletterModal = document.getElementById('newsletter-modal');
-const openNewsletterModalBtns = document.querySelectorAll('.open-newsletter-modal');
-const closeNewsletterModalBtn = document.querySelector('.close-modal-btn');
+const closeNewsletterModalBtn = document.querySelector('#newsletter-modal .close-modal-btn');
+const openNewsletterModalBtns = document.querySelectorAll('.open-newsletter-modal'); // Botões que abrem o modal
 
 // Mobile menu functionality
 function toggleMobileMenu() {
     mobileMenuOverlay.classList.toggle('active');
-    // Adicionado aria-expanded para acessibilidade
-    mobileMenuBtn.setAttribute('aria-expanded', mobileMenuOverlay.classList.contains('active'));
     document.body.style.overflow = mobileMenuOverlay.classList.contains('active') ? 'hidden' : '';
 }
 
 function closeMobileMenu() {
     mobileMenuOverlay.classList.remove('active');
-    mobileMenuBtn.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
 }
 
 // Event listeners for mobile menu
 mobileMenuBtn.addEventListener('click', toggleMobileMenu);
 mobileMenuOverlay.addEventListener('click', (e) => {
-    if (e.target === mobileMenuOverlay) { // Clica no overlay para fechar
+    if (e.target === mobileMenuOverlay) { // Fecha apenas se clicar no overlay
         closeMobileMenu();
     }
 });
@@ -45,8 +41,7 @@ function smoothScroll(target) {
     const element = document.querySelector(target);
     if (element) {
         const headerHeight = document.querySelector('.header').offsetHeight;
-        // Ajusta a posição de scroll para compensar o header fixo e um pouco de padding
-        const elementPosition = element.offsetTop - headerHeight - 20; // -20px para um visual melhor
+        const elementPosition = element.offsetTop - headerHeight;
         
         window.scrollTo({
             top: elementPosition,
@@ -62,21 +57,19 @@ function smoothScroll(target) {
         const target = link.getAttribute('href');
         if (target.startsWith('#')) {
             smoothScroll(target);
-            // Marcar link ativo para destaque visual
-            navLinks.forEach(navLink => navLink.classList.remove('active'));
-            link.classList.add('active');
         }
     });
 });
 
 // Animated counter for streams
 function animateCounter() {
+    // Verifica se o elemento statNumber e o dataset.target existem
     if (!statNumber || !statNumber.dataset.target) {
         console.warn("Elemento .stat-number ou data-target não encontrado para a animação do contador.");
         return;
     }
     const target = parseInt(statNumber.dataset.target);
-    const duration = 2500; // 2.5 seconds para mais suavidade
+    const duration = 2000; // 2 seconds
     const start = Date.now();
     const startValue = 0;
 
@@ -84,11 +77,10 @@ function animateCounter() {
         const elapsed = Date.now() - start;
         const progress = Math.min(elapsed / duration, 1);
         
-        // Easing function for smooth animation (easeOutQuart já é bom)
+        // Easing function for smooth animation
         const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-        let currentValue = Math.floor(startValue + (target - startValue) * easeOutQuart);
+        const currentValue = Math.floor(startValue + (target - startValue) * easeOutQuart);
         
-        // Formatação do número com pontos (milhões)
         statNumber.textContent = currentValue.toLocaleString('pt-BR');
         
         if (progress < 1) {
@@ -101,16 +93,16 @@ function animateCounter() {
     updateCounter();
 }
 
-// Particle system for background (Refinado)
+// Particle system for background
 class Particle {
     constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 1.5 + 0.5; // Partículas ligeiramente menores
-        this.speedX = (Math.random() - 0.5) * 0.3; // Mais lentas
-        this.speedY = (Math.random() - 0.5) * 0.3;
-        this.opacity = Math.random() * 0.4 + 0.1; // Menos opacas
-        this.color = `rgba(0, 212, 255, ${this.opacity})`; // Cor base do tema
+        this.size = Math.random() * 2 + 1;
+        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.speedY = (Math.random() - 0.5) * 0.5;
+        this.opacity = Math.random() * 0.5 + 0.1;
+        this.connections = [];
     }
     
     update() {
@@ -127,43 +119,36 @@ class Particle {
     draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
+        ctx.fillStyle = `rgba(0, 212, 255, ${this.opacity})`;
         ctx.fill();
     }
 }
 
+// Initialize particles
 let particles = [];
-// Ajuste de particleCount baseado na tela para melhor performance UX
-const getParticleCount = () => {
-    if (window.innerWidth < 768) return 30; // Mobile
-    if (window.innerWidth < 1200) return 60; // Tablets e notebooks menores
-    return 100; // Desktop (aumentado para mais densidade no "melhor site")
-};
+const particleCount = 50; // Mantido em 50 para boa performance padrão
 
 function initParticles() {
-    if (!canvas || !ctx) return; // Garante que canvas e ctx existem
     particles = [];
-    const currentParticleCount = getParticleCount();
-    for (let i = 0; i < currentParticleCount; i++) {
+    for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
     }
 }
 
 function drawConnections() {
-    if (!ctx) return;
     for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
             const dx = particles[i].x - particles[j].x;
             const dy = particles[i].y - particles[j].y;
             const distance = Math.sqrt(dx * dx + dy * dy);
             
-            if (distance < 120) { // Distância de conexão ligeiramente maior
-                const opacity = (120 - distance) / 120 * 0.08; // Conexões menos opacas
+            if (distance < 100) {
+                const opacity = (100 - distance) / 100 * 0.1;
                 ctx.beginPath();
                 ctx.moveTo(particles[i].x, particles[i].y);
                 ctx.lineTo(particles[j].x, particles[j].y);
                 ctx.strokeStyle = `rgba(0, 212, 255, ${opacity})`;
-                ctx.lineWidth = 0.8; // Linhas mais finas
+                ctx.lineWidth = 1;
                 ctx.stroke();
             }
         }
@@ -171,7 +156,6 @@ function drawConnections() {
 }
 
 function animateParticles() {
-    if (!ctx) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     particles.forEach(particle => {
@@ -184,17 +168,31 @@ function animateParticles() {
 }
 
 function resizeCanvas() {
-    if (canvas) {
+    if (canvas) { // Verifica se o canvas existe
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        initParticles(); // Re-inicializa partículas ao redimensionar
+        initParticles();
     }
 }
 
-// Intersection Observer for better performance and animations
+// Scroll animations (ainda presente para elementos não observados pelo IntersectionObserver)
+function handleScrollAnimations() {
+    const elements = document.querySelectorAll('.glass-card, .section-title');
+    
+    elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+            element.classList.add('animate-on-scroll', 'animated');
+        }
+    });
+}
+
+// Intersection Observer for better performance
 const observerOptions = {
-    threshold: 0.1, // Elemento visível em 10%
-    rootMargin: '0px 0px -80px 0px' // Começa a animar 80px antes do final da viewport
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
 };
 
 const observer = new IntersectionObserver((entries) => {
@@ -204,9 +202,10 @@ const observer = new IntersectionObserver((entries) => {
             
             // Trigger counter animation when hero section is visible
             if (entry.target.classList.contains('hero')) {
+                // Apenas animar se ainda não foi animado para evitar repetições
                 if (!entry.target.dataset.animated) {
-                    setTimeout(animateCounter, 600); // Atraso levemente maior para melhor UX
-                    entry.target.dataset.animated = 'true';
+                    setTimeout(animateCounter, 500);
+                    entry.target.dataset.animated = 'true'; // Marca como animado
                 }
             }
         } else {
@@ -216,28 +215,22 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe elements for animations (Atualizado para incluir novas seções)
+// Observe elements for animations
 function initObserver() {
-    const elementsToObserve = document.querySelectorAll(
-        '.service-card, .artist-card, .about-card, .hero, .composers-content, .tour-virtual-content, .testimonial-card, .section-title, .footer-content'
-    );
+    const elementsToObserve = document.querySelectorAll('.service-card, .artist-card, .about-card, .hero, .composers-content, .tour-virtual-content');
     elementsToObserve.forEach(el => observer.observe(el));
 }
 
 // Header background opacity on scroll
 function handleHeaderScroll() {
     const header = document.querySelector('.header');
-    if (!header) return;
+    if (!header) return; // Garante que o header existe
     const scrolled = window.pageYOffset;
     
-    if (scrolled > 80) { // Menor scroll para escurecer o header mais rápido
+    if (scrolled > 100) {
         header.style.background = 'rgba(10, 10, 15, 0.95)';
-        header.style.backdropFilter = 'blur(15px)';
-        header.style.webkitBackdropFilter = 'blur(15px)';
     } else {
         header.style.background = 'rgba(10, 10, 15, 0.8)';
-        header.style.backdropFilter = 'blur(10px)';
-        header.style.webkitBackdropFilter = 'blur(10px)';
     }
 }
 
@@ -254,85 +247,48 @@ function addButtonGlowEffect() {
             button.style.setProperty('--mouse-x', `${x}px`);
             button.style.setProperty('--mouse-y', `${y}px`);
         });
-        // Reset glow on mouse leave
-        button.addEventListener('mouseleave', () => {
-            button.style.setProperty('--mouse-x', `50%`);
-            button.style.setProperty('--mouse-y', `50%`);
-            button.style.setProperty('opacity', `0`);
-        });
     });
 }
 
-// Modal de Newsletter (Nova funcionalidade)
-function openNewsletter() {
+// Lógica para abrir e fechar o modal de newsletter
+function openNewsletterModal(e) {
+    e.preventDefault(); // Previne o comportamento padrão do link
     if (newsletterModal) {
         newsletterModal.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Evita scroll do background
-        // Opcional: focar no primeiro campo do formulário
-        const firstInput = newsletterModal.querySelector('input');
-        if (firstInput) firstInput.focus();
+        document.body.style.overflow = 'hidden'; // Impede o scroll do body
     }
 }
 
-function closeNewsletter() {
+function closeNewsletterModal() {
     if (newsletterModal) {
         newsletterModal.classList.remove('active');
-        document.body.style.overflow = '';
+        document.body.style.overflow = ''; // Restaura o scroll do body
     }
 }
 
-// Event Listeners para o Modal de Newsletter
-openNewsletterModalBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        openNewsletter();
-    });
-});
-
-if (closeNewsletterModalBtn) {
-    closeNewsletterModalBtn.addEventListener('click', closeNewsletter);
-}
-
-// Fecha modal com tecla ESC
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && newsletterModal && newsletterModal.classList.contains('active')) {
-        closeNewsletter();
-    }
-});
-
-
-// Add parallax effect to hero section (melhorado para mais suavidade)
-function addParallaxEffect() {
-    const hero = document.querySelector('.hero');
-    if (!hero) return;
-
-    let requestId;
-    const updateParallax = () => {
-        const scrolled = window.pageYOffset;
-        const rate = scrolled * -0.2; // Taxa de parallax ajustada
-        
-        hero.style.transform = `translateY(${rate}px)`;
-        requestId = null; // Limpa o ID da requisição
-    };
-
-    window.addEventListener('scroll', () => {
-        if (!requestId) {
-            requestId = requestAnimationFrame(updateParallax); // Otimiza para usar requestAnimationFrame
+// Event Listeners para o modal
+if (newsletterModal && closeNewsletterModalBtn) {
+    closeNewsletterModalBtn.addEventListener('click', closeNewsletterModal);
+    newsletterModal.addEventListener('click', (e) => {
+        if (e.target === newsletterModal) { // Fecha apenas se clicar no overlay
+            closeNewsletterModal();
         }
-    }, { passive: true }); // Usar passive: true para melhor performance de scroll
+    });
+}
+
+// Adiciona event listeners para os botões que abrem o modal
+if (openNewsletterModalBtns.length > 0) {
+    openNewsletterModalBtns.forEach(button => {
+        button.addEventListener('click', openNewsletterModal);
+    });
 }
 
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize canvas and particles
-    if (canvas && ctx) { // Só inicializa se o canvas for encontrado
-        resizeCanvas();
-        animateParticles();
-        window.addEventListener('resize', resizeCanvas); // Escuta resize do canvas
-    } else {
-        console.warn("Canvas ou contexto 2D não encontrado. Sistema de partículas desativado.");
-    }
+    resizeCanvas();
+    animateParticles();
     
     // Initialize scroll animations
     initObserver();
@@ -342,20 +298,20 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Add scroll event listeners
     window.addEventListener('scroll', () => {
-        // handleScrollAnimations(); // Removido, pois IntersectionObserver é mais eficiente para a maioria
+        handleScrollAnimations(); // Pode ser menos crítico com o IntersectionObserver, mas ainda útil para alguns elementos.
         handleHeaderScroll();
     });
     
-    // Add stagger animation to service cards
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        resizeCanvas();
+    });
+    
+    // Add stagger animation to service cards (ainda relevante)
     const serviceCards = document.querySelectorAll('.service-card');
     serviceCards.forEach((card, index) => {
-        // A animação já está sendo cuidada pelo IntersectionObserver com 'fade-in-up'
-        // Mas o delay pode ser mantido para um efeito cascata se a animação não for no scroll
         card.style.animationDelay = `${index * 0.1}s`;
     });
-
-    // Initialize parallax
-    addParallaxEffect();
 });
 
 // Add loading animation
@@ -363,27 +319,19 @@ window.addEventListener('load', () => {
     document.body.classList.add('loaded');
 });
 
-// Marca o link de navegação ativo no carregamento inicial
-document.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('section');
-    const scrollPosition = window.pageYOffset + document.querySelector('.header').offsetHeight + 50; // Ajuste para header e padding
-
-    sections.forEach(section => {
-        if (section.offsetTop <= scrollPosition && section.offsetTop + section.offsetHeight > scrollPosition) {
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + section.id) {
-                    link.classList.add('active');
-                }
-            });
-            mobileNavLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + section.id) {
-                    link.classList.add('active');
-                }
-            });
+// Add parallax effect to hero section
+function addParallaxEffect() {
+    const hero = document.querySelector('.hero');
+    
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * -0.2; // Taxa de parallax ajustada para um efeito mais suave
+        
+        if (hero) {
+            hero.style.transform = `translateY(${rate}px)`;
         }
     });
-});
-// Trigger inicial para a classe ativa
-document.dispatchEvent(new Event('scroll'));
+}
+
+// Initialize parallax
+addParallaxEffect();
