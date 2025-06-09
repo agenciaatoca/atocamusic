@@ -454,7 +454,7 @@ pre code {
     font-size: 0.95rem;
     color: var(--text-secondary);
     line-height: 1.6;
-    flex-grow: 1; /* Permite que a descrição ocupe espaço */
+    flex-grow: 1; /* Permite que a descrição ocupe espaço e alinhe os botões */
     margin-bottom: 1.5rem;
 }
 
