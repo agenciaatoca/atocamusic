@@ -347,3 +347,4 @@ function addParallaxEffect() {
 
 // Initialize parallax
 addParallaxEffect();
+// fim
