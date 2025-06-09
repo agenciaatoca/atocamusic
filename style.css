@@ -241,7 +241,7 @@ p {
 a {
   color: var(--accent-cyan); /* Links globais usam a cor de destaque */
   text-decoration: none;
-  transition: color var(--duration-fast) var(--ease-standard);
+  transition: color 0.3s ease; /* Transição para links gerais */
 }
 
 a:hover {
@@ -332,15 +332,17 @@ pre code {
     box-shadow: var(--glow-cyan);
 }
 
-.hero-cta {
-    margin-top: 2rem;
-    font-size: 1.1rem;
-    padding: 1.2rem 3rem;
+.btn--small { /* Estilo para o botão pequeno */
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    border-radius: 25px;
 }
 
 /* Seções */
-.services, .artists, .composers, .about {
+.services, .artists, .composers, .about, .tour-virtual {
     padding: 6rem 0;
+    position: relative; /* Para garantir z-index correto com partículas */
+    z-index: 2; /* Acima do canvas de partículas */
 }
 
 .section-title {
@@ -351,92 +353,232 @@ pre code {
     color: var(--text-primary);
 }
 
+/* Hero Section Specific */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    background-attachment: fixed; /* Parallax para o fundo hero */
+    background-size: cover;
+}
+
+.hero-content {
+    max-width: 800px;
+    z-index: 10;
+    transform: translateY(30px);
+    opacity: 0;
+    animation: heroFadeIn 1s ease 0.3s forwards;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: var(--text-secondary);
+    margin-top: -2rem; /* Aproxima do título */
+    margin-bottom: 2rem;
+    font-weight: 300;
+}
+
+.hero-stats {
+    margin: 3rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.stat-number {
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 100;
+    color: var(--accent-green);
+    text-shadow: var(--glow-green);
+}
+
+.stat-number::before {
+    content: '+';
+    font-size: 0.7em;
+}
+
+.stat-label {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+}
+
+.hero-cta {
+    margin-top: 2rem;
+    font-size: 1.1rem;
+    padding: 1.2rem 3rem;
+}
+
+
 /* Serviços */
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Ajustado minmax para serviços */
     gap: 2rem;
 }
 
 .service-card {
-    padding: 2rem;
+    padding: 2.5rem 2rem; /* Mais padding para melhor visual */
     text-align: center;
-    transition: all 0.3s ease;
-}
-
-.service-card:hover {
-    transform: translateY(-10px) rotateX(5deg);
-    box-shadow: var(--glow-purple);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Espaço entre elementos */
 }
 
 .service-icon {
-    font-size: 3rem;
+    font-size: 3.5rem; /* Ícones maiores */
     margin-bottom: 1rem;
     display: block;
+    color: var(--accent-cyan); /* Cor para os ícones de serviço */
+    text-shadow: var(--glow-cyan);
 }
 
 .service-title {
-    font-size: 1.3rem;
+    font-size: 1.5rem; /* Títulos maiores */
     font-weight: 500;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
     color: var(--text-primary);
-}
-
-.service-price {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--accent-green);
-    margin-bottom: 1rem;
 }
 
 .service-description {
     font-size: 0.95rem;
     color: var(--text-secondary);
-    line-height: 1.5;
+    line-height: 1.6;
+    flex-grow: 1; /* Permite que a descrição ocupe espaço */
+    margin-bottom: 1.5rem;
+}
+
+.service-description i {
+    font-style: normal; /* Remove itálico se o i for usado para "por faixa" */
+    color: var(--accent-green); /* Cor para "POR FAIXA" */
+    font-weight: 600;
+}
+
+.service-price {
+    font-size: 1.2rem; /* Preço um pouco maior */
+    font-weight: 600;
+    color: var(--accent-green);
+    margin-bottom: 1.5rem; /* Mais espaçamento antes do botão */
+}
+
+.service-price span {
+    font-size: 1.4em; /* Número do preço maior */
+    font-weight: 700;
+    text-shadow: var(--glow-green);
+}
+
+.service-price em {
+    font-style: normal; /* Remove itálico */
+    color: var(--text-secondary);
+    font-size: 0.9em;
+    font-weight: 400;
 }
 
 /* Artistas */
 .artists-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 2rem;
-    max-width: 600px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajustado minmax para artistas */
+    gap: 2.5rem; /* Mais espaçamento entre os cards */
+    max-width: 900px; /* Aumentado para acomodar mais artistas lado a lado */
     margin: 0 auto;
 }
 
 .artist-card {
     padding: 2.5rem 2rem;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.artist-media {
+    width: 100%;
+    margin-bottom: 1.5rem;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--glow-cyan); /* Brilho ao redor do iframe */
+    aspect-ratio: 16 / 9; /* Mantém a proporção de vídeo para iframe */
+}
+
+.artist-media iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
 }
 
 .artist-genre {
-    font-size: 0.85rem;
+    font-size: 0.9rem; /* Um pouco maior */
     color: var(--accent-cyan);
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 1rem;
-    font-weight: 500;
+    letter-spacing: 1.5px; /* Mais espaçamento */
+    margin-bottom: 0.8rem;
+    font-weight: 600;
 }
 
 .artist-name {
-    font-size: 1.4rem;
-    font-weight: 400;
-    margin-bottom: 1.5rem;
+    font-size: 1.8rem; /* Nome maior */
+    font-weight: 300;
+    margin-bottom: 1rem;
     color: var(--text-primary);
 }
 
-.artist-link {
-    margin-top: 1rem;
+.artist-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem; /* Mais espaço entre os links */
+    margin-top: auto; /* Empurra os links para o final do card */
 }
+
+.artist-link {
+    padding: 0.7rem 1.2rem;
+    font-size: 0.9rem;
+    display: inline-flex; /* Para alinhar ícone e texto */
+    align-items: center;
+    gap: 0.5rem; /* Espaço entre ícone e texto */
+}
+
+.artist-link .fa-brands, .artist-link .fa-solid { /* Estilo para os ícones Font Awesome */
+    font-size: 1.2rem; /* Tamanho do ícone */
+    color: inherit; /* Herda a cor do link */
+    transition: color 0.3s ease;
+}
+/* Cores específicas para ícones de mídia social se quiser sobrescrever */
+.artist-link .fa-instagram { color: #E4405F; }
+.artist-link .fa-youtube { color: #FF0000; }
+.artist-link .fa-spotify { color: #1DB954; }
 
 .coming-soon {
     opacity: 0.7;
+    background: rgba(255, 255, 255, 0.05); /* Um pouco mais escuro para indicar "em breve" */
+    border-style: dashed; /* Borda tracejada */
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 .coming-soon-text {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: var(--text-secondary);
     font-style: italic;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.section-cta {
+    text-align: center;
+    margin-top: 4rem; /* Espaço abaixo da grade */
 }
 
 /* Compositores */
@@ -445,20 +587,33 @@ pre code {
 }
 
 .composers-content {
-    max-width: 600px;
+    max-width: 700px; /* Aumentado para melhor leitura */
     margin: 0 auto;
-    padding: 3rem;
+    padding: 3.5rem; /* Mais padding */
     text-align: center;
 }
 
 .composers-text {
-    font-size: 1.1rem;
+    font-size: 1.15rem; /* Texto maior */
     color: var(--text-secondary);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
     line-height: 1.7;
 }
 
-/* Quem Somos */
+.composers-text-highlight {
+    font-size: 1.25rem; /* Destaque maior */
+    color: var(--accent-green); /* Cor de destaque */
+    font-weight: 500;
+    margin-top: 2rem; /* Espaço acima */
+    margin-bottom: 2.5rem; /* Espaço abaixo do botão */
+    text-shadow: var(--glow-green); /* Sombra para o brilho */
+}
+
+/* Quem Somos (About) */
+.about {
+    background: var(--bg-primary); /* Garante que esta seção se destaque do Composers */
+}
+
 .about-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -467,10 +622,13 @@ pre code {
 
 .about-card {
     padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Alinha o conteúdo ao topo do card */
 }
 
 .about-card-title {
-    font-size: 1.4rem;
+    font-size: 1.6rem; /* Títulos maiores */
     font-weight: 500;
     margin-bottom: 1.5rem;
     color: var(--accent-cyan);
@@ -480,17 +638,20 @@ pre code {
     color: var(--text-secondary);
     line-height: 1.6;
     font-size: 1rem;
+    flex-grow: 1; /* Permite que o texto ocupe o espaço e alinhe os botões */
 }
 
 .about-values {
     list-style: none;
+    margin-top: 1rem; /* Espaçamento para a lista de valores */
 }
 
 .about-values li {
     color: var(--text-secondary);
     margin-bottom: 0.8rem;
     position: relative;
-    padding-left: 1.5rem;
+    padding-left: 1.8rem; /* Mais espaço para o ícone */
+    font-size: 0.95rem;
 }
 
 .about-values li::before {
@@ -499,6 +660,54 @@ pre code {
     position: absolute;
     left: 0;
     font-weight: bold;
+    font-size: 1.1rem; /* Ícone um pouco maior */
+}
+
+.about-team-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Empurra o botão para baixo */
+}
+
+.about-team-card .btn {
+    margin-top: 1.5rem; /* Espaçamento acima do botão */
+}
+
+/* Tour Virtual (O Estudio) */
+.tour-virtual {
+    background: var(--bg-secondary); /* Alterna o fundo */
+}
+
+.tour-virtual-content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tour-virtual-text {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.video-placeholder {
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 2rem;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--glow-purple); /* Sombra de destaque para o placeholder */
+}
+
+.tour-placeholder-img {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 
 /* Rodapé (Footer) */
@@ -513,11 +722,12 @@ pre code {
     justify-content: space-between;
     gap: 3rem;
     padding: 3rem 2rem;
-    margin-bottom: 2rem;
+    max-width: var(--container-lg); /* Limita a largura do conteúdo do footer */
+    margin: 0 auto 2rem auto; /* Centraliza e adiciona margem inferior */
     align-items: flex-start;
 }
 
-.footer-left {
+.footer-left-combined { /* Novo container para info e redes sociais */
     flex: 1;
     min-width: 280px;
     display: flex;
@@ -526,18 +736,19 @@ pre code {
 }
 
 .footer-right {
-    flex: 1.5;
+    flex: 1.5; /* Dá mais espaço para o formulário */
     min-width: 300px;
 }
 
 .footer-section {
-    margin-bottom: 0;
+    margin-bottom: 0; /* Remove a margem inferior padrão */
 }
 
 .contact-intro {
     font-size: 0.95rem;
     color: var(--text-secondary);
     margin-bottom: 1.5rem;
+    line-height: 1.5;
 }
 
 .contact-item {
@@ -547,15 +758,28 @@ pre code {
     margin-bottom: 1rem;
 }
 
-.contact-icon {
+.contact-icon { /* Estilo base para os spans que contêm os ícones */
     font-size: 1.2rem;
     color: var(--accent-cyan);
 }
+
+.contact-icon .fa-brands,
+.contact-icon .fa-solid {
+    font-size: 1.8rem; /* Tamanho maior para os ícones no footer */
+    vertical-align: middle; /* Alinha o ícone no meio */
+}
+
+/* Cores específicas para ícones de contato no footer */
+.contact-item .fa-whatsapp { color: #25D366; }
+.contact-item .fa-envelope { color: #D44638; }
+.contact-item .fa-location-dot { color: #4285F4; }
+
 
 .contact-link {
     color: var(--text-secondary);
     text-decoration: none;
     transition: color 0.3s ease;
+    font-size: 1rem; /* Garante tamanho legível */
 }
 
 .contact-link:hover {
@@ -564,44 +788,77 @@ pre code {
 
 .contact-text {
     color: var(--text-secondary);
+    font-size: 1rem; /* Garante tamanho legível */
+}
+
+.social-media {
+    display: flex;
+    gap: 1.5rem; /* Espaçamento entre os ícones sociais */
+    flex-wrap: wrap;
+    align-items: center;
 }
 
 .social-link {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
-    color: var(--text-secondary);
-    text-decoration: none;
+    justify-content: center;
+    width: 50px; /* Tamanho fixo para o ícone */
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08); /* Fundo sutil */
     transition: all 0.3s ease;
+    text-decoration: none; /* Remove sublinhado */
 }
 
 .social-link:hover {
-    color: var(--accent-cyan);
-    text-shadow: 0 0 10px var(--accent-cyan);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: var(--glow-cyan);
+    transform: translateY(-3px);
 }
 
-.social-icon {
-    font-size: 1.2rem;
+.social-link .social-icon { /* O span dentro do link */
+    font-size: 1.8rem; /* Tamanho do ícone dentro do círculo */
+    color: var(--text-primary); /* Cor padrão dos ícones, a menos que sobrescrita */
+    transition: color 0.3s ease;
 }
+
+/* Cores específicas para os ícones sociais se necessário (pode ser sobrescrito pelo inline se o HTML o tiver) */
+.social-link .fa-instagram { color: #E4405F; } /* Ou apenas var(--text-primary) */
+.social-link .fa-tiktok { color: #FFFFFF; } /* TikTok é preto no fundo branco, então branco aqui */
+.social-link .fa-youtube { color: #FF0000; }
+
 
 /* Estilos do formulário de contato */
 .contact-form .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem; /* Mais espaçamento entre os campos */
 }
 
 .contact-form .form-control {
-    background-color: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.08); /* Fundo um pouco mais visível */
+    border-color: rgba(255, 255, 255, 0.15);
     color: var(--text-primary);
+    padding: 0.8rem 1rem; /* Mais padding nos inputs */
+    font-size: 1rem;
+}
+
+.contact-form .form-control:focus {
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 0 2px var(--accent-cyan);
 }
 
 .contact-form .form-control::placeholder {
     color: var(--text-secondary);
-    opacity: 0.7;
+    opacity: 0.6; /* Placeholder um pouco mais claro */
+}
+
+.contact-form textarea.form-control {
+    min-height: 100px; /* Altura mínima para a área de texto */
 }
 
 .contact-form .btn--primary {
-    margin-top: 1rem;
+    margin-top: 1.5rem; /* Mais margem acima do botão de envio */
+    padding: 1rem 2rem; /* Botão de envio maior */
+    font-size: 1.1rem;
 }
 
 .footer-bottom {
@@ -611,6 +868,106 @@ pre code {
     color: var(--text-secondary);
     font-size: 0.9rem;
 }
+
+.footer-bottom a {
+    color: var(--text-secondary); /* Cor do link da política */
+    text-decoration: underline;
+}
+
+.footer-bottom a:hover {
+    color: var(--accent-cyan);
+}
+
+/* Modal de Newsletter */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Fundo mais escuro */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Z-index alto para ficar acima de tudo */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    position: relative;
+    padding: 3rem 2rem; /* Mais padding */
+    max-width: 500px;
+    width: 90%;
+    border-radius: 20px; /* Bordas mais arredondadas */
+    text-align: center;
+    transform: translateY(20px); /* Começa um pouco abaixo */
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.8rem; /* Tamanho maior para o X */
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.5rem;
+    line-height: 1;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.close-modal-btn::before {
+    content: '×'; /* Caractere 'X' */
+}
+
+.close-modal-btn:hover {
+    color: var(--accent-cyan);
+    transform: rotate(90deg);
+}
+
+.modal-title {
+    font-size: 2rem; /* Título maior */
+    color: var(--accent-cyan);
+    margin-bottom: 1rem;
+}
+
+.modal-description {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+.newsletter-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+/* Esconder o honeypot field */
+.hidden {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    position: absolute !important;
+    left: -9999px !important;
+}
+
 
 /* Design Responsivo */
 @media (max-width: 768px) {
@@ -624,6 +981,10 @@ pre code {
     
     .hero-title {
         font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
     }
     
     .services-grid {
@@ -646,15 +1007,27 @@ pre code {
         padding: 2rem 1rem;
     }
 
-    .footer-left,
+    .footer-left-combined,
     .footer-right {
         min-width: unset;
         flex: unset;
         width: 100%;
     }
-    
-    .container {
-        padding: 0 15px;
+
+    .social-media {
+        justify-content: center; /* Centraliza ícones sociais no mobile */
+    }
+
+    .tour-virtual-content {
+        padding: 2rem 1.5rem;
+    }
+
+    .modal-content {
+        padding: 2rem 1.5rem;
+    }
+
+    .modal-title {
+        font-size: 1.5rem;
     }
 }
 
@@ -692,16 +1065,15 @@ pre code {
 .service-card,
 .artist-card,
 .about-card,
-.glass-card {
+.glass-card,
+.tour-virtual-content,
+.modal-content { /* Adicionado para otimização */
     will-change: transform, box-shadow; /* Indica ao navegador para otimizar essas propriedades */
 }
 
 /* Estilos de transição suaves para todos os elementos */
-/* NOTA: o seletor universal *{} com transition pode impactar a performance. 
-   É melhor aplicar transições especificamente aos elementos que precisam delas.
-   No entanto, foi mantido aqui como estava em suas versões anteriores. */
 * {
-    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease, color 0.3s ease;
 }
 
 .service-card:hover {
