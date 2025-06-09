@@ -3,19 +3,26 @@ const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
 const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 const navLinks = document.querySelectorAll('.nav-link');
-const statNumber = document.querySelector('.stat-number'); // Elemento para o contador
+const statNumber = document.querySelector('.stat-number');
 const canvas = document.getElementById('particles-canvas');
-const ctx = canvas ? canvas.getContext('2d') : null; // Verifica se canvas existe antes de pegar o contexto
+const ctx = canvas ? canvas.getContext('2d') : null;
 
 // Elementos do Modal de Newsletter
 const newsletterModal = document.getElementById('newsletter-modal');
 const closeNewsletterModalBtn = document.querySelector('#newsletter-modal .close-modal-btn');
-const openNewsletterModalBtns = document.querySelectorAll('.open-newsletter-modal'); // Botões que abrem o modal
+const openNewsletterModalBtns = document.querySelectorAll('.open-newsletter-modal');
 
-// Mobile menu functionality
+// Variáveis para o sistema de partículas
+let particles = [];
+const particleCount = 70; // Aumentado para mais partículas
+const connectionDistance = 120; // Distância máxima para conectar partículas
+
+// --- Funções de Funcionalidade Geral ---
+
+// Toggle do Menu Mobile
 function toggleMobileMenu() {
     mobileMenuOverlay.classList.toggle('active');
-    document.body.style.overflow = mobileMenuOverlay.classList.contains('active') ? 'hidden' : '';
+    document.body.style.overflow = mobileMenuOverlay.classList.contains('active') ? 'hidden' : ''; // Impede o scroll do body
 }
 
 function closeMobileMenu() {
@@ -23,29 +30,12 @@ function closeMobileMenu() {
     document.body.style.overflow = '';
 }
 
-// Event listeners for mobile menu
-if (mobileMenuBtn) { // Verifica se o botão existe
-    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-}
-if (mobileMenuOverlay) { // Verifica se o overlay existe
-    mobileMenuOverlay.addEventListener('click', (e) => {
-        if (e.target === mobileMenuOverlay) { // Fecha apenas se clicar no overlay
-            closeMobileMenu();
-        }
-    });
-}
-
-// Close mobile menu when clicking nav links
-mobileNavLinks.forEach(link => {
-    link.addEventListener('click', closeMobileMenu);
-});
-
-// Smooth scrolling for navigation links
+// Smooth scrolling para links de navegação
 function smoothScroll(target) {
     const element = document.querySelector(target);
     if (element) {
         const header = document.querySelector('.header');
-        const headerHeight = header ? header.offsetHeight : 0; // Pega altura do header, 0 se não existir
+        const headerHeight = header ? header.offsetHeight : 0;
         const elementPosition = element.offsetTop - headerHeight;
         
         window.scrollTo({
@@ -55,26 +45,31 @@ function smoothScroll(target) {
     }
 }
 
-// Add smooth scrolling to all nav links
+// Adiciona smooth scrolling a todos os links de navegação
 [...navLinks, ...mobileNavLinks].forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
         const target = link.getAttribute('href');
-        if (target && target.startsWith('#')) { // Verifica se target existe e começa com '#'
+        if (target && target.startsWith('#')) {
             smoothScroll(target);
+            closeMobileMenu(); // Fecha o menu mobile após clicar em um link
+        } else if (target && !target.startsWith('#')) {
+            // Se for um link externo (como portifolio.html), apenas navega
+            window.location.href = target;
         }
     });
 });
 
-// Animated counter for streams
+// --- Animações e Efeitos Visuais ---
+
+// Contador Animado para Streams
 function animateCounter() {
-    // Verifica se o elemento statNumber e o dataset.target existem
     if (!statNumber || !statNumber.dataset.target) {
         // console.warn("Elemento .stat-number ou data-target não encontrado para a animação do contador.");
         return;
     }
     const target = parseInt(statNumber.dataset.target);
-    const duration = 2000; // 2 seconds
+    const duration = 2000; // 2 segundos
     const start = Date.now();
     const startValue = 0;
 
@@ -82,7 +77,7 @@ function animateCounter() {
         const elapsed = Date.now() - start;
         const progress = Math.min(elapsed / duration, 1);
         
-        // Easing function for smooth animation
+        // Easing function for smooth animation (easeOutQuart)
         const easeOutQuart = 1 - Math.pow(1 - progress, 4);
         const currentValue = Math.floor(startValue + (target - startValue) * easeOutQuart);
         
@@ -94,20 +89,19 @@ function animateCounter() {
             statNumber.textContent = target.toLocaleString('pt-BR');
         }
     }
-    
     updateCounter();
 }
 
-// Particle system for background (apenas se canvas e contexto existirem)
+// Classe para Partículas do Canvas
 class Particle {
     constructor() {
         this.x = Math.random() * canvas.width;
         this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2 + 1;
-        this.speedX = (Math.random() - 0.5) * 0.5;
+        this.size = Math.random() * 2 + 1; // Tamanho entre 1 e 3
+        this.speedX = (Math.random() - 0.5) * 0.5; // Velocidade lenta
         this.speedY = (Math.random() - 0.5) * 0.5;
-        this.opacity = Math.random() * 0.5 + 0.1;
-        this.connections = [];
+        this.opacity = Math.random() * 0.4 + 0.1; // Opacidade entre 0.1 e 0.5
+        this.color = `rgba(0, 212, 255, ${this.opacity})`; // Cor ciano
     }
     
     update() {
@@ -122,17 +116,15 @@ class Particle {
     }
     
     draw() {
-        if (!ctx) return; // Garante que o contexto existe antes de desenhar
+        if (!ctx) return;
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 212, 255, ${this.opacity})`;
+        ctx.fillStyle = this.color;
         ctx.fill();
     }
 }
 
-let particles = [];
-const particleCount = 50; // Mantido em 50 para boa performance padrão
-
+// Inicializa as partículas
 function initParticles() {
     if (!canvas || !ctx) return;
     particles = [];
@@ -141,6 +133,7 @@ function initParticles() {
     }
 }
 
+// Desenha as conexões entre partículas próximas
 function drawConnections() {
     if (!canvas || !ctx) return;
     for (let i = 0; i < particles.length; i++) {
@@ -149,100 +142,71 @@ function drawConnections() {
             const dy = particles[i].y - particles[j].y;
             const distance = Math.sqrt(dx * dx + dy * dy);
             
-            if (distance < 100) {
-                const opacity = (100 - distance) / 100 * 0.1;
+            if (distance < connectionDistance) { // Conecta se estiverem próximas
+                const opacity = (1 - (distance / connectionDistance)) * 0.15; // Opacidade diminui com a distância
                 ctx.beginPath();
                 ctx.moveTo(particles[i].x, particles[i].y);
                 ctx.lineTo(particles[j].x, particles[j].y);
-                ctx.strokeStyle = `rgba(0, 212, 255, ${opacity})`;
-                ctx.lineWidth = 1;
+                ctx.strokeStyle = `rgba(0, 212, 255, ${opacity})`; // Cor ciano para as linhas
+                ctx.lineWidth = 0.8; // Linhas mais finas
                 ctx.stroke();
             }
         }
     }
 }
 
+// Loop de animação das partículas
 function animateParticles() {
     if (!canvas || !ctx) return;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpa o canvas
+
+    // Desenha e atualiza as partículas
     particles.forEach(particle => {
         particle.update();
         particle.draw();
     });
     
-    drawConnections();
-    requestAnimationFrame(animateParticles);
+    drawConnections(); // Desenha as conexões
+    requestAnimationFrame(animateParticles); // Chama a próxima animação
 }
 
+// Redimensiona o canvas e reinicia as partículas
 function resizeCanvas() {
-    if (canvas && ctx) { // Verifica se canvas e ctx existem
+    if (canvas && ctx) {
         canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-        initParticles();
+        canvas.height = document.documentElement.scrollHeight; // Altura total da página
+        initParticles(); // Reinicia as partículas ao redimensionar
     }
 }
 
-// Scroll animations (ainda presente para elementos não observados pelo IntersectionObserver)
-function handleScrollAnimations() {
-    const elements = document.querySelectorAll('.glass-card, .section-title');
-    
-    elements.forEach(element => {
-        const elementTop = element.getBoundingClientRect().top;
-        const elementVisible = 150;
-        
-        if (elementTop < window.innerHeight - elementVisible) {
-            element.classList.add('animate-on-scroll', 'animated');
-        }
+// Parallax Effect para a seção Hero
+function addParallaxEffect() {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        // Ajuste a taxa de parallax para um efeito mais suave
+        const rate = scrolled * -0.2; 
+        // Aplica o transform diretamente ao pseudo-elemento ou a um elemento específico dentro do hero
+        hero.style.setProperty('--parallax-offset', `${rate}px`);
     });
-}
-
-// Intersection Observer for better performance
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in-up');
-            
-            // Trigger counter animation when hero section is visible
-            if (entry.target.classList.contains('hero')) {
-                // Apenas animar se ainda não foi animado para evitar repetições
-                if (statNumber && !entry.target.dataset.animated) { // Verifica statNumber também
-                    setTimeout(animateCounter, 500);
-                    entry.target.dataset.animated = 'true'; // Marca como animado
-                }
-            }
-        } else {
-            // Opcional: remover a classe quando sai da visualização para permitir re-animação
-            // entry.target.classList.remove('fade-in-up');
-        }
-    });
-}, observerOptions);
-
-// Observe elements for animations
-function initObserver() {
-    const elementsToObserve = document.querySelectorAll('.service-card, .artist-card, .about-card, .hero, .composers-content, .tour-virtual-content');
-    elementsToObserve.forEach(el => observer.observe(el));
 }
 
 // Header background opacity on scroll
 function handleHeaderScroll() {
     const header = document.querySelector('.header');
-    if (!header) return; // Garante que o header existe
+    if (!header) return;
     const scrolled = window.pageYOffset;
     
-    if (scrolled > 100) {
-        header.style.background = 'rgba(10, 10, 15, 0.95)';
+    if (scrolled > 50) { // Adiciona a classe 'scrolled' após 50px de rolagem
+        header.classList.add('scrolled');
     } else {
-        header.style.background = 'rgba(10, 10, 15, 0.8)';
+        header.classList.remove('scrolled');
     }
 }
 
-// Add glow effect to buttons on mouse move
+// Adiciona efeito de glow aos botões no movimento do mouse
 function addButtonGlowEffect() {
     const buttons = document.querySelectorAll('.btn--primary');
     
@@ -260,91 +224,121 @@ function addButtonGlowEffect() {
 
 // Lógica para abrir e fechar o modal de newsletter
 function openNewsletterModal(e) {
-    e.preventDefault(); // Previne o comportamento padrão do link
+    e.preventDefault();
     if (newsletterModal) {
         newsletterModal.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Impede o scroll do body
+        document.body.style.overflow = 'hidden';
     }
 }
 
 function closeNewsletterModal() {
     if (newsletterModal) {
         newsletterModal.classList.remove('active');
-        document.body.style.overflow = ''; // Restaura o scroll do body
+        document.body.style.overflow = '';
     }
 }
 
-// Event Listeners para o modal
-if (newsletterModal && closeNewsletterModalBtn) {
-    closeNewsletterModalBtn.addEventListener('click', closeNewsletterModal);
-    newsletterModal.addEventListener('click', (e) => {
-        if (e.target === newsletterModal) { // Fecha apenas se clicar no overlay
-            closeNewsletterModal();
+// --- Intersection Observer para Animações de Scroll ---
+const observerOptions = {
+    threshold: 0.15, // Aumenta o threshold para acionar mais cedo
+    rootMargin: '0px 0px -50px 0px' // Começa a animar 50px antes de entrar no viewport
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fadeInUp');
+            // Animar contador quando a seção hero se torna visível pela primeira vez
+            if (entry.target.classList.contains('hero') && !entry.target.dataset.animated) {
+                setTimeout(animateCounter, 500);
+                entry.target.dataset.animated = 'true'; // Marca como animado
+            }
+            observer.unobserve(entry.target); // Deixa de observar após animar
         }
     });
+}, observerOptions);
+
+// Observa elementos para animações
+function initObserver() {
+    const elementsToObserve = document.querySelectorAll(
+        '.service-card, .artist-card, .about-card, .composers-content, .tour-virtual-content, .footer-content, .portfolio-card'
+    );
+    elementsToObserve.forEach(el => observer.observe(el));
 }
 
-// Adiciona event listeners para os botões que abrem o modal
-if (openNewsletterModalBtns.length > 0) {
-    openNewsletterModalBtns.forEach(button => {
-        button.addEventListener('click', openNewsletterModal);
-    });
-}
 
-
-// Initialize everything when DOM is loaded
+// --- Inicialização ao Carregar o DOM ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize canvas and particles only if canvas and ctx exist
+    // Inicializa canvas e partículas apenas se canvas e contexto existirem
     if (canvas && ctx) {
-        resizeCanvas();
-        animateParticles();
+        resizeCanvas(); // Ajusta o tamanho do canvas
+        animateParticles(); // Inicia a animação das partículas
     } else {
         console.warn("Canvas ou contexto 2D não encontrados. Partículas não serão inicializadas.");
     }
     
-    // Initialize scroll animations
+    // Adiciona event listeners para o menu mobile
+    if (mobileMenuBtn) { mobileMenuBtn.addEventListener('click', toggleMobileMenu); }
+    if (mobileMenuOverlay) {
+        mobileMenuOverlay.addEventListener('click', (e) => {
+            if (e.target === mobileMenuOverlay) { closeMobileMenu(); } // Fecha apenas se clicar no overlay
+        });
+    }
+
+    // Inicializa o Intersection Observer para animações de scroll
     initObserver();
     
-    // Add button glow effects
+    // Adiciona efeitos de glow aos botões
     addButtonGlowEffect();
     
-    // Add scroll event listeners
+    // Adiciona event listeners de scroll
     window.addEventListener('scroll', () => {
-        handleScrollAnimations(); // Pode ser menos crítico com o IntersectionObserver, mas ainda útil para alguns elementos.
         handleHeaderScroll();
     });
     
-    // Handle window resize
+    // Lidar com o redimensionamento da janela
     window.addEventListener('resize', () => {
         resizeCanvas();
     });
     
-    // Add stagger animation to service cards (ainda relevante)
-    const serviceCards = document.querySelectorAll('.service-card');
-    serviceCards.forEach((card, index) => {
-        card.style.animationDelay = `${index * 0.1}s`;
-    });
+    // Inicializa o efeito de parallax
+    addParallaxEffect();
+
+    // Event Listeners para o modal de newsletter
+    if (newsletterModal && closeNewsletterModalBtn) {
+        closeNewsletterModalBtn.addEventListener('click', closeNewsletterModal);
+        newsletterModal.addEventListener('click', (e) => {
+            if (e.target === newsletterModal) { closeNewsletterModal(); }
+        });
+    }
+
+    // Adiciona event listeners para os botões que abrem o modal
+    if (openNewsletterModalBtns.length > 0) {
+        openNewsletterModalBtns.forEach(button => {
+            button.addEventListener('click', openNewsletterModal);
+        });
+    }
+
+    // Marca o link de Portfólio como ativo se for a página atual
+    if (window.location.pathname.includes('portifolio.html')) {
+        document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
+            if (link.getAttribute('href') === 'portifolio.html') {
+                link.classList.add('active');
+            } else if (link.getAttribute('href') === 'index.html' && window.location.pathname === '/') {
+                link.classList.remove('active'); // Garante que Home não esteja ativo se estiver no portfólio
+            }
+        });
+    } else {
+        // Para index.html, marca Home como ativo por padrão
+        document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
+            if (link.getAttribute('href').endsWith('#home') || (link.getAttribute('href') === 'index.html' && window.location.pathname === '/')) {
+                link.classList.add('active');
+            }
+        });
+    }
 });
 
-// Add loading animation
+// Animação de carregamento da página
 window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
+    document.body.classList.add('loaded'); // Adiciona a classe 'loaded' para exibir o body
 });
-
-// Add parallax effect to hero section
-function addParallaxEffect() {
-    const hero = document.querySelector('.hero');
-    
-    window.addEventListener('scroll', () => {
-        const scrolled = window.pageYOffset;
-        const rate = scrolled * -0.2; // Taxa de parallax ajustada para um efeito mais suave
-        
-        if (hero) {
-            hero.style.transform = `translateY(${rate}px)`;
-        }
-    });
-}
-
-// Initialize parallax
-addParallaxEffect();
-// fim
