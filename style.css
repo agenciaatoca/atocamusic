@@ -1,6 +1,6 @@
 /* Variáveis de Cores e Tema */
 :root {
-  --bg-primary: #232337; /* Fundo escuro principal */
+  --bg-primary: #0A0A0F; /* Fundo escuro principal */
   --bg-secondary: #1A1A2E; /* Fundo secundário (seções alternadas, footer) */
   --accent-cyan: #00E4FF; /* Ciano vibrante para destaque */
   --accent-purple: #9B5CF6; /* Roxo vibrante */
