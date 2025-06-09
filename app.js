@@ -3,9 +3,9 @@ const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
 const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
 const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 const navLinks = document.querySelectorAll('.nav-link');
-const statNumber = document.querySelector('.stat-number');
+const statNumber = document.querySelector('.stat-number'); // Elemento para o contador
 const canvas = document.getElementById('particles-canvas');
-const ctx = canvas.getContext('2d');
+const ctx = canvas ? canvas.getContext('2d') : null; // Verifica se canvas existe antes de pegar o contexto
 
 // Elementos do Modal de Newsletter
 const newsletterModal = document.getElementById('newsletter-modal');
@@ -24,12 +24,16 @@ function closeMobileMenu() {
 }
 
 // Event listeners for mobile menu
-mobileMenuBtn.addEventListener('click', toggleMobileMenu);
-mobileMenuOverlay.addEventListener('click', (e) => {
-    if (e.target === mobileMenuOverlay) { // Fecha apenas se clicar no overlay
-        closeMobileMenu();
-    }
-});
+if (mobileMenuBtn) { // Verifica se o botão existe
+    mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+}
+if (mobileMenuOverlay) { // Verifica se o overlay existe
+    mobileMenuOverlay.addEventListener('click', (e) => {
+        if (e.target === mobileMenuOverlay) { // Fecha apenas se clicar no overlay
+            closeMobileMenu();
+        }
+    });
+}
 
 // Close mobile menu when clicking nav links
 mobileNavLinks.forEach(link => {
@@ -40,7 +44,8 @@ mobileNavLinks.forEach(link => {
 function smoothScroll(target) {
     const element = document.querySelector(target);
     if (element) {
-        const headerHeight = document.querySelector('.header').offsetHeight;
+        const header = document.querySelector('.header');
+        const headerHeight = header ? header.offsetHeight : 0; // Pega altura do header, 0 se não existir
         const elementPosition = element.offsetTop - headerHeight;
         
         window.scrollTo({
@@ -55,7 +60,7 @@ function smoothScroll(target) {
     link.addEventListener('click', (e) => {
         e.preventDefault();
         const target = link.getAttribute('href');
-        if (target.startsWith('#')) {
+        if (target && target.startsWith('#')) { // Verifica se target existe e começa com '#'
             smoothScroll(target);
         }
     });
@@ -65,7 +70,7 @@ function smoothScroll(target) {
 function animateCounter() {
     // Verifica se o elemento statNumber e o dataset.target existem
     if (!statNumber || !statNumber.dataset.target) {
-        console.warn("Elemento .stat-number ou data-target não encontrado para a animação do contador.");
+        // console.warn("Elemento .stat-number ou data-target não encontrado para a animação do contador.");
         return;
     }
     const target = parseInt(statNumber.dataset.target);
@@ -93,7 +98,7 @@ function animateCounter() {
     updateCounter();
 }
 
-// Particle system for background
+// Particle system for background (apenas se canvas e contexto existirem)
 class Particle {
     constructor() {
         this.x = Math.random() * canvas.width;
@@ -117,6 +122,7 @@ class Particle {
     }
     
     draw() {
+        if (!ctx) return; // Garante que o contexto existe antes de desenhar
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(0, 212, 255, ${this.opacity})`;
@@ -124,11 +130,11 @@ class Particle {
     }
 }
 
-// Initialize particles
 let particles = [];
 const particleCount = 50; // Mantido em 50 para boa performance padrão
 
 function initParticles() {
+    if (!canvas || !ctx) return;
     particles = [];
     for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
@@ -136,6 +142,7 @@ function initParticles() {
 }
 
 function drawConnections() {
+    if (!canvas || !ctx) return;
     for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
             const dx = particles[i].x - particles[j].x;
@@ -156,6 +163,7 @@ function drawConnections() {
 }
 
 function animateParticles() {
+    if (!canvas || !ctx) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     particles.forEach(particle => {
@@ -168,7 +176,7 @@ function animateParticles() {
 }
 
 function resizeCanvas() {
-    if (canvas) { // Verifica se o canvas existe
+    if (canvas && ctx) { // Verifica se canvas e ctx existem
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
         initParticles();
@@ -203,7 +211,7 @@ const observer = new IntersectionObserver((entries) => {
             // Trigger counter animation when hero section is visible
             if (entry.target.classList.contains('hero')) {
                 // Apenas animar se ainda não foi animado para evitar repetições
-                if (!entry.target.dataset.animated) {
+                if (statNumber && !entry.target.dataset.animated) { // Verifica statNumber também
                     setTimeout(animateCounter, 500);
                     entry.target.dataset.animated = 'true'; // Marca como animado
                 }
@@ -286,9 +294,13 @@ if (openNewsletterModalBtns.length > 0) {
 
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize canvas and particles
-    resizeCanvas();
-    animateParticles();
+    // Initialize canvas and particles only if canvas and ctx exist
+    if (canvas && ctx) {
+        resizeCanvas();
+        animateParticles();
+    } else {
+        console.warn("Canvas ou contexto 2D não encontrados. Partículas não serão inicializadas.");
+    }
     
     // Initialize scroll animations
     initObserver();
