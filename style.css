@@ -1030,6 +1030,58 @@ pre code {
         font-size: 1.5rem;
     }
 }
+/* === CORREÇÃO 1: Menu Mobile Oculto por Padrão === */
+.mobile-menu-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(15px);
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.mobile-menu-overlay.active {
+  display: flex;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* === CORREÇÃO 2: Animação heroFadeIn ausente === */
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-content {
+  animation: heroFadeIn 1s ease 0.3s forwards;
+}
+
+/* === Opcional: Garantir visibilidade para botões hero (caso ainda esteja oculto) === */
+.hero-cta {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* === Opcional: Estilo seguro para .stat-number caso esteja escondido === */
+.stat-number {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transition: opacity 0.3s ease;
+}
 
 /* Animações */
 @keyframes fadeInUp {
