@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATOCAMUSIC - Oferta Irresistível: Transforme Sua Música Gospel!</title>
+    <meta name="description" content="ATOCAMUSIC: Pacotes exclusivos para músicos gospel, ministérios e compositores. Produção, mixagem, afinação e assessoria para levar sua música ao próximo nível.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configuração do Tailwind para usar o tema escuro e cores personalizadas -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-primary': '#0A0A0F',
+                        'bg-secondary': '#1A1A2E',
+                        'accent-cyan': '#00E4FF',
+                        'accent-purple': '#9B5CF6',
+                        'accent-green': '#00FF99',
+                        'text-primary': '#FFFFFF',
+                        'text-secondary': '#B0B0B0',
+                        'glass-bg': 'rgba(255, 255, 255, 0.1)',
+                        'glass-border': 'rgba(255, 255, 255, 0.2)',
+                    },
+                    boxShadow: {
+                        'glow-cyan': '0 0 25px rgba(0, 228, 255, 0.5), 0 0 40px rgba(0, 228, 255, 0.3)',
+                        'glow-purple': '0 0 25px rgba(155, 92, 246, 0.5), 0 0 40px rgba(155, 92, 246, 0.3)',
+                        'glow-green': '0 0 25px rgba(0, 255, 153, 0.5), 0 0 40px rgba(0, 255, 153, 0.3)',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'], // Usando Inter como a fonte principal
+                    },
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* Estilos base e gradiente de fundo */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(at 50% 100%, #1a1a2e 0%, #0a0a0f 70%), linear-gradient(to top left, #002430 0%, #001c2a 50%, #001220 100%);
+            background-attachment: fixed;
+            background-size: cover;
+            color: #FFFFFF;
+            line-height: 1.6;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Garante que o body ocupe a altura total da viewport */
+        }
+
+        /* Classes personalizadas para o efeito glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 1rem; /* rounded-xl do Tailwind */
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: var(--tw-shadow-glow-cyan); /* Usa a sombra definida no Tailwind config */
+            transform: translateY(-0.25rem); /* -translate-y-1 do Tailwind */
+        }
+
+        /* Estilo para o botão principal com gradiente */
+        .btn-gradient {
+            background: linear-gradient(135deg, #00E4FF 0%, #9B5CF6 100%);
+            box-shadow: 0 8px 32px rgba(0, 228, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0, 228, 255, 0.4);
+        }
+
+        /* Efeito de brilho ao passar o mouse para o botão principal */
+        .btn-gradient-hover-effect {
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .btn-gradient-hover-effect::before {
+            content: '';
+            position: absolute;
+            top: var(--mouse-y, 50%);
+            left: var(--mouse-x, 50%);
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .btn-gradient-hover-effect:hover::before {
+            opacity: 1;
+        }
+
+        /* Estilo específico para o hero title com gradiente de texto */
+        .hero-text-gradient {
+            background: linear-gradient(135deg, #FFFFFF 0%, #00E4FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent; /* Fallback for browsers that don't support -webkit-text-fill-color */
+        }
+
+        /* Esconder o campo honeypot */
+        .netlify-hidden {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            position: absolute !important;
+            left: -9999px !important;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 lg:p-8">
+    <div class="max-w-4xl w-full mx-auto bg-bg-primary rounded-xl shadow-2xl p-6 md:p-10 lg:p-12 glass-card">
+        <!-- Cabeçalho / Hero Section da Landing Page -->
+        <header class="text-center mb-10">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight mb-4 hero-text-gradient">
+                Transforme Sua Música!
+            </h1>
+            <p class="text-xl sm:text-2xl text-text-secondary mb-6 max-w-2xl mx-auto">
+                ATOCAMUSIC: Produção musical profissional, gestão e assessoria para o seu ministério ou carreira solo.
+            </p>
+            <p class="text-lg text-accent-cyan font-semibold">
+                Por Diekson Rosa, seu Produtor e Assessor Musical.
+            </p>
+        </header>
+
+        <!-- Seção de Problema e Solução / Benefícios -->
+        <section class="mb-10 text-center">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-6 text-text-primary">
+                Sua música merece brilhar. Nós te ajudamos a chegar lá.
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+                <div class="bg-glass-bg p-6 rounded-lg glass-card flex items-start space-x-4">
+                    <i class="fas fa-hand-holding-heart text-3xl text-accent-green"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold text-text-primary mb-2">Qualidade e Emoção</h3>
+                        <p class="text-text-secondary">Garanta que cada nota transmita a mensagem e a paixão do seu coração, com áudio impecável e impactante.</p>
+                    </div>
+                </div>
+                <div class="bg-glass-bg p-6 rounded-lg glass-card flex items-start space-x-4">
+                    <i class="fas fa-chart-line text-3xl text-accent-purple"></i>
+                    <div>
+                        <h3 class="text-xl font-semibold text-text-primary mb-2">Crescimento e Estratégia</h3>
+                        <p class="text-text-secondary">Não apenas produza, mas posicione sua carreira musical para alcançar novos ouvintes e oportunidades.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Prova Social/Urgência (Simulada) -->
+        <section class="mb-10 text-center">
+            <div class="bg-bg-secondary p-6 rounded-xl border border-glass-border">
+                <p class="text-3xl font-bold text-accent-green mb-2 shadow-glow-green inline-block px-3 py-1 rounded-full">
+                    +1.000.000
+                </p>
+                <p class="text-lg text-text-secondary">streams com nossos artistas já lançados!</p>
+                <p class="text-xl font-semibold text-accent-cyan mt-4">
+                    📢 ATENÇÃO: Oferta Exclusiva por Tempo Limitado! Últimas Vagas!
+                </p>
+            </div>
+        </section>
+
+        <!-- Seção de Pacotes - Oferta Irresistível -->
+        <section class="mb-10">
+            <h2 class="text-3xl sm:text-4xl font-bold text-center mb-8 text-text-primary">
+                Escolha o Seu Caminho para o Sucesso:
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Pacote 1: Single Gospel Profissional -->
+                <div class="bg-glass-bg p-6 rounded-xl flex flex-col items-center glass-card">
+                    <i class="fas fa-music text-4xl text-accent-cyan mb-4"></i>
+                    <h3 class="text-2xl font-bold text-text-primary mb-2">Single Profissional</h3>
+                    <p class="text-text-secondary text-center mb-4 flex-grow">
+                        Gravação de Voz e Violão Profissional (Autoral ou Cover) + Edição Vocal Completa (Afinação) + Mixagem Básica de 1 música.
+                    </p>
+                    <div class="text-3xl font-bold text-accent-green mb-6">
+                        A partir de R$ <span class="text-4xl font-extrabold">197</span>
+                    </div>
+                    <a href="https://wa.me/5561982115374?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20Pacote%20Single%20Gospel%20Profissional." 
+                       target="_blank" 
+                       class="w-full py-3 px-6 rounded-full text-lg font-bold text-bg-primary btn-gradient flex items-center justify-center space-x-2 btn-gradient-hover-effect">
+                        <i class="fab fa-whatsapp text-2xl"></i>
+                        <span>Quero Meu Single Profissional!</span>
+                    </a>
+                </div>
+
+                <!-- Pacote 2: Cover Prontinho -->
+                <div class="bg-glass-bg p-6 rounded-xl flex flex-col items-center glass-card">
+                    <i class="fas fa-microphone text-4xl text-accent-purple mb-4"></i>
+                    <h3 class="text-2xl font-bold text-text-primary mb-2">Cover Prontinho</h3>
+                    <p class="text-text-secondary text-center mb-4 flex-grow">
+                        Edição e Afinação de Voz + Violão + Mixagem Completa + Licenciamento Simplificado de 1 cover + Distribuição em mais de 150 plataformas.
+                    </p>
+                    <div class="text-3xl font-bold text-accent-green mb-6">
+                        A partir de R$ <span class="text-4xl font-extrabold">497</span>
+                    </div>
+                    <a href="https://wa.me/5561982115374?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20Pacote%20Cover%20Prontinho." 
+                       target="_blank" 
+                       class="w-full py-3 px-6 rounded-full text-lg font-bold text-bg-primary btn-gradient flex items-center justify-center space-x-2 btn-gradient-hover-effect">
+                        <i class="fab fa-whatsapp text-2xl"></i>
+                        <span>Quero Lançar Meu Cover!</span>
+                    </a>
+                </div>
+
+                <!-- Pacote 3: Mini-Consultoria de Carreira -->
+                <div class="bg-glass-bg p-6 rounded-xl flex flex-col items-center glass-card">
+                    <i class="fas fa-lightbulb text-4xl text-accent-green mb-4"></i>
+                    <h3 class="text-2xl font-bold text-text-primary mb-2">Mini-Consultoria de Carreira</h3>
+                    <p class="text-text-secondary text-center mb-4 flex-grow">
+                        1 hora de consultoria online/presencial com Diekson Rosa sobre posicionamento, distribuição e gestão para artistas.
+                    </p>
+                    <div class="text-3xl font-bold text-accent-green mb-6">
+                        A partir de R$ <span class="text-4xl font-extrabold">150</span>
+                    </div>
+                    <a href="https://wa.me/5561982115374?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20a%20Mini-Consultoria%20de%20Carreira." 
+                       target="_blank" 
+                       class="w-full py-3 px-6 rounded-full text-lg font-bold text-bg-primary btn-gradient flex items-center justify-center space-x-2 btn-gradient-hover-effect">
+                        <i class="fab fa-whatsapp text-2xl"></i>
+                        <span>Quero Minha Consultoria!</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Formulário de Contato Direto (Alternativo/Detalhado) -->
+        <section class="mb-10 text-center">
+            <h2 class="text-3xl sm:text-4xl font-bold mb-6 text-text-primary">
+                Tem um projeto maior? Fale Conosco!
+            </h2>
+            <p class="text-lg text-text-secondary mb-6">
+                Para produções de EP, álbum, assessoria completa ou locação de estúdio, preencha o formulário e retornaremos.
+            </p>
+            <form class="max-w-xl mx-auto p-8 rounded-xl glass-card" name="landing-contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+                <input type="hidden" name="form-name" value="landing-contact" />
+                <p class="netlify-hidden">
+                    <label>Não preencha este campo: <input name="bot-field" /></label>
+                </p>
+                <div class="mb-4">
+                    <input type="text" name="name" placeholder="Seu Nome Completo" class="w-full p-3 rounded-lg bg-bg-secondary border border-glass-border focus:ring-accent-cyan focus:border-accent-cyan text-text-primary focus:outline-none" required>
+                </div>
+                <div class="mb-4">
+                    <input type="email" name="email" placeholder="Seu Melhor E-mail" class="w-full p-3 rounded-lg bg-bg-secondary border border-glass-border focus:ring-accent-cyan focus:border-accent-cyan text-text-primary focus:outline-none" required>
+                </div>
+                <div class="mb-4">
+                    <input type="tel" name="phone" placeholder="Seu Telefone (Opcional)" class="w-full p-3 rounded-lg bg-bg-secondary border border-glass-border focus:ring-accent-cyan focus:border-accent-cyan text-text-primary focus:outline-none">
+                </div>
+                <div class="mb-6">
+                    <textarea name="message" rows="4" placeholder="Descreva seu projeto ou dúvida..." class="w-full p-3 rounded-lg bg-bg-secondary border border-glass-border focus:ring-accent-cyan focus:border-accent-cyan text-text-primary focus:outline-none" required></textarea>
+                </div>
+                <button type="submit" class="w-full py-3 rounded-full text-lg font-bold text-bg-primary btn-gradient btn-gradient-hover-effect">
+                    Enviar Mensagem
+                </button>
+            </form>
+        </section>
+
+        <!-- Rodapé da Landing Page -->
+        <footer class="text-center text-text-secondary text-sm">
+            <p>&copy; 2025 ATOCAMUSIC. Todos os direitos reservados. | <a href="https://www.agenciaatoca.github.io/politica-de-privacidade.html" target="_blank" class="text-accent-cyan hover:underline">Política de Privacidade</a></p>
+            <div class="mt-4 flex justify-center space-x-4">
+                <a href="https://www.instagram.com/atoca.music" target="_blank" class="text-accent-cyan hover:text-accent-purple transition-colors"><i class="fab fa-instagram text-2xl"></i></a>
+                <a href="https://www.tiktok.com/@atoca.music" target="_blank" class="text-accent-cyan hover:text-accent-purple transition-colors"><i class="fab fa-tiktok text-2xl"></i></a>
+                <a href="https://www.youtube.com/@atocamusic" target="_blank" class="text-accent-cyan hover:text-accent-purple transition-colors"><i class="fab fa-youtube text-2xl"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // JavaScript para o efeito de brilho nos botões ao passar o mouse
+        document.querySelectorAll('.btn-gradient-hover-effect').forEach(button => {
+            button.addEventListener('mousemove', (e) => {
+                const rect = button.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                button.style.setProperty('--mouse-x', `${x}px`);
+                button.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+    </script>
+</body>
+</html>
