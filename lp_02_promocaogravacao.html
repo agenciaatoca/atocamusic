@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATOCAMUSIC - Transforme Sua Adoração em Música Profissional</title>
+    <meta name="description" content="Sua mensagem de fé, amplificada para o mundo. Produção musical gospel de alta qualidade que toca corações e impulsiona sua carreira.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* Estilos personalizados para complementar o Tailwind */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F9FA; /* Um branco levemente acinzentado, muito clean */
+            color: #334155; /* Cinza-ardósia para texto, ótima legibilidade */
+        }
+
+        /* Novas cores personalizadas (Tema Teal) */
+        :root {
+            --color-primary: #14B8A6; /* Teal 500 */
+            --color-primary-dark: #0D9488; /* Teal 600 */
+            --color-text-dark: #1E293B; /* Slate 800 */
+            --color-text-light: #64748B; /* Slate 500 */
+        }
+
+        .cta-button {
+            background-color: var(--color-primary);
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
+        }
+
+        .cta-button:hover {
+            background-color: var(--color-primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(20, 184, 166, 0.4);
+        }
+
+        .section-title {
+            color: var(--color-text-dark);
+        }
+        
+        .section-subtitle {
+            color: var(--color-text-light);
+        }
+
+        .highlight-primary {
+            color: var(--color-primary);
+        }
+
+        .testimonial-card {
+            background-color: #ffffff;
+            border-left: 4px solid var(--color-primary);
+        }
+
+        .faq-question {
+            cursor: pointer;
+        }
+
+        /* Animação para o FAQ */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+
+        .price-card {
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .price-card:hover, .price-card.featured {
+            transform: scale(1.05);
+            border-color: var(--color-primary);
+            box-shadow: 0 10px 30px -5px rgba(0,0,0,0.1);
+        }
+
+        .featured-badge {
+            background-color: var(--color-primary);
+            color: white;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- CONTAINER PRINCIPAL -->
+    <div class="max-w-5xl mx-auto">
+
+        <!-- 1. HERO SECTION: Conexão imediata com o sonho do cliente -->
+        <header class="text-center py-20 px-6">
+            <h1 class="text-4xl md:text-6xl font-extrabold section-title leading-tight mb-4">
+                Sua Mensagem de Fé, <br class="hidden md:block"> <span class="highlight-primary">Amplificada para o Mundo</span>
+            </h1>
+            <p class="section-subtitle text-lg md:text-xl max-w-2xl mx-auto mb-8">
+                Chega de gravações amadoras que não transmitem a emoção da sua adoração. Eleve sua música a um nível profissional e toque milhares de vidas.
+            </p>
+            <a href="#packages" class="cta-button font-bold text-lg rounded-full py-4 px-10 inline-block">
+                QUERO MINHA MÚSICA PROFISSIONAL
+            </a>
+            <p class="text-sm mt-4 text-gray-500">Junte-se a dezenas de artistas que já confiam em nosso trabalho.</p>
+        </header>
+
+        <!-- 2. SEÇÃO DE PROBLEMA/DOR: Gatilho da Identificação -->
+        <section class="py-16 bg-white px-6">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">Sua música tem um propósito. Ela está sendo ouvida?</h2>
+                <p class="section-subtitle text-lg mb-12">Se você se identifica com algum destes pontos, você está no lugar certo.</p>
+                <div class="grid md:grid-cols-3 gap-8 text-left">
+                    <div class="flex items-start space-x-4">
+                        <i class="fas fa-microphone-slash text-2xl highlight-primary mt-1"></i>
+                        <div>
+                            <h3 class="font-bold text-lg mb-1">Gravação Sem Impacto</h3>
+                            <p class="section-subtitle">Sua composição é poderosa, mas a qualidade do áudio não transmite a verdadeira emoção.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <i class="fas fa-map-signs text-2xl highlight-primary mt-1"></i>
+                        <div>
+                            <h3 class="font-bold text-lg mb-1">Carreira Estagnada</h3>
+                            <p class="section-subtitle">Você se sente perdido, sem saber os próximos passos para crescer e ser reconhecido.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start space-x-4">
+                        <i class="fas fa-cloud-upload-alt text-2xl highlight-primary mt-1"></i>
+                        <div>
+                            <h3 class="font-bold text-lg mb-1">Dificuldade de Lançamento</h3>
+                            <p class="section-subtitle">O processo de distribuição e licenciamento parece complexo e desanimador.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SEÇÃO DE SOLUÇÃO/BENEFÍCIOS: Apresentando a transformação -->
+        <section class="py-20 px-6">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">Imagine Sua Música Tocando Vidas...</h2>
+                <p class="section-subtitle text-lg mb-12">Nós cuidamos de toda a parte técnica e estratégica para que você possa focar no que mais importa: sua mensagem.</p>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-sm text-center">
+                        <i class="fas fa-star text-4xl highlight-primary mb-4"></i>
+                        <h3 class="font-bold text-xl mb-2">Qualidade Impecável</h3>
+                        <p class="section-subtitle">Produção, mixagem e masterização que competem com os grandes nomes do gospel.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-sm text-center">
+                        <i class="fas fa-bullseye text-4xl highlight-primary mb-4"></i>
+                        <h3 class="font-bold text-xl mb-2">Direcionamento Estratégico</h3>
+                        <p class="section-subtitle">Assessoria para você tomar as decisões certas e construir uma carreira sólida e com propósito.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-sm text-center">
+                        <i class="fas fa-globe-americas text-4xl highlight-primary mb-4"></i>
+                        <h3 class="font-bold text-xl mb-2">Alcance Global</h3>
+                        <p class="section-subtitle">Sua música nas maiores plataformas digitais (Spotify, Deezer, Apple Music) de forma simples e correta.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. SEÇÃO DE PROVA SOCIAL: Gatilho da Confiança e Autoridade -->
+        <section class="bg-white py-20 px-6">
+            <div class="text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold section-title mb-2">Resultados que Falam por Si</h2>
+                <p class="section-subtitle text-lg mb-12">Não é sobre nós, é sobre o sucesso de quem confia em nosso trabalho.</p>
+
+                <div class="bg-gray-100 p-8 rounded-xl mb-12">
+                    <p class="text-5xl md:text-7xl font-extrabold highlight-primary">+1.000.000</p>
+                    <p class="text-xl font-semibold section-title mt-2">de streams nas plataformas digitais com nossos artistas.</p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8 text-left">
+                    <div class="testimonial-card p-6 rounded-lg shadow-sm">
+                        <p class="section-subtitle italic mb-4">"O Diekson não só entregou uma qualidade sonora incrível, mas entendeu a essência da minha adoração. Minha música finalmente soa como eu sempre sonhei."</p>
+                        <div class="flex items-center">
+                            <img src="https://placehold.co/50x50/EFEFEF/333333?text=AA" alt="Foto de Ana Almeida" class="rounded-full mr-4">
+                            <div>
+                                <p class="font-bold">Ana Almeida</p>
+                                <p class="text-sm text-gray-500">Cantora e Compositora</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card p-6 rounded-lg shadow-sm">
+                        <p class="section-subtitle italic mb-4">"Eu estava perdido. A consultoria me deu um mapa claro do que fazer. Em 6 meses, meu número de ouvintes triplicou. Sou muito grato!"</p>
+                         <div class="flex items-center">
+                            <img src="https://placehold.co/50x50/EFEFEF/333333?text=MJ" alt="Foto de Marcos Junior" class="rounded-full mr-4">
+                            <div>
+                                <p class="font-bold">Marcos Junior</p>
+                                <p class="text-sm text-gray-500">Líder de Louvor</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. SEÇÃO DE OFERTA/PACOTES: Gatilho da Ancoragem e Decisão -->
+        <section id="packages" class="py-20 px-6">
+            <div class="text-center max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">O Plano Perfeito Para o Seu Momento</h2>
+                <p class="section-subtitle text-lg mb-12">Escolha o caminho que te levará ao próximo nível. Sem burocracia, direto ao ponto.</p>
+
+                <div class="grid lg:grid-cols-3 gap-8 items-start">
+                    <!-- Pacote 1 -->
+                    <div class="price-card bg-white p-8 rounded-lg text-center flex flex-col h-full">
+                        <h3 class="text-xl font-bold mb-2">PACOTE ESSENCIAL</h3>
+                        <p class="section-subtitle mb-6 flex-grow">Ideal para dar vida à sua composição com qualidade de estúdio.</p>
+                        <p class="text-4xl font-extrabold section-title mb-1">R$ 197</p>
+                        <p class="text-gray-500 mb-6">Pagamento único</p>
+                        <ul class="text-left space-y-3 section-subtitle mb-8">
+                            <li class="flex items-start"><i class="fas fa-check highlight-primary mr-3 mt-1"></i>Gravação Voz e Violão Profissional</li>
+                            <li class="flex items-start"><i class="fas fa-check highlight-primary mr-3 mt-1"></i>Edição e Afinação Vocal Completa</li>
+                            <li class="flex items-start"><i class="fas fa-check highlight-primary mr-3 mt-1"></i>Mixagem de Alta Qualidade</li>
+                            <li class="flex items-start"><i class="fas fa-check text-green-500 mr-3 mt-1"></i>GRÁTIS UM REELS DE ATÉ 1:30min</li>
+                        </ul>
+                        <div class="mt-auto">
+                             <a href="https://wa.me/5561982115374?text=Ol%C3%A1%2C%20tenho%20interesse%20no%20Pacote%20Essencial!" target="_blank" class="border-2 border-teal-500 text-teal-500 font-bold rounded-full py-3 px-8 block w-full hover:bg-teal-500 hover:text-white transition-colors">QUERO O ESSENCIAL</a>
+                        </div>
+                    </div>
+
+                    <!-- Pacote 2 (Destaque) -->
+                    <div class="price-card bg-white p-8 rounded-lg text-center flex flex-col h-full featured relative">
+                        <span class="featured-badge absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 px-4 py-1 text-sm font-bold rounded-full">MAIS POPULAR</span>
+                        <h3 class="text-xl font-bold mb-2">PACOTE LANÇAMENTO</h3>
+                        <p class="section-subtitle mb-6 flex-grow">Produza e lance sua música no mundo, sem complicações.</p>
+                        <p class="text-4xl font-extrabold section-title mb-1">R$ 497</p>
+                        <p class="text-gray-500 mb-6">Pagamento único</p>
+                        <ul class="text-left space-y-3 section-subtitle mb-8">
+                            <li class="flex items-start"><i class="fas fa-check highlight-primary mr-3 mt-1"></i><strong>Tudo do Pacote Essencial +</strong></li>
+                            <li class="flex items-start"><i class="fas fa-check highlight-primary mr-3 mt-1"></i>Mixagem e Masterização Premium</li>
+                            <li class="flex items-start"><i class="fas fa-check highlight-primary mr-3 mt-1"></i>Licenciamento Simplificado (Cover)</li>
+                            <li class="flex items-start"><i class="fas fa-check highlight-primary mr-3 mt-1"></i>Distribuição em +150 Plataformas</li>
+                        </ul>
+                         <div class="mt-auto">
+                           <a href="https://wa.me/5561982115374?text=Ol%C3%A1%2C%20quero%20impulsionar%20minha%20carreira%20com%20o%20Pacote%20Lan%C3%A7amento!" target="_blank" class="cta-button font-bold rounded-full py-3 px-8 block w-full">QUERO LANÇAR MINHA MÚSICA</a>
+                        </div>
+                    </div>
+
+                    <!-- Pacote 3 -->
+                    <div class="price-card bg-white p-8 rounded-lg text-center flex flex-col h-full">
+                        <h3 class="text-xl font-bold mb-2">PACOTE DIRECIONAL</h3>
+                        <p class="section-subtitle mb-6 flex-grow">A clareza e estratégia que você precisa para decolar sua carreira.</p>
+                        <p class="text-4xl font-extrabold section-title mb-1">R$ 997</p>
+                        <p class="text-gray-500 mb-6">Por hora</p>
+                        <ul class="text-left space-y-3 section-subtitle mb-8">
+                            <li class="flex items-start"><i class="fas fa-check highlight-primary mr-3 mt-1"></i>Consultoria de Carreira (1h)</li>
+                            <li class="flex items-start"><i class="fas fa-check highlight-primary mr-3 mt-1"></i>Análise de Posicionamento</li>
+                            <li class="flex items-start"><i class="fas fa-check highlight-primary mr-3 mt-1"></i>Plano de Ação para Lançamentos</li>
+                        </ul>
+                        <div class="mt-auto">
+                            <a href="https://wa.me/5561982115374?text=Ol%C3%A1%2C%20preciso%20de%20direcionamento%20e%20quero%20a%20Consultoria!" target="_blank" class="border-2 border-teal-500 text-teal-500 font-bold rounded-full py-3 px-8 block w-full hover:bg-teal-500 hover:text-white transition-colors">QUERO DIRECIONAMENTO</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. SEÇÃO DE GARANTIA: Gatilho da Reversão de Risco -->
+        <section class="py-16 px-6">
+            <div class="max-w-3xl mx-auto bg-white rounded-lg shadow-lg p-10 flex flex-col md:flex-row items-center text-center md:text-left">
+                <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.apetrechosdosul.com.br%2Ftempo-de-garantia&psig=AOvVaw1KWuKm5i5JN3VrJes3Inhm&ust=1749766295742000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCNia9Mux6o0DFQAAAAAdAAAAABAE" alt="Selo de Garantia" class="w-32 h-32 mb-6 md:mb-0 md:mr-8">
+                <div>
+                    <h2 class="text-2xl font-bold section-title mb-3">Sua Satisfação é a Nossa Missão</h2>
+                    <p class="section-subtitle leading-relaxed">Temos tanta confiança na qualidade do nosso trabalho que oferecemos uma <span class="font-bold">Garantia de Satisfação Total</span>. Se você não amar o resultado final da sua produção, nós trabalharemos nela até que fique perfeita para você, sem custos adicionais. Seu sonho é o nosso compromisso.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 7. FAQ - Perguntas Frequentes: Quebra de Objeções -->
+        <section class="py-20 px-6">
+            <div class="max-w-3xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold section-title text-center mb-12">Ainda tem dúvidas?</h2>
+                <div class="space-y-4">
+                    <div class="bg-white rounded-lg shadow-sm">
+                        <div class="faq-question flex justify-between items-center p-5">
+                            <h3 class="font-semibold text-lg">Sou iniciante, este serviço é para mim?</h3>
+                            <i class="fas fa-chevron-down transform transition-transform"></i>
+                        </div>
+                        <div class="faq-answer px-5 pb-5 section-subtitle">
+                            <p>Com certeza! Nossos pacotes são pensados para artistas em todos os níveis. Vamos te guiar em cada passo do processo, desde a gravação até o lançamento, com toda a paciência e profissionalismo que você merece.</p>
+                        </div>
+                    </div>
+                     <div class="bg-white rounded-lg shadow-sm">
+                        <div class="faq-question flex justify-between items-center p-5">
+                            <h3 class="font-semibold text-lg">Como funciona o pagamento?</h3>
+                            <i class="fas fa-chevron-down transform transition-transform"></i>
+                        </div>
+                        <div class="faq-answer px-5 pb-5 section-subtitle">
+                            <p>O pagamento é facilitado e pode ser feito via PIX, transferência ou cartão de crédito (com possibilidade de parcelamento). Após a conversa inicial e definição do projeto, enviamos o link para pagamento seguro.</p>
+                        </div>
+                    </div>
+                     <div class="bg-white rounded-lg shadow-sm">
+                        <div class="faq-question flex justify-between items-center p-5">
+                            <h3 class="font-semibold text-lg">E se eu não gostar do resultado?</h3>
+                            <i class="fas fa-chevron-down transform transition-transform"></i>
+                        </div>
+                        <div class="faq-answer px-5 pb-5 section-subtitle">
+                            <p>É aqui que entra nossa Garantia de Satisfação Total. Oferecemos rodadas de revisão para ajustar os detalhes da produção e mixagem até que a música soe exatamente como você imaginou.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-sm">
+                        <div class="faq-question flex justify-between items-center p-5">
+                            <h3 class="font-semibold text-lg">Preciso ir até o estúdio?</h3>
+                            <i class="fas fa-chevron-down transform transition-transform"></i>
+                        </div>
+                        <div class="faq-answer px-5 pb-5 section-subtitle">
+                            <p>Não necessariamente. Trabalhamos com artistas de todo o Brasil de forma 100% online. Você pode enviar suas guias de voz e violão gravadas pelo celular e nós fazemos a mágica acontecer. Se estiver em Brasília, a opção presencial também está disponível!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. FINAL CTA: Última Chamada para Ação -->
+        <section class="bg-white py-20 px-6">
+            <div class="text-center max-w-3xl mx-auto">
+                 <h2 class="text-3xl md:text-4xl font-bold section-title mb-4">Está pronto para o próximo nível?</h2>
+                 <p class="section-subtitle text-lg max-w-2xl mx-auto mb-8">
+                    Sua música tem o poder de mudar vidas. Não deixe que a falta de qualidade técnica te impeça de cumprir seu chamado. A hora é agora.
+                </p>
+                <a href="https://wa.me/5561982115374?text=Ol%C3%A1%2C%20estou%20pronto(a)%20para%20transformar%20minha%20m%C3%BAsica!%20Podemos%20conversar%3F" target="_blank" class="cta-button font-bold text-lg rounded-full py-4 px-10 inline-block">
+                    <i class="fab fa-whatsapp mr-2"></i> FALAR COM UM PRODUTOR
+                </a>
+                <p class="text-sm mt-4 text-gray-500">Resposta rápida e sem compromisso.</p>
+            </div>
+        </section>
+
+        <!-- RODAPÉ -->
+        <footer class="text-center py-8 px-6 border-t">
+            <p class="text-gray-500 mb-4">&copy; 2025 ATOCAMUSIC. Todos os direitos reservados. Feito com <i class="fas fa-heart text-red-500"></i> por Diekson Rosa.</p>
+            <div class="flex justify-center space-x-6">
+                <a href="https://www.instagram.com/atoca.music" target="_blank" class="text-gray-500 hover:highlight-primary transition-colors"><i class="fab fa-instagram text-2xl"></i></a>
+                <a href="https://www.tiktok.com/@atoca.music" target="_blank" class="text-gray-500 hover:highlight-primary transition-colors"><i class="fab fa-tiktok text-2xl"></i></a>
+                <a href="https://www.youtube.com/@atocamusic" target="_blank" class="text-gray-500 hover:highlight-primary transition-colors"><i class="fab fa-youtube text-2xl"></i></a>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // JavaScript para o Acordeão do FAQ
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', event => {
+                const answer = item.nextElementSibling;
+                const icon = item.querySelector('i');
+
+                // Fecha todos os outros FAQs abertos
+                document.querySelectorAll('.faq-answer').forEach(ans => {
+                    if (ans !== answer) {
+                        ans.style.maxHeight = '0';
+                        ans.previousElementSibling.querySelector('i').classList.remove('rotate-180');
+                    }
+                });
+                
+                // Abre ou fecha o FAQ clicado
+                if (answer.style.maxHeight && answer.style.maxHeight !== '0px') {
+                    answer.style.maxHeight = '0';
+                    icon.classList.remove('rotate-180');
+                } else {
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                    icon.classList.add('rotate-180');
+                } 
+            });
+        });
+    </script>
+
+</body>
+</html>
