@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atoca Music - Apresentação Estratégica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+            overflow: hidden;
+        }
+
+        .slide {
+            display: none;
+            height: 100vh;
+            width: 100vw;
+            padding: 2rem;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-nav {
+            position: fixed;
+            bottom: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.75rem 1.5rem;
+            border-radius: 9999px;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 50;
+        }
+
+        .btn-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .indicator {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            font-size: 0.875rem;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="indicator" id="slide-indicator">1 / 8</div>
+
+    <!-- Slide 1: Capa -->
+    <div class="slide active" id="slide-1">
+        <h1 class="text-5xl md:text-7xl font-black mb-4 text-center">O FIM DO <br><span class="gradient-text">AMADORISMO MUSICAL</span></h1>
+        <p class="text-xl md:text-2xl text-slate-400 text-center max-w-2xl font-light">
+            Atoca Music: Inteligência de Palco e Gestão de Lucro para o Entretenimento de Brasília.
+        </p>
+        <div class="mt-10 p-4 border border-slate-700 rounded-lg text-sm text-slate-500 italic">
+            Propriedade Intelectual Atoca Music - 2026
+        </div>
+    </div>
+
+    <!-- Slide 2: O Diagnóstico -->
+    <div class="slide" id="slide-2">
+        <h2 class="text-3xl md:text-5xl font-bold mb-8 gradient-text">Sua Música é um Ativo ou uma Despesa?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-5xl">
+            <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+                <i class="fas fa-clock text-sky-400 text-3xl mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Exaustão Operacional</h3>
+                <p class="text-slate-400 text-sm">Horas perdidas no WhatsApp negociando com dezenas de músicos.</p>
+            </div>
+            <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+                <i class="fas fa-exclamation-triangle text-red-400 text-3xl mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Risco de Palco Vazio</h3>
+                <p class="text-slate-400 text-sm">O músico faltou? O som está ruim? O prejuízo na reputação é seu.</p>
+            </div>
+            <div class="bg-slate-800 p-8 rounded-2xl border border-slate-700">
+                <i class="fas fa-chart-line-down text-orange-400 text-3xl mb-4"></i>
+                <h3 class="text-xl font-bold mb-2">Desperdício de Verba</h3>
+                <p class="text-slate-400 text-sm">Contratar "o que você gosta" em vez do que o seu público consome.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: A Ruptura -->
+    <div class="slide" id="slide-3">
+        <h2 class="text-3xl md:text-5xl font-bold mb-6 text-center">Nós Somos sua <br><span class="text-sky-400">Diretoria de Entretenimento</span></h2>
+        <p class="text-lg text-slate-300 text-center max-w-3xl mb-10">
+            A Atoca Music assume o risco, a curadoria e a burocracia. Você volta a focar no que importa: <strong>o atendimento e o balcão.</strong>
+        </p>
+        <div class="bg-white/5 p-8 rounded-3xl border border-white/10 w-full max-w-2xl">
+            <ul class="space-y-4">
+                <li class="flex items-center gap-4"><i class="fas fa-check-circle text-green-400"></i> Gestão de cachês (Pagamento único para a Atoca)</li>
+                <li class="flex items-center gap-4"><i class="fas fa-check-circle text-green-400"></i> Curadoria Técnica Baseada em Neuromarketing (Perfil do público X Gênero Musical)</li>
+                <li class="flex items-center gap-4"><i class="fas fa-check-circle text-green-400"></i> Seguro Contra Faltas (Substituição imediata garantida)</li>
+                <li class="flex items-center gap-4"><i class="fas fa-check-circle text-green-400"></i> Avaliação de Performance (Métricas de consumo por artista)</li>
+                <li class="flex items-center gap-4"><i class="fas fa-check-circle text-green-400"></i> PlayList exclusiva para o Dia (Youtube e Spotify)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Slide 4: Engenharia de Atmosfera -->
+    <div class="slide" id="slide-4">
+        <h2 class="text-3xl md:text-5xl font-bold mb-8 gradient-text text-center">Engenharia de Atmosfera</h2>
+        <div class="flex flex-col md:flex-row gap-12 items-center max-w-5xl">
+            <div class="flex-1 space-y-6">
+                <div class="bg-slate-800 p-6 rounded-xl">
+                    <h4 class="font-bold text-sky-400">Curadoria Baseada em Dados</h4>
+                    <p class="text-sm text-slate-400">Mapeamos o BPM (batidas por minuto) ideal para estimular o giro de mesa e consumo de drinks no DF.</p>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-xl">
+                    <h4 class="font-bold text-sky-400">Conexão Ideológica</h4>
+                    <p class="text-sm text-slate-400">Criamos uma identidade sonora única. Seu bar deixará de ser apenas um lugar de comida para ser uma experiência cultural.</p>
+                </div>
+            </div>
+            <div class="flex-1 text-center border-l border-slate-700 pl-12 hidden md:block">
+                <i class="fas fa-brain text-8xl text-slate-600 mb-4"></i>
+                <p class="text-slate-500 font-mono text-sm uppercase tracking-widest">Neuro-Music Strategy</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Oferta de Risco Zero -->
+    <div class="slide" id="slide-5">
+        <h2 class="text-3xl md:text-5xl font-bold mb-10 text-center">O Mesmo Investimento. <br><span class="text-sky-400">Dez Vezes Mais Valor.</span></h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-4xl">
+            <div class="p-8 border border-slate-700 rounded-2xl opacity-50">
+                <h3 class="text-center font-bold mb-4 uppercase text-sm">Modelo Atual</h3>
+                <ul class="space-y-3 text-sm">
+                    <li><i class="fas fa-times text-red-500 mr-2"></i> Você caça bandas no Instagram</li>
+                    <li><i class="fas fa-times text-red-500 mr-2"></i> Você negocia um por um</li>
+                    <li><i class="fas fa-times text-red-500 mr-2"></i> Você corre risco de "no-show"</li>
+                    <li><i class="fas fa-times text-red-500 mr-2"></i> Sem nota fiscal ou garantia</li>
+                </ul>
+            </div>
+            <div class="p-8 bg-sky-900/30 border-2 border-sky-400 rounded-2xl shadow-2xl shadow-sky-500/20">
+                <h3 class="text-center font-bold mb-4 uppercase text-sm text-sky-400">Padrão Atoca Music</h3>
+                <ul class="space-y-3 text-sm">
+                    <li><i class="fas fa-check text-sky-400 mr-2"></i> Curadoria profissional de elite</li>
+                    <li><i class="fas fa-check text-sky-400 mr-2"></i> Contrato único e gestão fiscal</li>
+                    <li><i class="fas fa-check text-sky-400 mr-2"></i> Backup garantido em 60 min</li>
+                    <li><i class="fas fa-check text-sky-400 mr-2"></i> <strong>Custo Extra: ZERO</strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: O Circuito DF -->
+    <div class="slide" id="slide-6">
+        <h2 class="text-3xl md:text-5xl font-bold mb-6 gradient-text">Circuito Atoca Brasília</h2>
+        <p class="text-center text-slate-300 max-w-2xl mb-8">
+            Estamos selecionando apenas <strong>5 estabelecimentos</strong> na primeira fase para transformar em hubs culturais de alta performance no DF.
+        </p>
+        <div class="flex gap-4">
+            <span class="bg-slate-800 px-4 py-2 rounded-full border border-slate-700 text-xs">Asa Sul</span>
+            <span class="bg-slate-800 px-4 py-2 rounded-full border border-slate-700 text-xs">Asa Norte</span>
+            <span class="bg-slate-800 px-4 py-2 rounded-full border border-slate-700 text-xs">Sudoeste</span>
+            <span class="bg-slate-800 px-4 py-2 rounded-full border border-slate-700 text-xs">Águas Claras</span>
+            <span class="bg-sky-500/20 text-sky-400 px-4 py-2 rounded-full border border-sky-500/50 text-xs font-bold">PONTE ALTA</span>
+        </div>
+    </div>
+
+    <!-- Slide 7: Prova de Intenção -->
+    <div class="slide" id="slide-7">
+        <h2 class="text-3xl md:text-5xl font-bold mb-6 text-center">Por Que Agora?</h2>
+        <p class="text-lg text-slate-400 text-center max-w-2xl">
+            "Não buscamos apenas clientes. Buscamos parceiros que entendem que o entretenimento profissional é o que separa um bar comum de um ponto turístico."
+        </p>
+        <div class="mt-12 flex items-center gap-6">
+            <div class="h-20 w-20 rounded-full bg-gradient-to-tr from-sky-500 to-indigo-500 flex items-center justify-center text-3xl">
+                <i class="fas fa-rocket"></i>
+            </div>
+            <div>
+                <p class="font-bold">Lançamento Exclusivo</p>
+                <p class="text-sm text-slate-500">Condições especiais para os Parceiros.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 8: Visão -->
+    <div class="slide" id="slide-7">
+        <h2 class="text-3xl md:text-5xl font-bold mb-6 text-center italic">"Esse projeto é maior <br>do que um serviço."</h2>
+        <p class="text-xl text-slate-400 text-center max-w-2xl">
+            É a união entre a elite musical de Brasília e os bares que buscam o próximo nível de faturamento.
+        </p>
+    </div>
+        
+        <div class="mt-20 text-slate-600 text-xs font-mono">
+            WWW.ATOCAMUSIC.COM.BR
+        </div>
+    </div>
+
+    <!-- Navegação -->
+    <div class="flex gap-4">
+        <div class="btn-nav" style="left: 2rem;" onclick="prevSlide()"><i class="fas fa-chevron-left"></i></div>
+        <div class="btn-nav" style="right: 2rem;" onclick="nextSlide()"><i class="fas fa-chevron-right"></i></div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 8;
+
+        function updateIndicator() {
+            document.getElementById('slide-indicator').innerText = `${currentSlide} / ${totalSlides}`;
+        }
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            slides.forEach(s => s.classList.remove('active'));
+            document.getElementById(`slide-${n}`).classList.add('active');
+            currentSlide = n;
+            updateIndicator();
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                showSlide(currentSlide + 1);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 1) {
+                showSlide(currentSlide - 1);
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // Swipe para Touch
+        let touchstartX = 0;
+        let touchendX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchstartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchendX = e.changedTouches[0].screenX;
+            if (touchendX < touchstartX - 50) nextSlide();
+            if (touchendX > touchstartX + 50) prevSlide();
+        });
+    </script>
+</body>
+</html>
