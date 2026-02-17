@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atoca Music - Gerador de Convite </title>
+    <title>Atoca Music - Gerador de Convite AI</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -76,32 +76,32 @@
 <body class="p-4 md:p-12">
 
     <div class="max-w-5xl mx-auto">
-        <!-- Header -->
+        <!-- Cabeçalho -->
         <div class="flex flex-col md:flex-row items-center justify-between mb-12 gap-4">
             <div class="text-center md:text-left">
-                <h1 class="text-3xl font-extrabold tracking-tighter uppercase">Gerador de <span class="text-sky-500">Convite</span></h1>
-                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1">Script de Conversão e Inteligência de Mercado Atoca Music</p>
+                <h1 class="text-3xl font-extrabold tracking-tighter uppercase">Gerador de <span class="text-sky-600">Convite</span></h1>
+                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1 text-center md:text-left">Script e Inteligência de Mercado Atoca Music</p>
             </div>
             <div class="flex items-center gap-3">
                 <div class="px-4 py-1.5 rounded-full border border-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                    Status: <span class="text-green-500">Sistema Criptografado</span>
+                    Status: <span class="text-green-500">Conectado ao Gemini 2.0</span>
                 </div>
             </div>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
             
-            <!-- Configurações -->
+            <!-- Painel de Configuração -->
             <div class="lg:col-span-2 space-y-6">
-                <section class="glass-card p-6 rounded-3xl space-y-6">
+                <section class="glass-card p-6 md:p-8 rounded-[2.5rem] space-y-6">
                     <div>
-                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 block">Nome do Local</label>
-                        <input type="text" id="bar-name" placeholder="Ex: Cervejaria Atoca" 
-                               class="input-atoca w-full p-4 rounded-2xl text-white outline-none">
+                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 block">Nome do Bar / Evento</label>
+                        <input type="text" id="bar-name" placeholder="Ex: Villa Bar da Bel" 
+                               class="input-atoca w-full p-4 rounded-2xl text-white outline-none font-medium">
                     </div>
 
                     <div>
-                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 block">Estilo da Noite</label>
+                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 block">Qual o clima da noite?</label>
                         <div class="grid grid-cols-2 gap-3" id="template-options">
                             <div class="option-card p-4 rounded-2xl text-center" data-type="sertanejo">
                                 <i class="fas fa-solid fa-hat-cowboy text-sky-400 mb-2"></i>
@@ -139,15 +139,15 @@
                     </div>
 
                     <div>
-                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 block">Atração e/ou Promoção Especial</label>
-                        <textarea id="extra-info" placeholder="Ex: Dose dupla de Chopp até às 20h, Cantor João Silva tocando o melhor do Rock..." 
+                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 block">Atração + Promoção Especial</label>
+                        <textarea id="extra-info" placeholder="Ex: Dose dupla de Chopp até às 20h, Bel Brandão cantando o melhor do Sertanejo, Mulher Free..." 
                                   class="input-atoca w-full p-4 rounded-2xl text-white outline-none h-28 resize-none text-sm font-medium"></textarea>
                     </div>
 
                     <button onclick="generateInvite()" id="btn-generate" 
                             class="w-full bg-sky-500 hover:bg-sky-400 text-slate-950 font-black py-5 rounded-2xl transition-all flex items-center justify-center gap-3 active:scale-95 shadow-xl shadow-sky-500/10">
                         <span id="btn-text">GERAR SCRIPT AGORA</span>
-                        <div id="btn-loader" class="loading-spinner hidden"></div>
+                        <div id="btn-loader" class="loading-spinner hidden text-center"></div>
                     </button>
                 </section>
             </div>
@@ -158,8 +158,8 @@
                     <div class="w-20 h-20 bg-slate-900 rounded-full flex items-center justify-center mb-6 border border-slate-800">
                         <i class="fas fa-wand-magic-sparkles text-slate-600 text-3xl"></i>
                     </div>
-                    <h3 class="text-slate-500 font-bold uppercase tracking-widest text-sm mb-2">Aguardando Comando</h3>
-                    <p class="text-slate-700 text-xs italic max-w-xs">Nossa IA de Copywriting está pronta. Preencha os dados ao lado para começar.</p>
+                    <h3 class="text-slate-500 font-bold uppercase tracking-widest text-sm mb-2 text-center">Aguardando Comando</h3>
+                    <p class="text-slate-700 text-xs italic max-w-xs text-center">Nossa IA de Copywriting está pronta. Preencha os dados ao lado para começar.</p>
                 </div>
 
                 <div id="result-card" class="glass-card p-8 rounded-[2.5rem] hidden h-full flex flex-col shadow-2xl">
@@ -178,7 +178,7 @@
                     </div>
 
                     <div class="mt-8 flex items-center justify-between border-t border-slate-800 pt-6">
-                        <span class="text-[9px] text-slate-600 font-mono uppercase tracking-widest">Protocolo: ATOCA-AI-2026</span>
+                        <span class="text-[9px] text-slate-600 font-mono uppercase tracking-widest">Protocolo: ATOCA-AI-FLASH-2.0</span>
                         <span id="copy-status" class="text-green-500 text-[10px] font-bold uppercase hidden">Copiado para o ClipBoard!</span>
                     </div>
                 </div>
@@ -187,22 +187,20 @@
         </div>
 
         <footer class="mt-16 text-center">
-            <p class="text-slate-700 text-[10px] font-bold uppercase tracking-[0.4em]">Propriedade da Atoca Music Group &copy; Brasília - DF</p>
+            <p class="text-slate-700 text-[10px] font-bold uppercase tracking-[0.4em]">Propriedade da Atoca Music &copy; Brasília - DF</p>
         </footer>
     </div>
 
     <!-- Alertas Flutuantes -->
     <div id="message-box" class="fixed bottom-10 left-1/2 -translate-x-1/2 glass-card px-8 py-4 rounded-2xl hidden z-50 shadow-2xl border border-sky-500/50 transition-all">
-        <p id="message-text" class="text-sm font-bold text-white flex items-center gap-3"></p>
+        <p id="message-text" class="text-sm font-bold text-white flex items-center gap-3 text-center"></p>
     </div>
 
     <script>
         /**
-         * CONFIGURAÇÃO DA CHAVE API
-         * Cole sua chave entre as aspas abaixo. 
-         * Gere em: https://aistudio.google.com/app/apikey
+         * CHAVE DE API INTEGRADA - FORNECIDA PELO USUÁRIO
          */
-        const apiKey = "AIzaSyBv0T2Z7gj_5YDRxP2nKRDOVUi2Qv4qK0I"; 
+        const apiKey = "AIzaSyCIHzpf-iw_SocQOJq_dbGs7fJwt-6hogk"; 
         
         let currentType = 'Sertanejo';
 
@@ -224,17 +222,16 @@
         }
 
         async function callGemini(prompt, systemInstruction) {
-            if(!apiKey) {
-                throw new Error("KEY_MISSING");
-            }
-
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+            // URL atualizada para o Gemini 2.0 Flash como solicitado no curl
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+            
             const payload = {
-                contents: [{ parts: [{ text: prompt }] }],
-                systemInstruction: { parts: [{ text: systemInstruction }] }
+                contents: [{ 
+                    parts: [{ text: `INSTRUÇÃO DE SISTEMA: ${systemInstruction}\n\nPERGUNTA DO USUÁRIO: ${prompt}` }] 
+                }]
             };
 
-            // Implementação de Retry com Exponential Backoff
+            // Implementação de Retry para evitar falhas em conexões 4G/instáveis
             let delay = 1000;
             for (let i = 0; i < 3; i++) {
                 try {
@@ -244,7 +241,11 @@
                         body: JSON.stringify(payload)
                     });
                     
-                    if (!response.ok) throw new Error('HTTP_ERROR');
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        console.error("Erro API:", errorData);
+                        throw new Error('HTTP_ERROR');
+                    }
                     
                     const data = await response.json();
                     return data.candidates?.[0]?.content?.parts?.[0]?.text;
@@ -271,24 +272,24 @@
                 return;
             }
 
-            // Preparar UI
-            btnText.innerText = "IA PROCESSANDO...";
+            // UI State
+            btnText.innerText = "ATOCA AI PROCESSANDO...";
             btnLoader.classList.remove('hidden');
             btn.disabled = true;
 
-            const sysPrompt = `Você é o Diretor de Copywriting da Atoca Music Brasília. 
-            Sua missão é criar um convite irresistível para redes sociais (Instagram e WhatsApp).
-            REGRAS: 
-            1. Tom de voz: Vibrante, moderno e exclusivo.
-            2. Use Emojis com inteligência.
-            3. Estrutura: 
-               - Gancho: Uma frase forte para parar o scroll.
+            const sysPrompt = `Você é o Melhor Diretor de Copywriting do Mundo e trabalaha na Atoca Music Brasília. 
+            Crie um convite magnético e profissional para redes sociais (Instagram e WhatsApp).
+            REGRAS OBRIGATÓRIAS: 
+            1. Tom de voz: Vibrante, moderno, voltado para entretenimento de alta qualidade.
+            2. Use Emojis temáticos com inteligência.
+            3. Estrutura do texto: 
+               - Gancho: Uma frase impactante inicial.
                - Clima: Descreva a experiência sonora do bar.
-               - Diferencial: Inclua as ofertas ou atrações fornecidas.
-               - CTA: Chamada para ação clara.
-            4. Nunca use 'Prezados' ou linguagem formal demais. Fale como Brasília fala.`;
+               - Oferta/Diferencial: Integre as atrações ou promoções extras de forma persuasiva.
+               - CTA: Chamada para ação clara (Ex: Reserve sua mesa, venha curtir).
+            4. Localização: Fale a linguagem de Brasília.`;
 
-            const prompt = `Gere um convite para o bar "${barName}". Estilo da Noite: "${currentType}". Detalhes Específicos: "${extra}".`;
+            const prompt = `Gere um convite estratégico para o bar "${barName}". Estilo da Noite: "${currentType}". Detalhes Extras para incluir: "${extra}".`;
 
             try {
                 const text = await callGemini(prompt, sysPrompt);
@@ -296,14 +297,11 @@
                 output.innerText = text;
                 emptyState.classList.add('hidden');
                 resultCard.classList.remove('hidden');
-                showMessage("Script gerado com sucesso!");
+                showMessage("Script estratégico gerado!");
                 
             } catch (error) {
-                if(error.message === "KEY_MISSING") {
-                    showMessage("Erro: Chave API não configurada no código-fonte.", true);
-                } else {
-                    showMessage("Erro na conexão com a inteligência. Tente novamente.", true);
-                }
+                console.error(error);
+                showMessage("Erro na conexão com a inteligência. Tente novamente em instantes.", true);
             } finally {
                 btnText.innerText = "GERAR SCRIPT AGORA";
                 btnLoader.classList.add('hidden');
@@ -314,11 +312,13 @@
         function copyContent() {
             const text = document.getElementById('output-text').innerText;
             
-            // Método robusto de cópia
+            // Método universal de cópia para navegadores móveis e desktop
             const textArea = document.createElement("textarea");
             textArea.value = text;
             document.body.appendChild(textArea);
             textArea.select();
+            textArea.setSelectionRange(0, 99999); // Para dispositivos móveis
+            
             try {
                 document.execCommand('copy');
                 const status = document.getElementById('copy-status');
@@ -332,9 +332,9 @@
                     resultCard.classList.remove('copy-success');
                 }, 2000);
                 
-                showMessage("Convite pronto para colar no WhatsApp!");
+                showMessage("Copiado! Agora é só colar no WhatsApp.");
             } catch (err) {
-                showMessage("Erro ao copiar. Tente selecionar o texto manualmente.", true);
+                showMessage("Erro ao copiar. Tente selecionar manualmente.", true);
             }
             document.body.removeChild(textArea);
         }
