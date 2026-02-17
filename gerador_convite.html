@@ -3,149 +3,281 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atoca Music - Gerador de Convite AI</title>
+    <title>Atoca Music - Gerador de Convite Profissional</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f1f5f9; }
-        .card { background: #1e293b; border: 1px solid #334155; border-radius: 1.5rem; transition: all 0.2s; }
-        .input-atoca { background: #0f172a; border: 1px solid #334155; border-radius: 0.75rem; padding: 0.75rem 1rem; color: white; width: 100%; outline: none; }
-        .input-atoca:focus { border-color: #38bdf8; box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.1); }
-        .btn-template { background: #334155; border: 1px solid #475569; padding: 0.5rem 1rem; border-radius: 9999px; font-size: 0.875rem; transition: all 0.2s; }
-        .btn-template:hover { background: #475569; border-color: #38bdf8; }
-        .btn-template.active { background: #38bdf8; color: #0f172a; border-color: #38bdf8; font-weight: bold; }
-        .loading-bar { height: 4px; background: #38bdf8; position: fixed; top: 0; left: 0; transition: width 0.3s; width: 0%; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #0a0f1d; 
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .input-atoca {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid #334155;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .input-atoca:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.2);
+        }
+
+        .option-card {
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #334155;
+        }
+
+        .option-card:hover {
+            border-color: #38bdf8;
+            background: rgba(56, 189, 248, 0.05);
+        }
+
+        .option-card.selected {
+            border-color: #38bdf8;
+            background: rgba(56, 189, 248, 0.15);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+        }
+
+        .loading-spinner {
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-top: 2px solid #38bdf8;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .copy-success {
+            animation: pop 0.4s ease-out;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
     </style>
 </head>
-<body class="min-h-screen p-4 md:p-8 flex flex-col items-center">
-    <div id="loader" class="loading-bar"></div>
+<body class="p-4 md:p-12">
 
-    <div class="max-w-2xl w-full">
-        <header class="text-center mb-12">
-            <h1 class="text-3xl font-black mb-2 tracking-tight">GERADOR DE <span class="text-sky-400">CONVITE AI</span></h1>
-            <p class="text-slate-400 text-sm">Scripts magnéticos para o seu bar em segundos.</p>
-        </header>
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-12">
+            <div>
+                <h1 class="text-2xl font-extrabold tracking-tighter uppercase">Gerador de <span class="text-sky-400">Convite</span></h1>
+                <p class="text-slate-500 text-sm font-medium uppercase tracking-widest">Inteligência de Mercado Atoca Music</p>
+            </div>
+            <div class="hidden md:block">
+                <div class="px-4 py-1 rounded-full border border-slate-700 text-[10px] font-bold text-slate-500 uppercase">Status: Online</div>
+            </div>
+        </div>
 
-        <main class="space-y-6">
-            <!-- Passo 1: Informações -->
-            <section class="card p-6 shadow-xl">
-                <div class="mb-6">
-                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Nome do Bar / Estabelecimento</label>
-                    <input type="text" id="bar-name" placeholder="Ex: Cervejaria Atoca, Pub Central..." class="input-atoca">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+            
+            <!-- Configurações (Lado Esquerdo) -->
+            <div class="lg:col-span-2 space-y-6">
+                <section class="glass-card p-6 rounded-3xl space-y-6">
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 block">Nome do Local</label>
+                        <input type="text" id="bar-name" placeholder="Ex: Cervejaria Atoca" 
+                               class="input-atoca w-full p-4 rounded-2xl text-white outline-none">
+                    </div>
+
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 block">Tipo de Evento Profissional</label>
+                        <div class="grid grid-cols-2 gap-3" id="template-options">
+                            <div class="option-card p-4 rounded-2xl text-center selected" data-type="rock-pop">
+                                <i class="fas fa-guitar text-sky-400 mb-2"></i>
+                                <p class="text-xs font-bold uppercase">Rock & Pop</p>
+                            </div>
+                            <div class="option-card p-4 rounded-2xl text-center" data-type="sertanejo">
+                                <i class="fas fa-hat-cowboy text-sky-400 mb-2"></i>
+                                <p class="text-xs font-bold uppercase">Sertanejo</p>
+                            </div>
+                            <div class="option-card p-4 rounded-2xl text-center" data-type="jazz-blues">
+                                <i class="fas fa-sax-hot text-sky-400 mb-2"></i>
+                                <p class="text-xs font-bold uppercase">Jazz & Blues</p>
+                            </div>
+                            <div class="option-card p-4 rounded-2xl text-center" data-type="happy-hour">
+                                <i class="fas fa-beer-mug-empty text-sky-400 mb-2"></i>
+                                <p class="text-xs font-bold uppercase">Happy Hour</p>
+                             </div>
+                            <div class="option-card p-4 rounded-2xl text-center" data-type="jazz-blues">
+                                <i class="fas fa-sax-hot text-sky-400 mb-2"></i>
+                                <p class="text-xs font-bold uppercase">Fim de Semana</p>
+                            </div>
+                            <div class="option-card p-4 rounded-2xl text-center" data-type="happy-hour">
+                                <i class="fas fa-beer-mug-empty text-sky-400 mb-2"></i>
+                                <p class="text-xs font-bold uppercase">Evento Vip</p>
+                             </div>
+                            <div class="option-card p-4 rounded-2xl text-center" data-type="happy-hour">
+                                <i class="fas fa-beer-mug-empty text-sky-400 mb-2"></i>
+                                <p class="text-xs font-bold uppercase">Noite de Casais</p>   
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 block">Oferta ou Atração (Opcional)</label>
+                        <textarea id="extra-info" placeholder="Ex: Dose dupla de Chopp até às 20h, Cantor João Silva..." 
+                                  class="input-atoca w-full p-4 rounded-2xl text-white outline-none h-24 resize-none text-sm"></textarea>
+                    </div>
+
+                    <button onclick="generateInvite()" id="btn-generate" 
+                            class="w-full bg-sky-500 hover:bg-sky-400 text-slate-950 font-black py-5 rounded-2xl transition-all flex items-center justify-center gap-3">
+                        <span id="btn-text">GERAR SCRIPT AGORA</span>
+                        <div id="btn-loader" class="loading-spinner hidden"></div>
+                    </button>
+                </section>
+            </div>
+
+            <!-- Resultado (Lado Direito) -->
+            <div class="lg:col-span-3">
+                <div id="empty-state" class="h-full flex flex-col items-center justify-center border-2 border-dashed border-slate-800 rounded-3xl p-12 text-center">
+                    <div class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-wand-magic-sparkles text-slate-600 text-2xl"></i>
+                    </div>
+                    <p class="text-slate-600 font-medium italic">Configure ao lado e veja a mágica acontecer aqui.</p>
                 </div>
 
-                <div class="mb-6">
-                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Qual o clima do evento?</label>
-                    <div class="flex flex-wrap gap-2" id="template-options">
-                        <button class="btn-template active" data-type="happy-hour">🍻 Happy Hour</button>
-                        <button class="btn-template" data-type="live-music">🎸 Música ao Vivo</button>
-                        <button class="btn-template" data-type="weekend">🔥 Fim de Semana</button>
-                        <button class="btn-template" data-type="exclusive">💎 Evento VIP</button>
-                        <button class="btn-template" data-type="date">🍷 Noite de Casais</button>
+                <div id="result-card" class="glass-card p-8 rounded-3xl hidden h-full flex flex-col">
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="text-[10px] font-bold text-sky-400 uppercase tracking-[0.2em]">Cópia Gerada com IA</span>
+                        <button onclick="copyContent()" class="bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-2 transition-colors">
+                            <i class="fas fa-copy"></i> COPIAR TEXTO
+                        </button>
+                    </div>
+                    
+                    <div id="output-text" class="flex-1 bg-slate-950/50 p-6 rounded-2xl border border-slate-800 text-slate-300 leading-relaxed whitespace-pre-wrap font-medium overflow-y-auto">
+                        <!-- Conteúdo da IA -->
+                    </div>
+
+                    <div class="mt-6 flex items-center justify-between text-[10px] text-slate-600 font-mono uppercase tracking-widest">
+                        <span>Padrão de Conversão: Alto</span>
+                        <span id="copy-status" class="text-green-500 font-bold hidden">Copiado com Sucesso!</span>
                     </div>
                 </div>
+            </div>
 
-                <div class="mb-4">
-                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Detalhes Extras (Opcional)</label>
-                    <textarea id="extra-info" placeholder="Ex: Dose dupla de chopp, entrada franca, nome do artista..." class="input-atoca h-24 resize-none"></textarea>
-                </div>
+        </div>
 
-                <button onclick="generateScript()" class="w-full bg-sky-500 hover:bg-sky-400 text-slate-950 font-black py-4 rounded-xl transition-all flex items-center justify-center gap-2">
-                    GERAR SCRIPT AGORA <i class="fas fa-magic"></i>
-                </button>
-            </section>
-
-            <!-- Passo 2: Resultado -->
-            <section id="result-container" class="card p-6 border-sky-500/50 hidden">
-                <div class="flex justify-between items-center mb-4">
-                    <h3 class="text-sm font-bold text-sky-400 uppercase tracking-widest">Script Sugerido</h3>
-                    <button onclick="copyToClipboard()" class="text-slate-400 hover:text-sky-400 text-sm flex items-center gap-2">
-                        <i class="fas fa-copy"></i> Copiar
-                    </button>
-                </div>
-                <div id="output" class="text-slate-300 leading-relaxed whitespace-pre-wrap font-medium bg-slate-900/50 p-6 rounded-xl border border-slate-700">
-                    <!-- Gerado pela IA -->
-                </div>
-                <div class="mt-4 flex gap-4">
-                    <button onclick="generateScript()" class="flex-1 text-xs text-slate-500 hover:text-white transition-colors">
-                        <i class="fas fa-sync mr-1"></i> Tentar outra versão
-                    </button>
-                    <div id="copy-status" class="text-xs text-green-400 opacity-0 transition-opacity">Copiado!</div>
-                </div>
-            </section>
-        </main>
-
-        <footer class="mt-12 text-center text-slate-600 text-[10px] uppercase tracking-[0.2em]">
-            Tecnologia de Entretenimento Profissional &copy; Atoca Music
+        <footer class="mt-12 text-center">
+            <p class="text-slate-600 text-[10px] font-bold uppercase tracking-[0.3em]">&copy; 2026 Atoca Music Group - Brasília/DF</p>
         </footer>
     </div>
 
-    <script>
-        const apiKey = ""; // API Key provided at runtime
-        let currentType = 'happy-hour';
+    <!-- Message Box (Custom Alert) -->
+    <div id="message-box" class="fixed bottom-10 left-1/2 -translate-x-1/2 glass-card px-6 py-4 rounded-2xl hidden z-50 shadow-2xl border border-sky-500/50">
+        <p id="message-text" class="text-sm font-bold text-white"></p>
+    </div>
 
-        // Seleção de Template
-        document.querySelectorAll('.btn-template').forEach(btn => {
-            btn.addEventListener('click', () => {
-                document.querySelectorAll('.btn-template').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentType = btn.dataset.type;
+    <script>
+        const apiKey = ""; // API Key fornecida pelo ambiente
+        let currentType = 'rock-pop';
+
+        // Lógica de seleção de templates
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', () => {
+                document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                currentType = card.dataset.type;
             });
         });
 
-        async function generateScript() {
-            const barName = document.getElementById('bar-name').value || "Nosso Bar";
-            const extra = document.getElementById('extra-info').value;
-            const output = document.getElementById('output');
-            const container = document.getElementById('result-container');
-            const loader = document.getElementById('loader');
-
-            if(!barName) {
-                alert("Por favor, insira o nome do bar.");
-                return;
-            }
-
-            loader.style.width = "40%";
-            container.classList.remove('hidden');
-            output.innerHTML = '<div class="flex items-center gap-2 text-slate-500"><i class="fas fa-circle-notch fa-spin text-sky-400"></i> Redigindo script de alta conversão...</div>';
-
-            const sysPrompt = `Você é um especialista em Copywriting para Redes Sociais no nicho de Bares e Entretenimento. 
-            Seu objetivo é criar um convite curto, magnético e cheio de personalidade para WhatsApp e Instagram. 
-            Use Emojis, use um tom vibrante, crie senso de urgência ou exclusividade conforme o tipo de evento.`;
-
-            const prompt = `Tipo de Evento: ${currentType}. Nome do Bar: ${barName}. Detalhes Extras: ${extra}. 
-            Gere um texto dividido em: 1. Gancho (primeira linha), 2. Corpo do convite, 3. Chamada para ação (CTA).`;
-
-            try {
-                const result = await callGemini(prompt, sysPrompt);
-                loader.style.width = "100%";
-                output.innerText = result;
-                setTimeout(() => loader.style.width = "0%", 1000);
-            } catch (e) {
-                output.innerText = "Houve um erro na geração. Tente novamente.";
-                loader.style.width = "0%";
-            }
+        function showMessage(text) {
+            const box = document.getElementById('message-box');
+            document.getElementById('message-text').innerText = text;
+            box.classList.remove('hidden');
+            setTimeout(() => box.classList.add('hidden'), 3000);
         }
 
-        async function callGemini(prompt, sys) {
+        async function callGemini(prompt, systemInstruction) {
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
             const payload = {
                 contents: [{ parts: [{ text: prompt }] }],
-                systemInstruction: { parts: [{ text: sys }] }
+                systemInstruction: { parts: [{ text: systemInstruction }] }
             };
 
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-            const data = await response.json();
-            return data.candidates?.[0]?.content?.parts?.[0]?.text;
+            let delay = 1000;
+            for (let i = 0; i < 5; i++) {
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    if (!response.ok) throw new Error('API Error');
+                    const data = await response.json();
+                    return data.candidates?.[0]?.content?.parts?.[0]?.text;
+                } catch (e) {
+                    if (i === 4) throw e;
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    delay *= 2;
+                }
+            }
         }
 
-        function copyToClipboard() {
-            const text = document.getElementById('output').innerText;
+        async function generateInvite() {
+            const barName = document.getElementById('bar-name').value;
+            const extra = document.getElementById('extra-info').value;
+            const btnText = document.getElementById('btn-text');
+            const btnLoader = document.getElementById('btn-loader');
+            const emptyState = document.getElementById('empty-state');
+            const resultCard = document.getElementById('result-card');
+            const output = document.getElementById('output-text');
+
+            if (!barName) {
+                showMessage("Por favor, informe o nome do bar.");
+                return;
+            }
+
+            // UI State - Loading
+            btnText.innerText = "REDIGINDO...";
+            btnLoader.classList.remove('hidden');
+            document.getElementById('btn-generate').disabled = true;
+
+            const sysPrompt = `Você é o Diretor de Copywriting da Atoca Music. 
+            Crie um convite magnético para redes sociais (Instagram/WhatsApp). 
+            Regras: 
+            1. Use Emojis modernos. 
+            2. Tom de voz vibrante, convidativo e de elite. 
+            3. Estruture em: Gancho (primeira linha), Corpo (o clima do evento) e CTA (Call to Action). 
+            4. Se houver informações extras, integre-as de forma orgânica.`;
+
+            const prompt = `Gere um convite para o bar "${barName}". Estilo musical/atmosfera: "${currentType}". Detalhes extras: "${extra}".`;
+
+            try {
+                const text = await callGemini(prompt, sysPrompt);
+                
+                output.innerText = text;
+                emptyState.classList.add('hidden');
+                resultCard.classList.remove('hidden');
+                
+            } catch (error) {
+                showMessage("Erro na conexão com a inteligência. Tente novamente.");
+            } finally {
+                btnText.innerText = "GERAR SCRIPT AGORA";
+                btnLoader.classList.add('hidden');
+                document.getElementById('btn-generate').disabled = false;
+            }
+        }
+
+        function copyContent() {
+            const text = document.getElementById('output-text').innerText;
             const textArea = document.createElement("textarea");
             textArea.value = text;
             document.body.appendChild(textArea);
@@ -154,8 +286,17 @@
             document.body.removeChild(textArea);
             
             const status = document.getElementById('copy-status');
-            status.style.opacity = '1';
-            setTimeout(() => status.style.opacity = '0', 2000);
+            const resultCard = document.getElementById('result-card');
+            
+            status.classList.remove('hidden');
+            resultCard.classList.add('copy-success');
+            
+            setTimeout(() => {
+                status.classList.add('hidden');
+                resultCard.classList.remove('copy-success');
+            }, 2000);
+            
+            showMessage("Texto copiado para a área de transferência!");
         }
     </script>
 </body>
