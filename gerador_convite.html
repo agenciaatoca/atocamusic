@@ -84,14 +84,9 @@
 <body class="p-4 md:p-12">
 
     <!-- Painel de Configuração Oculto (Para o Diretor) -->
-    <div id="config-panel" class="glass-card p-4 rounded-2xl shadow-2xl border-sky-500/50">
-        <label class="text-[10px] font-bold text-sky-400 uppercase tracking-widest mb-2 block">Configuração de API</label>
-        <input type="password" id="api-key-input" placeholder="Cole sua Gemini API Key aqui" 
-               class="input-atoca w-full p-2 rounded-lg text-xs text-white outline-none mb-2">
-        <button onclick="saveApiKey()" class="w-full bg-sky-500 text-slate-950 text-[10px] font-bold py-2 rounded-lg uppercase">Salvar Chave</button>
-    </div>
-
-    <div class="max-w-4xl mx-auto">
+            </div>
+            <div class="px-4 py-1.5 rounded-full border border-slate-800 text-[10px] font-bold text-slate-400">SERVER STATUS: <span class="text-green-500">ENCRYPTED & ONLINE</span></div>
+        </header>
         <!-- Header -->
         <div class="flex items-center justify-between mb-12">
             <div>
@@ -206,121 +201,84 @@
         </footer>
     </div>
 
-    <!-- Mensagens do Sistema -->
-    <div id="message-box" class="fixed bottom-10 left-1/2 -translate-x-1/2 glass-card px-6 py-4 rounded-2xl hidden z-50 shadow-2xl border border-sky-500/50">
-        <p id="message-text" class="text-sm font-bold text-white"></p>
-    </div>
+  <!-- Alertas -->
+    <div id="alert" class="fixed bottom-10 left-1/2 -translate-x-1/2 glass px-6 py-3 rounded-2xl hidden z-50 text-sm font-bold shadow-2xl"></div>
 
     <script>
-        let customApiKey = ""; 
-        let currentType = 'rock-pop';
+        // ATENÇÃO: COLOQUE SUA CHAVE DENTRO DAS ASPAS ABAIXO
+        const hardcodedApiKey = "AIzaSyBv0T2Z7gj_5YDRxP2nKRDOVUi2Qv4qK0I"; 
+        
+        let selectedType = 'Sertanejo';
 
-        // Lógica de seleção de templates
-        document.querySelectorAll('.option-card').forEach(card => {
-            card.addEventListener('click', () => {
-                document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
-                card.classList.add('selected');
-                currentType = card.dataset.type;
-            });
-        });
-
-        function toggleConfig() {
-            const panel = document.getElementById('config-panel');
-            panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+        function setType(type, el) {
+            document.querySelectorAll('.option-box').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+            selectedType = type;
         }
 
-        function saveApiKey() {
-            customApiKey = document.getElementById('api-key-input').value;
-            if(customApiKey) {
-                showMessage("Chave configurada com sucesso!");
-                toggleConfig();
-            }
+        function showAlert(msg, color = "white") {
+            const el = document.getElementById('alert');
+            el.innerText = msg;
+            el.style.color = color;
+            el.classList.remove('hidden');
+            setTimeout(() => el.classList.add('hidden'), 3000);
         }
 
-        function showMessage(text) {
-            const box = document.getElementById('message-box');
-            document.getElementById('message-text').innerText = text;
-            box.classList.remove('hidden');
-            setTimeout(() => box.classList.add('hidden'), 3000);
-        }
+        async function generate() {
+            const bar = document.getElementById('bar-name').value;
+            const extra = document.getElementById('extra').value;
+            const btn = document.getElementById('btn');
+            const label = document.getElementById('btn-label');
+            const loader = document.getElementById('loader');
 
-        async function callGemini(prompt, systemInstruction) {
-            // Usa a chave inserida manualmente ou a do ambiente
-            const finalKey = customApiKey || ""; 
-            
-            if(!finalKey) {
-                throw new Error("API_KEY_MISSING");
-            }
+            if (!bar) return showAlert("Insira o nome do bar!");
+            if (!hardcodedApiKey) return showAlert("ERRO: API Key não configurada no código.", "#f87171");
 
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${finalKey}`;
-            const payload = {
-                contents: [{ parts: [{ text: prompt }] }],
-                systemInstruction: { parts: [{ text: systemInstruction }] }
-            };
-
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-            
-            if (!response.ok) throw new Error('API_ERROR');
-            
-            const data = await response.json();
-            return data.candidates?.[0]?.content?.parts?.[0]?.text;
-        }
-
-        async function generateInvite() {
-            const barName = document.getElementById('bar-name').value;
-            const extra = document.getElementById('extra-info').value;
-            const btnText = document.getElementById('btn-text');
-            const btnLoader = document.getElementById('btn-loader');
-            const emptyState = document.getElementById('empty-state');
-            const resultCard = document.getElementById('result-card');
-            const output = document.getElementById('output-text');
-            const btn = document.getElementById('btn-generate');
-
-            if (!barName) {
-                showMessage("Por favor, informe o nome do bar.");
-                return;
-            }
-
-            btnText.innerText = "GERANDO...";
-            btnLoader.classList.remove('hidden');
+            // UI State
+            label.innerText = "PENSANDO...";
+            loader.classList.remove('hidden');
             btn.disabled = true;
 
-            const sysPrompt = `Você é o melhor Diretor de Copywriting que existe no Brasil e trabalha para a Atoca Music. 
-            Crie um convite magnético para redes sociais (Instagram/WhatsApp). 
-            Regras: Use Emojis. Tom de voz vibrante. Gancho impactante. CTA claro e convincente.`;
-
-            const prompt = `Bar: "${barName}". Estilo: "${currentType}". Detalhes: "${extra}".`;
+            const sys = "Você é um copywriter de elite para bares. Gere um convite magnético para WhatsApp/Instagram. Use Emojis. Seja breve e persuasivo. Estrutura: Gancho impactante, clima do evento, oferta e chamada para ação.";
+            const prompt = `Gere um convite para o bar "${bar}". Tipo: "${selectedType}". Diferencial: "${extra}".`;
 
             try {
-                const text = await callGemini(prompt, sysPrompt);
-                output.innerText = text;
-                emptyState.classList.add('hidden');
-                resultCard.classList.remove('hidden');
-            } catch (error) {
-                if(error.message === "API_KEY_MISSING") {
-                    showMessage("Erro: Clique na engrenagem e insira sua API Key.");
-                } else {
-                    showMessage("Erro na conexão. Verifique sua chave.");
-                }
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${hardcodedApiKey}`;
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: prompt }] }],
+                        systemInstruction: { parts: [{ text: sys }] }
+                    })
+                });
+
+                if (!response.ok) throw new Error();
+                const data = await response.json();
+                const text = data.candidates[0].content.parts[0].text;
+
+                document.getElementById('placeholder').classList.add('hidden');
+                document.getElementById('result').classList.remove('hidden');
+                document.getElementById('output').innerText = text;
+
+            } catch (e) {
+                showAlert("Erro de conexão. Verifique sua chave API.", "#f87171");
             } finally {
-                btnText.innerText = "GERAR SCRIPT AGORA";
-                btnLoader.classList.add('hidden');
+                label.innerText = "GERAR CONVITE AGORA";
+                loader.classList.add('hidden');
                 btn.disabled = false;
             }
         }
 
-        function copyContent() {
-            const text = document.getElementById('output-text').innerText;
-            navigator.clipboard.writeText(text).then(() => {
-                const status = document.getElementById('copy-status');
-                status.classList.remove('hidden');
-                setTimeout(() => status.classList.add('hidden'), 2000);
-                showMessage("Copiado para o WhatsApp!");
-            });
+        function copy() {
+            const text = document.getElementById('output').innerText;
+            const dummy = document.createElement("textarea");
+            document.body.appendChild(dummy);
+            dummy.value = text;
+            dummy.select();
+            document.execCommand("copy");
+            document.body.removeChild(dummy);
+            showAlert("Copiado com sucesso! ✨", "#38bdf8");
         }
     </script>
 </body>
