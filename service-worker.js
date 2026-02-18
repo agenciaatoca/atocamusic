@@ -1,7 +1,8 @@
 const CACHE_NAME = "atoca-cache-v1";
 const urlsToCache = [
   "/",
-  "/index.html"
+  "/gerador_convite.html",
+  "/manifest.json"
 ];
 
 self.addEventListener("install", event => {
