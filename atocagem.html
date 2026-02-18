@@ -20,22 +20,18 @@
             font-family: 'Inter', sans-serif; 
             background-color: var(--gem-bg); 
             color: #e3e3e3;
-            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         h1, h2, h3 { font-family: 'Google Sans', sans-serif; }
-
-        .gem-container {
-            background: var(--gem-surface);
-            border: 1px solid var(--gem-border);
-            border-radius: 28px;
-        }
 
         .input-area {
             background: #1e1f20;
             border: 1px solid var(--gem-border);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
         .input-area:focus-within {
@@ -48,17 +44,12 @@
             border: 1px solid var(--gem-border);
             color: #c4c7c5;
             transition: all 0.2s;
+            cursor: pointer;
         }
 
         .preset-chip:hover {
             background: rgba(255, 255, 255, 0.05);
             border-color: #8e918f;
-        }
-
-        .preset-chip.active {
-            background: rgba(138, 180, 248, 0.1);
-            border-color: var(--gem-blue);
-            color: var(--gem-blue);
         }
 
         .gem-gradient {
@@ -81,115 +72,108 @@
             border-radius: 24px;
         }
 
-        /* Botão flutuante estilo Google */
         .btn-fab {
             background: var(--gem-blue);
             color: #041e49;
             box-shadow: 0 4px 12px rgba(138, 180, 248, 0.3);
         }
-
-        .btn-fab:hover {
-            box-shadow: 0 6px 16px rgba(138, 180, 248, 0.4);
-            transform: translateY(-1px);
-        }
     </style>
 </head>
-<body class="min-h-screen flex flex-col items-center p-4 md:p-8">
+<body class="p-4 md:p-8">
 
     <div class="w-full max-w-4xl flex-1 flex flex-col">
         
-        <!-- Header minimalista -->
+        <!-- Header -->
         <header class="flex items-center justify-between mb-12 w-full px-4">
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center">
-                    <i class="fas fa-sparkles text-white text-xs"></i>
+                    <i class="fas fa-sparkles text-white text-[10px]"></i>
                 </div>
                 <h1 class="text-xl font-medium tracking-tight">Atoca <span class="text-slate-500">Gem</span></h1>
             </div>
-            <div class="flex items-center gap-4">
-                <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest bg-slate-800/50 px-3 py-1 rounded-full border border-slate-700">
-                    Flash 2.0 Engine
-                </span>
-            </div>
+            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest bg-slate-800/50 px-3 py-1 rounded-full border border-slate-700">
+                Engine 2.0 Flash
+            </span>
         </header>
 
-        <!-- Área de Exibição do Resultado -->
+        <!-- Main Content -->
         <main class="flex-1 flex flex-col w-full">
             
             <div id="welcome-screen" class="my-auto text-center space-y-6">
-                <h2 class="text-4xl md:text-5xl font-medium tracking-tight">Crie convites que <br><span class="gem-gradient font-bold italic">lotam sua casa.</span></h2>
-                <p class="text-slate-400 text-sm max-w-md mx-auto">Sua inteligência artificial dedicada a transformar música ao vivo em faturamento real.</p>
+                <h2 class="text-4xl md:text-5xl font-medium tracking-tight leading-tight">Crie convites que <br><span class="gem-gradient font-bold italic">enchem seu bar.</span></h2>
+                <p class="text-slate-400 text-sm max-w-md mx-auto">IA de copywriting treinada para transformar eventos musicais em faturamento para casas noturnas de Brasília.</p>
                 
-                <!-- Chips de Sugestão -->
                 <div class="flex flex-wrap justify-center gap-2 pt-6">
-                    <button onclick="applyPreset('Rock & Pop', 'Dose dupla de chopp até 21h')" class="preset-chip px-4 py-2 rounded-full text-xs font-medium">🎸 Noite do Rock</button>
-                    <button onclick="applyPreset('Sertanejo', 'Lista VIP no site')" class="preset-chip px-4 py-2 rounded-full text-xs font-medium">🤠 Sexta Sertaneja</button>
-                    <button onclick="applyPreset('Happy Hour', '30% OFF em petiscos')" class="preset-chip px-4 py-2 rounded-full text-xs font-medium">🍻 Happy Hour</button>
+                    <div onclick="applyPreset('Pop Rock', 'Dose dupla de Gin até 22h')" class="preset-chip px-4 py-2 rounded-full text-xs font-medium">🎸 Noite do Rock</div>
+                    <div onclick="applyPreset('Sertanejo', 'Lista VIP disponível no link da bio')" class="preset-chip px-4 py-2 rounded-full text-xs font-medium">🤠 Sexta Sertaneja</div>
+                    <div onclick="applyPreset('Happy Hour', 'Combo de Chopp com 20% OFF')" class="preset-chip px-4 py-2 rounded-full text-xs font-medium">🍻 Happy Hour</div>
                 </div>
             </div>
 
             <!-- Loader -->
-            <div id="ai-loading" class="hidden w-full max-w-2xl mx-auto space-y-4">
+            <div id="ai-loading" class="hidden w-full max-w-2xl mx-auto space-y-4 my-auto">
                 <div class="h-4 w-3/4 loading-shimmer rounded-full opacity-50"></div>
                 <div class="h-4 w-full loading-shimmer rounded-full opacity-50"></div>
                 <div class="h-4 w-1/2 loading-shimmer rounded-full opacity-50"></div>
+                <p class="text-center text-xs text-slate-600 animate-pulse mt-4">REDAÇÃO ESTRATÉGICA EM ANDAMENTO...</p>
             </div>
 
-            <!-- Resultado -->
-            <div id="response-container" class="hidden w-full max-w-3xl mx-auto space-y-6">
-                <div class="response-card p-8 shadow-2xl relative">
-                    <div id="output-text" class="text-slate-200 text-lg leading-relaxed whitespace-pre-wrap font-medium">
-                        <!-- Gerado pela IA -->
-                    </div>
+            <!-- Response -->
+            <div id="response-container" class="hidden w-full max-w-3xl mx-auto space-y-6 my-auto">
+                <div class="response-card p-8 shadow-2xl relative border-l-4 border-l-blue-500">
+                    <div id="output-text" class="text-slate-200 text-lg leading-relaxed whitespace-pre-wrap font-medium"></div>
                 </div>
-                <div class="flex items-center justify-center gap-4">
-                    <button onclick="copyContent()" class="btn-fab px-8 py-3 rounded-full font-bold text-sm transition-all flex items-center gap-2">
-                        <i class="fas fa-copy"></i> COPIAR SCRIPT
+                <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+                    <button onclick="copyContent()" class="btn-fab w-full md:w-auto px-10 py-4 rounded-full font-bold text-sm transition-all flex items-center justify-center gap-2">
+                        <i class="fas fa-copy"></i> COPIAR PARA WHATSAPP
                     </button>
-                    <button onclick="resetApp()" class="text-slate-500 hover:text-white text-xs font-bold uppercase tracking-widest px-4 py-2">
-                        <i class="fas fa-plus mr-2"></i> Novo Convite
+                    <button onclick="resetApp()" class="text-slate-500 hover:text-white text-xs font-bold uppercase tracking-widest px-4 py-3">
+                        <i class="fas fa-plus mr-2"></i> Criar outro
                     </button>
                 </div>
             </div>
         </main>
 
-        <!-- Barra de Comando Estilo Gem -->
+        <!-- Command Bar -->
         <div class="mt-8 mb-4 w-full">
             <div class="max-w-3xl mx-auto input-area p-2 rounded-[2.5rem] flex flex-col gap-2 shadow-2xl">
                 <div class="flex flex-col md:flex-row gap-2 px-4 pt-2">
-                    <input type="text" id="bar-name" placeholder="Nome do bar..." 
-                           class="flex-1 bg-transparent py-2 text-white text-sm outline-none border-none placeholder-slate-600 font-medium">
+                    <input type="text" id="bar-name" placeholder="Nome do Bar..." 
+                           class="flex-1 bg-transparent py-2 text-white text-sm outline-none border-none placeholder-slate-700 font-medium">
                     <div class="hidden md:block w-[1px] h-6 bg-slate-700 self-center"></div>
-                    <input type="text" id="style-text" placeholder="Estilo musical..." 
-                           class="flex-1 bg-transparent py-2 text-white text-sm outline-none border-none placeholder-slate-600 font-medium">
+                    <input type="text" id="style-text" placeholder="Estilo ou Atração..." 
+                           class="flex-1 bg-transparent py-2 text-white text-sm outline-none border-none placeholder-slate-700 font-medium">
                 </div>
-                <div class="relative flex items-center">
-                    <textarea id="extra-info" rows="1" placeholder="Adicione uma oferta ou detalhe extra..." 
-                              class="flex-1 bg-transparent px-4 py-3 text-slate-300 text-sm outline-none border-none placeholder-slate-600 resize-none"></textarea>
+                <div class="relative flex items-center pb-2">
+                    <textarea id="extra-info" rows="1" placeholder="Promoção ou detalhe extra..." 
+                              class="flex-1 bg-transparent px-4 py-3 text-slate-300 text-sm outline-none border-none placeholder-slate-700 resize-none overflow-hidden"></textarea>
                     <button onclick="generateInvite()" id="btn-generate" 
-                            class="mr-2 w-10 h-10 rounded-full flex items-center justify-center transition-all bg-sky-500 text-slate-900 hover:bg-sky-400">
+                            class="mr-2 w-12 h-12 rounded-full flex items-center justify-center transition-all bg-sky-500 text-slate-900 hover:bg-sky-400 active:scale-90">
                         <i id="send-icon" class="fas fa-arrow-up"></i>
-                        <div id="spinner" class="hidden w-4 h-4 border-2 border-slate-900 border-t-transparent rounded-full animate-spin"></div>
+                        <div id="spinner" class="hidden w-5 h-5 border-2 border-slate-900 border-t-transparent rounded-full animate-spin"></div>
                     </button>
                 </div>
             </div>
-            <p class="text-center text-[10px] text-slate-600 mt-4 uppercase tracking-[0.2em]">Atoca Gem pode produzir scripts criativos. Verifique as informações.</p>
+            <p class="text-center text-[9px] text-slate-700 mt-4 uppercase tracking-[0.3em]">IA Proprietária Atoca Music &copy; 2026</p>
         </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-white text-slate-950 px-6 py-3 rounded-full text-xs font-bold shadow-2xl hidden z-[100] animate-bounce">
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-white text-slate-950 px-6 py-3 rounded-full text-xs font-bold shadow-2xl hidden z-[100]">
         <span id="toast-text"></span>
     </div>
 
     <script>
-        // CHAVE API ATUALIZADA E VÁLIDA
+        // CHAVE DE API ATUALIZADA (CONFORME SOLICITADO NO CURL)
         const apiKey = "AIzaSyCIHzpf-iw_SocQOJq_dbGs7fJwt-6hogk"; 
 
         function applyPreset(style, extra) {
             document.getElementById('style-text').value = style;
             document.getElementById('extra-info').value = extra;
-            showToast(`Tema ${style} aplicado!`);
+            showToast(`Configurado para ${style}!`);
+            const tx = document.getElementById('extra-info');
+            tx.style.height = "auto";
+            tx.style.height = (tx.scrollHeight) + "px";
         }
 
         function showToast(msg) {
@@ -205,15 +189,16 @@
             document.getElementById('bar-name').value = "";
             document.getElementById('style-text').value = "";
             document.getElementById('extra-info').value = "";
+            document.getElementById('extra-info').style.height = "auto";
         }
 
-        async function callGemini(prompt, systemInstruction) {
-            // Endpoint Gemini 2.0 Flash conforme solicitado
+        async function callGemini(prompt, sysPrompt) {
+            // Endpoint para Gemini 2.0 Flash estável
             const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
             
             const payload = {
                 contents: [{ 
-                    parts: [{ text: `INSTRUÇÃO DE SISTEMA: ${systemInstruction}\n\nREQUISIÇÃO DO USUÁRIO: ${prompt}` }] 
+                    parts: [{ text: `INSTRUÇÃO DE SISTEMA: ${sysPrompt}\n\nREQUISIÇÃO: ${prompt}` }] 
                 }]
             };
 
@@ -224,9 +209,8 @@
             });
             
             if (!response.ok) {
-                const errData = await response.json();
-                console.error("Erro na API:", errData);
-                throw new Error(errData.error?.message || 'Erro de conexão');
+                const error = await response.json();
+                throw new Error(error.error?.message || "Falha na conexão");
             }
             
             const data = await response.json();
@@ -242,33 +226,33 @@
             const loading = document.getElementById('ai-loading');
             const container = document.getElementById('response-container');
             const output = document.getElementById('output-text');
-            
             const sendIcon = document.getElementById('send-icon');
             const spinner = document.getElementById('spinner');
 
             if (!bar) return showToast("Por favor, informe o nome do bar.");
 
-            // Estado de carregamento
+            // UI Loading State
             welcome.classList.add('hidden');
             container.classList.add('hidden');
             loading.classList.remove('hidden');
             sendIcon.classList.add('hidden');
             spinner.classList.remove('hidden');
 
-            const sys = `Você é o Atoca Gem, especialista em marketing viral para bares de Brasília. 
-            Crie um convite magnético para redes sociais. 
-            Diretrizes: use emojis, tom vibrante, foco em experiência e faturamento. 
-            Fale como um brasiliense moderno (Asa Sul, Norte, Águas Claras, etc). 
-            Estrutura: Gancho impactante -> Clima da noite -> Diferencial/Oferta -> CTA claro.`;
+            const sys = `Você é o Atoca Gem, copywriter de elite da Atoca Music. 
+            Crie um convite para WhatsApp e Instagram que lote o bar de Brasília mencionado.
+            DIRETRIZES: use muitos emojis, tom vibrante e persuasivo. Fale como se conhecesse a vibe da noite de Brasília (Asa Sul, Norte, Águas Claras).
+            ESTRUTURA: Gancho impactante -> Clima da noite -> Oferta/Atração -> Chamada para ação clara.`;
 
-            const prompt = `Bar: "${bar}". Atração/Estilo: "${style}". Oferta Extra: "${extra}". Gere um texto de alto engajamento.`;
+            const prompt = `Bar: "${bar}". Atração/Estilo: "${style}". Oferta Extra: "${extra}".`;
 
             try {
                 const text = await callGemini(prompt, sys);
                 output.innerText = text;
                 loading.classList.add('hidden');
                 container.classList.remove('hidden');
+                showToast("Convite gerado! ✨");
             } catch (error) {
+                console.error(error);
                 showToast("Erro: " + error.message);
                 welcome.classList.remove('hidden');
                 loading.classList.add('hidden');
@@ -286,7 +270,7 @@
             textArea.select();
             document.execCommand('copy');
             document.body.removeChild(textArea);
-            showToast("Copiado com sucesso! ✨");
+            showToast("Texto copiado! ✨");
         }
 
         // Auto-expand textarea
