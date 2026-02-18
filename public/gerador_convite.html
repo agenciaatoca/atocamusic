@@ -208,7 +208,7 @@ document.querySelectorAll('.option-card').forEach(card => {
     });
 });
 
-async function callGemini(prompt, systemInstruction) {
+async function callGemini(barName, extra, style) {
 
     const response = await fetch("/api/generate", {
         method: "POST",
@@ -216,16 +216,16 @@ async function callGemini(prompt, systemInstruction) {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            prompt,
-            systemInstruction
+            barName,
+            extra,
+            style
         })
     });
 
     const data = await response.json();
 
     if (!response.ok) {
-        console.error(data);
-        throw new Error("Erro na API");
+        throw new Error(data.error);
     }
 
     return data.text;
@@ -267,7 +267,7 @@ Extras: ${extra}
 
     try {
 
-        const text = await callGemini(prompt, sysPrompt);
+        const text = await callGemini(barName, extra, currentType);
 
         output.innerText = text;
         emptyState.classList.add('hidden');
