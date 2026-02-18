@@ -1,4 +1,3 @@
-{
-  "name": "atoca-app",
-  "private": true
+"dependencies": {
+  "@google/generative-ai": "^0.17.0"
 }
