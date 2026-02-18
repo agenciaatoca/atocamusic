@@ -1,0 +1,460 @@
+{
+  "metadata": {
+    "visual": {
+      "presentation": {
+        "themes": {
+          "ea2d3713-1c3d-4038-b032-5c57e40a39f3": {
+            "template": "basic",
+            "templateAdditionalOptions": {},
+            "palette": {
+              "primary": {
+                "0": "#000000",
+                "5": "#001415",
+                "10": "#002022",
+                "15": "#002b2d",
+                "20": "#00373a",
+                "25": "#004346",
+                "30": "#004f53",
+                "35": "#005c61",
+                "40": "#00696f",
+                "50": "#00848b",
+                "60": "#00a0a8",
+                "70": "#1dbdc6",
+                "80": "#4cd9e2",
+                "90": "#6ff6ff",
+                "95": "#c2fbff",
+                "98": "#e7feff",
+                "99": "#f3feff",
+                "100": "#ffffff"
+              },
+              "secondary": {
+                "0": "#000000",
+                "5": "#001415",
+                "10": "#051f21",
+                "15": "#102a2b",
+                "20": "#1b3436",
+                "25": "#273f41",
+                "30": "#324b4d",
+                "35": "#3e5759",
+                "40": "#4a6365",
+                "50": "#627c7e",
+                "60": "#7b9597",
+                "70": "#96b0b2",
+                "80": "#b1cccd",
+                "90": "#cce8ea",
+                "95": "#daf6f8",
+                "98": "#e7feff",
+                "99": "#f3feff",
+                "100": "#ffffff"
+              },
+              "tertiary": "",
+              "error": {
+                "0": "#000000",
+                "5": "#2d0001",
+                "10": "#410002",
+                "15": "#540003",
+                "20": "#690005",
+                "25": "#7e0007",
+                "30": "#93000a",
+                "35": "#a80710",
+                "40": "#ba1a1a",
+                "50": "#de3730",
+                "60": "#ff5449",
+                "70": "#ff897d",
+                "80": "#ffb4ab",
+                "90": "#ffdad6",
+                "95": "#ffedea",
+                "98": "#fff8f7",
+                "99": "#fffbff",
+                "100": "#ffffff"
+              },
+              "neutral": {
+                "0": "#000000",
+                "5": "#0e1212",
+                "10": "#191c1c",
+                "15": "#232627",
+                "20": "#2d3131",
+                "25": "#383c3c",
+                "30": "#444748",
+                "35": "#505353",
+                "40": "#5c5f5f",
+                "50": "#747878",
+                "60": "#8e9191",
+                "70": "#a9acac",
+                "80": "#c4c7c7",
+                "90": "#e0e3e3",
+                "95": "#eff1f1",
+                "98": "#f7faf9",
+                "99": "#fafdfc",
+                "100": "#ffffff"
+              },
+              "neutralVariant": {
+                "0": "#000000",
+                "5": "#091213",
+                "10": "#141d1e",
+                "15": "#1e2728",
+                "20": "#293233",
+                "25": "#343d3e",
+                "30": "#3f4849",
+                "35": "#4b5455",
+                "40": "#566061",
+                "50": "#6f7979",
+                "60": "#899393",
+                "70": "#a3adae",
+                "80": "#bec8c9",
+                "90": "#dae4e5",
+                "95": "#e9f3f3",
+                "98": "#f1fbfc",
+                "99": "#f4feff",
+                "100": "#ffffff"
+              }
+            },
+            "themeColors": {
+              "primaryColor": "",
+              "secondaryColor": "",
+              "backgroundColor": "",
+              "primaryTextColor": "",
+              "textColor": ""
+            },
+            "splashScreen": {
+              "storedData": {
+                "handle": "drive:/18KRXd5OFMBjA_B6lT1VSWrCfuanzU3Sd",
+                "mimeType": "image/png",
+                "contentLength": 1433696
+              }
+            }
+          },
+          "bb940255-1133-4cdf-afa9-bd96a9854312": {
+            "template": "basic",
+            "templateAdditionalOptions": {},
+            "palette": {
+              "primary": {
+                "0": "#000000",
+                "5": "#001224",
+                "10": "#001d35",
+                "15": "#002746",
+                "20": "#003257",
+                "25": "#003d69",
+                "30": "#00497c",
+                "35": "#00558f",
+                "40": "#0061a2",
+                "50": "#307bbe",
+                "60": "#5095d9",
+                "70": "#6db0f6",
+                "80": "#9dcaff",
+                "90": "#d1e4ff",
+                "95": "#e9f1ff",
+                "98": "#f8f9ff",
+                "99": "#fdfcff",
+                "100": "#ffffff"
+              },
+              "secondary": {
+                "0": "#000000",
+                "5": "#05121f",
+                "10": "#0f1c2b",
+                "15": "#1a2735",
+                "20": "#253140",
+                "25": "#303c4c",
+                "30": "#3b4858",
+                "35": "#475364",
+                "40": "#535f70",
+                "50": "#6b7889",
+                "60": "#8592a4",
+                "70": "#9facbf",
+                "80": "#bac8db",
+                "90": "#d6e4f7",
+                "95": "#e9f1ff",
+                "98": "#f8f9ff",
+                "99": "#fdfcff",
+                "100": "#ffffff"
+              },
+              "tertiary": "",
+              "error": {
+                "0": "#000000",
+                "5": "#2d0001",
+                "10": "#410002",
+                "15": "#540003",
+                "20": "#690005",
+                "25": "#7e0007",
+                "30": "#93000a",
+                "35": "#a80710",
+                "40": "#ba1a1a",
+                "50": "#de3730",
+                "60": "#ff5449",
+                "70": "#ff897d",
+                "80": "#ffb4ab",
+                "90": "#ffdad6",
+                "95": "#ffedea",
+                "98": "#fff8f7",
+                "99": "#fffbff",
+                "100": "#ffffff"
+              },
+              "neutral": {
+                "0": "#000000",
+                "5": "#0f1114",
+                "10": "#1a1c1e",
+                "15": "#242629",
+                "20": "#2f3033",
+                "25": "#3a3b3e",
+                "30": "#45474a",
+                "35": "#515255",
+                "40": "#5d5e61",
+                "50": "#76777a",
+                "60": "#909094",
+                "70": "#ababae",
+                "80": "#c6c6ca",
+                "90": "#e2e2e6",
+                "95": "#f1f0f4",
+                "98": "#f9f9fc",
+                "99": "#fdfcff",
+                "100": "#ffffff"
+              },
+              "neutralVariant": {
+                "0": "#000000",
+                "5": "#0d1117",
+                "10": "#171c22",
+                "15": "#21262c",
+                "20": "#2c3137",
+                "25": "#373c42",
+                "30": "#42474e",
+                "35": "#4e535a",
+                "40": "#5a5f66",
+                "50": "#73777f",
+                "60": "#8d9199",
+                "70": "#a7abb3",
+                "80": "#c3c7cf",
+                "90": "#dfe2eb",
+                "95": "#edf1f9",
+                "98": "#f8f9ff",
+                "99": "#fdfcff",
+                "100": "#ffffff"
+              }
+            },
+            "themeColors": {
+              "primaryColor": "",
+              "secondaryColor": "",
+              "backgroundColor": "",
+              "primaryTextColor": "",
+              "textColor": ""
+            },
+            "splashScreen": {
+              "storedData": {
+                "handle": "drive:/1IrduGTKNqppOb1FgX_ER9DnMuN2msyX7",
+                "mimeType": "image/png",
+                "contentLength": 1406432
+              }
+            }
+          }
+        },
+        "theme": "bb940255-1133-4cdf-afa9-bd96a9854312"
+      }
+    },
+    "intent": "An app that takes a user-provided product description and a one-sentence value proposition as input. The app will then evaluate these inputs and generate creative content ideas, a visual vision board, and a list of actionable next steps for the product. The output can be presented as a webpage or saved to a Google Doc.",
+    "revision_intents": [],
+    "raw_intent": "an app that evaluates a product and one sentence value prop and generates content ideas, vision boards and next steps",
+    "parameters": {}
+  },
+  "assets": {},
+  "title": "Marketing Maven Remix",
+  "description": "Brainstorms with you on content and marketing strategy",
+  "version": "0.0.1",
+  "nodes": [
+    {
+      "id": "node_step_marketing_content_and_next_steps",
+      "metadata": {
+        "title": "Generate Marketing Content and Next Steps",
+        "visual": {
+          "x": 883.5016941456124,
+          "y": 237.2831942550838,
+          "collapsed": "expanded",
+          "outputHeight": 88
+        },
+        "step_intent": "Generate a comprehensive list of marketing ideas categorized into 'Content Marketing', 'Social Media Campaigns', and 'Partnership Opportunities'. For each category, select the best idea and provide a short analysis including 'Pros' and 'Cons'. Also, create a simple, actionable checklist of three 'Suggested Next Steps'. The output should be well-structured text that can be used directly in a Google Doc."
+      },
+      "type": "embed://a2/generate.bgl.json#module:main",
+      "configuration": {
+        "config$prompt": {
+          "parts": [
+            {
+              "text": "You are an expert marketing strategist tasked with generating a comprehensive and actionable marketing plan. Your goal is to create well-structured text suitable for a Google Doc, detailing marketing ideas categorized into 'Content Marketing', 'Social Media Campaigns', and 'Partnership Opportunities'. For each category, you must select the single best idea, provide a short analysis of its 'Pros' and 'Cons', and then create a simple, actionable checklist of three 'Suggested Next Steps'.\n# Step by Step instructions\n1. Generate a comprehensive list of marketing ideas for the given Product Name and Product Description, categorized into 'Content Marketing', 'Social Media Campaigns', and 'Partnership Opportunities'.\n2. From the generated ideas, select the best idea for 'Content Marketing' and provide a short analysis including 'Pros' and 'Cons'.\n3. From the generated ideas, select the best idea for 'Social Media Campaigns' and provide a short analysis including 'Pros' and 'Cons'.\n4. From the generated ideas, select the best idea for 'Partnership Opportunities' and provide a short analysis including 'Pros' and 'Cons'.\n5. Create a simple, actionable checklist of three 'Suggested Next Steps' based on the selected best ideas.\n6. Ensure the entire output is well-structured text, formatted for direct use in a Google Doc.\n\n\nProduct Name:\n\"\"\"\n{{\"type\":\"in\",\"path\":\"ask_user_product_name\",\"title\":\"Product Name\"}}\n\"\"\"\nProduct Description:\n\"\"\"\n{{\"type\":\"in\",\"path\":\"ask_user_product_description\",\"title\":\"Product Description\"}}\n\"\"\"\nIMPORTANT NOTE: Start directly with the output, do not output any delimiters.\nOutput:\n"
+            }
+          ],
+          "role": "user"
+        },
+        "generation-mode": "text"
+      }
+    },
+    {
+      "id": "node_step_image_descriptions",
+      "metadata": {
+        "title": "Generate Vision Board Image Descriptions",
+        "visual": {
+          "x": 1233.5016941456124,
+          "y": 237.2831942550838,
+          "collapsed": "expanded",
+          "outputHeight": 88
+        },
+        "step_intent": "From the generated marketing content, identify the three 'Top Ideas' (one from each category). For each of these top ideas, generate a detailed, high-quality textual description that can be used as a prompt to create a unique 'vision board' image. The descriptions should be vivid and capture the essence of each marketing idea visually."
+      },
+      "type": "embed://a2/generate.bgl.json#module:main",
+      "configuration": {
+        "config$prompt": {
+          "parts": [
+            {
+              "text": "You are an expert in visual storytelling and creative imagery, tasked with translating abstract marketing concepts into vivid, detailed visual descriptions. Your goal is to generate high-quality textual prompts that can be used to create unique \"vision board\" images. Each description should be rich in visual detail, capturing the essence of the marketing idea as if it were a scene from a dream or a carefully composed photograph.\n# Step by Step instructions\n1. From the Marketing Content And Next Steps, identify the three 'Top Ideas', ensuring one is selected from each category (Content Marketing, Social Media Campaigns, Partnership Opportunities).\n2. For the first identified Top Idea, generate a detailed, high-quality textual description that visually captures the essence of this marketing idea. This description should be vivid and suitable as a prompt for a GenAI image generation API.\n3. After generating the description for the first Top Idea, check if descriptions have been generated for all three Top Ideas. If not, select the next Top Idea and return to step 2.\n4. Once all three descriptions are generated, format the output with a header for each image, e.g., \"Image 1: <description>\", \"Image 2: <description>\", \"Image 3: <description>\".\n5. Conclude the entire output with the phrase \"IMPORTANT: Generate exactly three images\".\n\n\nMarketing Content And Next Steps:\n\"\"\"\n{{\"type\":\"in\",\"path\":\"node_step_marketing_content_and_next_steps\",\"title\":\"Generate Marketing Content and Next Steps\"}}\n\"\"\"\nIMPORTANT NOTE: Start directly with the output, do not output any delimiters.\nOutput:\n"
+            }
+          ],
+          "role": "user"
+        },
+        "generation-mode": "text"
+      }
+    },
+    {
+      "id": "node_step_vision_board_images",
+      "metadata": {
+        "title": "Generate Vision Board Images",
+        "visual": {
+          "x": 1583.5016941456124,
+          "y": 237.2831942550838,
+          "collapsed": "expanded",
+          "outputHeight": 88
+        },
+        "step_intent": "Generate three unique, high-quality 'vision board' images, one for each of the top marketing ideas, based on the detailed image descriptions provided. The images should visually represent the marketing concepts."
+      },
+      "type": "embed://a2/generate.bgl.json#module:main",
+      "configuration": {
+        "config$prompt": {
+          "parts": [
+            {
+              "text": "Generate high-quality vision board images based on the following descriptions.\n\nYou will generate three unique and separate images.\n\nThe consistent style for all images should be a 'vision board art style', incorporating elements of collage, mood boards, and inspiring illustrations. Use vibrant and positive color palettes, dynamic compositions, and imagery that conveys innovation, growth, and success related to marketing concepts. The overall mood should be optimistic, forward-looking, and creative.\n\nHere are the detailed descriptions for each of the three vision board images:\n<input_name>image_descriptions</input_name>\n\nMaintain the specified vision board art style, color palette, and optimistic mood consistently across all three generated images.\n\nIMPORTANT: Generate separate images, not a combined image. Generate separate images.\n\nimage_descriptions: {{\"type\":\"in\",\"path\":\"node_step_image_descriptions\",\"title\":\"Generate Vision Board Image Descriptions\"}}"
+            }
+          ],
+          "role": "user"
+        },
+        "generation-mode": "image",
+        "p-disable-prompt-rewrite": true
+      }
+    },
+    {
+      "id": "node_step_marketing_plan_doc",
+      "metadata": {
+        "title": "Render HTML Files",
+        "visual": {
+          "x": 1933.5016941456124,
+          "y": 237.2831942550838,
+          "collapsed": "expanded",
+          "outputHeight": 88
+        },
+        "step_intent": "Combine all generated content, including the categorized marketing ideas, top idea analysis, suggested next steps, and the vision board images (ensuring each image is placed next to its corresponding 'Top Idea'), into a single, well-formatted Google Doc with a clear title and appropriate headings for each section.",
+        "userModified": true,
+        "expected_output": [
+          {
+            "type": "text",
+            "description": "HTML content from the source files.",
+            "list": true
+          }
+        ]
+      },
+      "type": "embed://a2/a2.bgl.json#module:render-outputs",
+      "configuration": {
+        "text": {
+          "role": "user",
+          "parts": [
+            {
+              "text": "{{\"type\":\"in\",\"path\":\"node_step_marketing_content_and_next_steps\",\"title\":\"Generate Marketing Content and Next Steps\"}}\n{{\"type\":\"in\",\"path\":\"node_step_vision_board_images\",\"title\":\"Generate Vision Board Images\"}}"
+            }
+          ]
+        },
+        "p-render-mode": "Auto",
+        "b-google-doc-title": ""
+      }
+    },
+    {
+      "id": "ask_user_product_name",
+      "metadata": {
+        "title": "Product Name",
+        "visual": {
+          "x": 433.5016941456124,
+          "y": 187.2831942550838,
+          "collapsed": "expanded",
+          "outputHeight": 88
+        }
+      },
+      "type": "embed://a2/a2.bgl.json#21ee02e7-83fa-49d0-964c-0cab10eafc2c",
+      "configuration": {
+        "description": {
+          "parts": [
+            {
+              "text": "Enter your product's name."
+            }
+          ],
+          "role": "user"
+        },
+        "p-modality": "Any"
+      }
+    },
+    {
+      "id": "ask_user_product_description",
+      "metadata": {
+        "title": "Product Description",
+        "visual": {
+          "x": 433.5016941456124,
+          "y": 337.2831942550838,
+          "collapsed": "expanded",
+          "outputHeight": 88
+        }
+      },
+      "type": "embed://a2/a2.bgl.json#21ee02e7-83fa-49d0-964c-0cab10eafc2c",
+      "configuration": {
+        "description": {
+          "parts": [
+            {
+              "text": "Provide a one-sentence product description."
+            }
+          ],
+          "role": "user"
+        },
+        "p-modality": "Any"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "ask_user_product_name",
+      "to": "node_step_marketing_content_and_next_steps",
+      "out": "context",
+      "in": "p-z-ask_user_product_name"
+    },
+    {
+      "from": "ask_user_product_description",
+      "to": "node_step_marketing_content_and_next_steps",
+      "out": "context",
+      "in": "p-z-ask_user_product_description"
+    },
+    {
+      "from": "node_step_marketing_content_and_next_steps",
+      "to": "node_step_image_descriptions",
+      "out": "context",
+      "in": "p-z-node_step_marketing_content_and_next_steps"
+    },
+    {
+      "from": "node_step_marketing_content_and_next_steps",
+      "to": "node_step_marketing_plan_doc",
+      "out": "context",
+      "in": "p-z-node_step_marketing_content_and_next_steps"
+    },
+    {
+      "from": "node_step_image_descriptions",
+      "to": "node_step_vision_board_images",
+      "out": "context",
+      "in": "p-z-node_step_image_descriptions"
+    },
+    {
+      "from": "node_step_vision_board_images",
+      "to": "node_step_marketing_plan_doc",
+      "out": "context",
+      "in": "p-z-node_step_vision_board_images"
+    }
+  ],
+  "url": "drive:/1oGMPjZHqJoxCcN7gAieW4ADDTuLMJIKL"
+}
