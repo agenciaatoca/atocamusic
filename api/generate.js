@@ -5,6 +5,7 @@ export default async function handler(req, res) {
   }
 
   try {
+
     const { prompt, systemInstruction } = req.body;
 
     const response = await fetch(
