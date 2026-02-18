@@ -40,9 +40,10 @@ Estrutura:
 
     const data = await response.json();
 
-    if (!response.ok) {
-      return res.status(500).json({ error: "Erro Gemini", details: data });
-    }
+   if (!response.ok) {
+  console.log("ERRO GEMINI:", data);
+  return res.status(500).json({ error: "Erro Gemini", details: data });
+}
 
     const text =
       data.candidates?.[0]?.content?.parts?.[0]?.text || "Erro ao gerar texto.";
