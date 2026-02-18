@@ -1,5 +1,1 @@
-{
-  "name": "atoca-ai-backend",
-  "version": "1.0.0",
-  "type": "module"
-}
+npm install @google/generative-ai
