@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atoca Music - Gerador de Convite AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #0a0f1d; 
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .input-atoca {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid #334155;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .input-atoca:focus {
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.1);
+        }
+
+        .option-card {
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid #334155;
+            background: rgba(15, 23, 42, 0.5);
+        }
+
+        .option-card:hover {
+            border-color: #38bdf8;
+            background: rgba(56, 189, 248, 0.05);
+        }
+
+        .option-card.selected {
+            border-color: #38bdf8;
+            background: rgba(56, 189, 248, 0.15);
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.1);
+        }
+
+        .loading-spinner {
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-top: 2px solid #38bdf8;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .copy-success {
+            animation: pop 0.4s ease-out;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-12">
+
+    <div class="max-w-5xl mx-auto">
+        <!-- Cabeçalho -->
+        <div class="flex flex-col md:flex-row items-center justify-between mb-12 gap-4">
+            <div class="text-center md:text-left">
+                <h1 class="text-3xl font-extrabold tracking-tighter uppercase">Gerador de <span class="text-sky-600">Convite</span></h1>
+                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1 text-center md:text-left">Script e Inteligência de Mercado Atoca Music</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="px-4 py-1.5 rounded-full border border-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
+                    Status: <span class="text-green-500">Conectado ao Gemini 2.0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
+            
+            <!-- Painel de Configuração -->
+            <div class="lg:col-span-2 space-y-6">
+                <section class="glass-card p-6 md:p-8 rounded-[2.5rem] space-y-6">
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 block">Nome do Bar / Evento</label>
+                        <input type="text" id="bar-name" placeholder="Ex: Villa Bar da Bel" 
+                               class="input-atoca w-full p-4 rounded-2xl text-white outline-none font-medium">
+                    </div>
+
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 block">Qual o clima da noite?</label>
+                        <div class="grid grid-cols-2 gap-3" id="template-options">
+                            <div class="option-card p-4 rounded-2xl text-center" data-type="sertanejo">
+                                <i class="fas fa-solid fa-hat-cowboy text-sky-400 mb-2"></i>
+                                <p class="text-xs font-bold uppercase">Sertanejo</p>
+                            </div>
+                            <div class="option-card p-4 rounded-2xl text-center" data-type="happy-hour">
+                                <i class="fas fa-beer-mug-empty text-sky-400 mb-2"></i>
+                                <p class="text-xs font-bold uppercase">Happy Hour</p>
+                            </div>
+                             <div class="option-card p-4 rounded-2xl text-center" data-type="Evento Vip">
+                                <i class="fas fa-regular fa-face-grin-stars text-sky-400 mb-2"></i>
+                                <p class="text-xs font-bold uppercase">Vip</p>
+                            </div>
+                             <div class="option-card p-4 rounded-2xl text-center" data-type="Fim de Semana">
+                               <i class="fas fa-solid fa-calendar-days text-sky-400 mb-2"></i>
+                                <p class="text-xs font-bold uppercase">Fim de Semana</p>
+                            </div>
+                             <div class="option-card p-4 rounded-2xl text-center" data-type="Noite de Casais">
+                                <i class="fas fa-solid fa-user-group text-sky-400 mb-2"></i>
+                                <p class="text-xs font-bold uppercase">Noite de Casais</p>
+                            </div>
+                             <div class="option-card p-4 rounded-2xl text-center selected" data-type="rock-pop">
+                                <i class="fas fa-solid fa-hand-back-fist text-sky-400 mb-2"></i>
+                                <p class="text-xs font-bold uppercase">Rock & Pop</p>
+                            </div>
+                            <div class="option-card p-4 rounded-2xl text-center" data-type="jazz-blues">
+                                <i class="fas fa-solid fa-guitar text-sky-400 mb-2"></i>
+                                <p class="text-xs font-bold uppercase">Jazz & Blues</p>
+                            </div>
+                            <div class="option-card p-4 rounded-2xl text-center" data-type="Aniversário">
+                                <i class="fas fa-solid fa-cake-candles text-sky-400 mb-2"></i>
+                                <p class="text-xs font-bold uppercase">Aniversário</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 block">Atração + Promoção Especial</label>
+                        <textarea id="extra-info" placeholder="Ex: Dose dupla de Chopp até às 20h, Bel Brandão cantando o melhor do Sertanejo, Mulher Free..." 
+                                  class="input-atoca w-full p-4 rounded-2xl text-white outline-none h-28 resize-none text-sm font-medium"></textarea>
+                    </div>
+
+                    <button onclick="generateInvite()" id="btn-generate" 
+                            class="w-full bg-sky-500 hover:bg-sky-400 text-slate-950 font-black py-5 rounded-2xl transition-all flex items-center justify-center gap-3 active:scale-95 shadow-xl shadow-sky-500/10">
+                        <span id="btn-text">GERAR SCRIPT AGORA</span>
+                        <div id="btn-loader" class="loading-spinner hidden text-center"></div>
+                    </button>
+                </section>
+            </div>
+
+            <!-- Painel de Saída -->
+            <div class="lg:col-span-3">
+                <div id="empty-state" class="h-full min-h-[400px] flex flex-col items-center justify-center border-2 border-dashed border-slate-800 rounded-[2.5rem] p-12 text-center">
+                    <div class="w-20 h-20 bg-slate-900 rounded-full flex items-center justify-center mb-6 border border-slate-800">
+                        <i class="fas fa-wand-magic-sparkles text-slate-600 text-3xl"></i>
+                    </div>
+                    <h3 class="text-slate-500 font-bold uppercase tracking-widest text-sm mb-2 text-center">Aguardando Comando</h3>
+                    <p class="text-slate-700 text-xs italic max-w-xs text-center">Nossa IA de Copywriting está pronta. Preencha os dados ao lado para começar.</p>
+                </div>
+
+                <div id="result-card" class="glass-card p-8 rounded-[2.5rem] hidden h-full flex flex-col shadow-2xl">
+                    <div class="flex justify-between items-center mb-8">
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                            <span class="text-[10px] font-bold text-sky-400 uppercase tracking-[0.2em]">Script Estratégico Gerado</span>
+                        </div>
+                        <button onclick="copyContent()" class="bg-slate-800 hover:bg-slate-700 px-6 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 transition-all active:scale-95">
+                            <i class="fas fa-copy"></i> COPIAR TEXTO
+                        </button>
+                    </div>
+                    
+                    <div id="output-text" class="flex-1 bg-slate-950/60 p-8 rounded-3xl border border-slate-800 text-slate-200 leading-relaxed whitespace-pre-wrap font-medium overflow-y-auto text-base">
+                        <!-- Conteúdo da IA -->
+                    </div>
+
+                    <div class="mt-8 flex items-center justify-between border-t border-slate-800 pt-6">
+                        <span class="text-[9px] text-slate-600 font-mono uppercase tracking-widest">Protocolo: ATOCA-AI-FLASH-2.0</span>
+                        <span id="copy-status" class="text-green-500 text-[10px] font-bold uppercase hidden">Copiado para o ClipBoard!</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="mt-16 text-center">
+            <p class="text-slate-700 text-[10px] font-bold uppercase tracking-[0.4em]">Propriedade da Atoca Music &copy; Brasília - DF</p>
+        </footer>
+    </div>
+
+    <!-- Alertas Flutuantes -->
+    <div id="message-box" class="fixed bottom-10 left-1/2 -translate-x-1/2 glass-card px-8 py-4 rounded-2xl hidden z-50 shadow-2xl border border-sky-500/50 transition-all">
+        <p id="message-text" class="text-sm font-bold text-white flex items-center gap-3 text-center"></p>
+    </div>
+
+   <script>
+
+let currentType = "Sertanejo";
+
+document.querySelectorAll('.option-card').forEach(card => {
+    card.addEventListener('click', () => {
+        document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        currentType = card.dataset.type;
+    });
+});
+
+async function callGemini(prompt, systemInstruction) {
+
+    const response = await fetch("/api/generate", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            prompt,
+            systemInstruction
+        })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        console.error(data);
+        throw new Error("Erro na API");
+    }
+
+    return data.text;
+}
+
+async function generateInvite() {
+
+    const barName = document.getElementById('bar-name').value;
+    const extra = document.getElementById('extra-info').value;
+    const btnText = document.getElementById('btn-text');
+    const btnLoader = document.getElementById('btn-loader');
+    const emptyState = document.getElementById('empty-state');
+    const resultCard = document.getElementById('result-card');
+    const output = document.getElementById('output-text');
+
+    if (!barName) {
+        alert("Informe o nome do bar.");
+        return;
+    }
+
+    btnText.innerText = "PROCESSANDO...";
+    btnLoader.classList.remove('hidden');
+
+    const sysPrompt = `
+Você é diretor de copywriting da Atoca Music Brasília.
+Crie convite magnético para Instagram e WhatsApp.
+Estrutura:
+- Gancho impactante
+- Experiência sonora
+- Oferta ou diferencial
+- CTA forte
+`;
+
+    const prompt = `
+Bar: ${barName}
+Estilo: ${currentType}
+Extras: ${extra}
+`;
+
+    try {
+
+        const text = await callGemini(prompt, sysPrompt);
+
+        output.innerText = text;
+        emptyState.classList.add('hidden');
+        resultCard.classList.remove('hidden');
+
+    } catch (error) {
+
+        alert("Erro ao conectar com IA.");
+
+    }
+
+    btnText.innerText = "GERAR SCRIPT";
+    btnLoader.classList.add('hidden');
+}
+
+function copyContent() {
+    const text = document.getElementById('output-text').innerText;
+    navigator.clipboard.writeText(text);
+    alert("Copiado!");
+}
+
+</script>
+</body>
+</html>
