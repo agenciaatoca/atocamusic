@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#000000">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atoca Music - Gerador de Convite AI</title>
@@ -195,6 +197,13 @@
     <div id="message-box" class="fixed bottom-10 left-1/2 -translate-x-1/2 glass-card px-8 py-4 rounded-2xl hidden z-50 shadow-2xl border border-sky-500/50 transition-all">
         <p id="message-text" class="text-sm font-bold text-white flex items-center gap-3 text-center"></p>
     </div>
+    
+    <script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/service-worker.js")
+      .then(() => console.log("Service Worker registrado"));
+  }
+</script>
 
    <script>
 
