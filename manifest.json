@@ -1,7 +1,7 @@
 {
   "name": "Atoca Music",
   "short_name": "Atoca",
-  "start_url": "/",
+  "start_url": "/gerador_convite.html",
   "display": "standalone",
   "background_color": "#000000",
   "theme_color": "#000000",
