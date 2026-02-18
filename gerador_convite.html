@@ -197,80 +197,29 @@
     </div>
 
     <script>
-        /**
-         * CHAVE DE API INTEGRADA - FORNECIDA PELO USUÁRIO
-         */
-        const apiKey = "AIzaSyCIHzpf-iw_SocQOJq_dbGs7fJwt-6hogk"; 
-        
-        let currentType = 'Sertanejo';
+      async function callGemini(prompt, systemInstruction) {
 
-        // Lógica de seleção de templates
-        document.querySelectorAll('.option-card').forEach(card => {
-            card.addEventListener('click', () => {
-                document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
-                card.classList.add('selected');
-                currentType = card.dataset.type;
-            });
-        });
+    const response = await fetch("https://atoca-ai-backend.vercel.app/api/generate", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            prompt,
+            systemInstruction
+        })
+    });
 
-        function showMessage(text, isError = false) {
-            const box = document.getElementById('message-box');
-            const msgText = document.getElementById('message-text');
-            msgText.innerHTML = isError ? `<i class="fas fa-exclamation-circle text-red-500"></i> ${text}` : `<i class="fas fa-check-circle text-sky-400"></i> ${text}`;
-            box.classList.remove('hidden');
-            setTimeout(() => box.classList.add('hidden'), 4000);
-        }
+    const data = await response.json();
 
-        async function callGemini(prompt, systemInstruction) {
-            // URL atualizada para o Gemini 2.0 Flash como solicitado no curl
-            const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-            
-            const payload = {
-                contents: [{ 
-                    parts: [{ text: `INSTRUÇÃO DE SISTEMA: ${systemInstruction}\n\nPERGUNTA DO USUÁRIO: ${prompt}` }] 
-                }]
-            };
+    if (!response.ok) {
+        console.error(data);
+        throw new Error("Erro na API");
+    }
 
-            // Implementação de Retry para evitar falhas em conexões 4G/instáveis
-            let delay = 1000;
-            for (let i = 0; i < 3; i++) {
-                try {
-                    const response = await fetch(url, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-                    
-                    if (!response.ok) {
-                        const errorData = await response.json();
-                        console.error("Erro API:", errorData);
-                        throw new Error('HTTP_ERROR');
-                    }
-                    
-                    const data = await response.json();
-                    return data.candidates?.[0]?.content?.parts?.[0]?.text;
-                } catch (e) {
-                    if (i === 2) throw e;
-                    await new Promise(r => setTimeout(r, delay));
-                    delay *= 2;
-                }
-            }
-        }
+    return data.text;
+}
 
-        async function generateInvite() {
-            const barName = document.getElementById('bar-name').value;
-            const extra = document.getElementById('extra-info').value;
-            const btnText = document.getElementById('btn-text');
-            const btnLoader = document.getElementById('btn-loader');
-            const emptyState = document.getElementById('empty-state');
-            const resultCard = document.getElementById('result-card');
-            const output = document.getElementById('output-text');
-            const btn = document.getElementById('btn-generate');
-
-            if (!barName) {
-                showMessage("Por favor, informe o nome do bar primeiro.", true);
-                return;
-            }
 
             // UI State
             btnText.innerText = "ATOCA AI PROCESSANDO...";
