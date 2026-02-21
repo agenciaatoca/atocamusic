@@ -13,7 +13,6 @@ Objetivo: Criar um convite magnético e de alta conversão para redes sociais (I
 Contexto: > - Local: ${barName}
 Estilo Musical/Vibe: ${style}
 Diferenciais da Noite: ${extra}
-Horário do Evento: ${time}
 Diretrizes Criativas:
 Tom de Voz: Sofisticado, energético e exclusivo. Não venda apenas um evento, venda o "lugar onde as coisas acontecem".
 O Gancho: Deve interromper o scroll. Use uma pergunta provocativa ou uma afirmação audaciosa sobre a noite.
@@ -22,7 +21,7 @@ Escassez e Urgência: Insira um gatilho de que a noite é única e as vagas/mesa
 Estrutura Obrigatória:
 Headline (Gancho): Curto e impactante.
 Corpo (A Experiência): 2 parágrafos curtos conectando o ${style} ao ambiente do ${barName}.
-Bullets de Destaque: Liste os ${extra} de forma irresistível, não esqueça do ${time}
+Bullets de Destaque: Liste os ${extra} de forma irresistível, não esqueça do horário
 CTA (Chamada para Ação): Direta, clara e com senso de urgência.
 Formatação: Use emojis de forma estratégica (não exagerada) e quebras de linha para facilitar a leitura no celular.
 IMPORTANTE: Retorne APENAS o convite final.
