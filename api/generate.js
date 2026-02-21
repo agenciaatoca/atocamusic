@@ -28,6 +28,7 @@ Formatação: Use emojis de forma estratégica (não exagerada) e quebras de lin
 IMPORTANTE: Retorne APENAS o convite final.
 Não inclua explicações, análises ou comentários.
 Não explique a estrutura.
+Não direcione o convite como se fosse da Atoca, use o ${barName}.
 Entregue somente o texto pronto para copiar e colar.
 `;
     try {
