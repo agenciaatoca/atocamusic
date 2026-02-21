@@ -1,61 +1,49 @@
 export default async function handler(req, res) {
-  if (req.method !== "POST") {
-    return res.status(405).json({ error: "Método não permitido" });
-  }
+    if (req.method !== 'POST') {
+        return res.status(405).json({ error: 'Método não permitido' });
+    }
 
-  try {
+    // 1. Captura as peças que vieram do seu HTML
     const { barName, extra, style } = req.body;
 
-    if (!process.env.GEMINI_API_KEY) {
-      return res.status(500).json({ error: "API KEY não configurada" });
-    }
-
-    const prompt = `
-Você é diretor de copywriting da Atoca Music Brasília.
-Crie convite magnético para Instagram e WhatsApp.
-
-Bar: ${barName}
-Estilo: ${style}
-Extras: ${extra}
-
-Estrutura:
-- Gancho impactante
-- Experiência sonora
-- Oferta ou diferencial
-- CTA forte
+    // 2. Monta o "prompt" unindo essas peças
+    const meuPrompt = `
+Atue como Diretor de Copywriting da Atoca Music Brasília, especialista em marketing de experiência e indústria fonográfica.
+Objetivo: Criar um convite magnético e de alta conversão para redes sociais (Instagram/WhatsApp).
+Contexto: > - Local: ${barName}
+Estilo Musical/Vibe: ${style}
+Diferenciais da Noite: ${extra}
+Diretrizes Criativas:
+Tom de Voz: Sofisticado, energético e exclusivo. Não venda apenas um evento, venda o "lugar onde as coisas acontecem".
+O Gancho: Deve interromper o scroll. Use uma pergunta provocativa ou uma afirmação audaciosa sobre a noite.
+Imersão Sonora: Descreva a sensação da música e do ambiente (ex: o grave no peito, a harmonia das luzes, a energia do palco).
+Escassez e Urgência: Insira um gatilho de que a noite é única e as vagas/mesas são limitadas.
+Estrutura Obrigatória:
+Headline (Gancho): Curto e impactante.
+Corpo (A Experiência): 2 parágrafos curtos conectando o ${style} ao ambiente do ${barName}.
+Bullets de Destaque: Liste os ${extra} de forma irresistível.
+CTA (Chamada para Ação): Direta, clara e com senso de urgência.
+Formatação: Use emojis de forma estratégica (não exagerada) e quebras de linha para facilitar a leitura no celular.
 `;
+    try {
+        const apiKey = process.env.GOOGLE_API_KEY;
+        
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                contents: [
+                    {
+                        parts: [{ text: meuPrompt }] // <--- Agora usamos o prompt montado aqui!
+                    }
+                ]
+            })
+        });
 
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          contents: [
-            {
-              parts: [{ text: prompt }]
-            }
-          ]
-        })
-      }
-    );
+        const data = await response.json();
+        return res.status(200).json(data);
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      console.log("ERRO GEMINI:", data);
-      return res.status(500).json({ error: "Erro Gemini", details: data });
+    } catch (error) {
+        return res.status(500).json({ error: 'Erro ao processar a IA' });
     }
-
-    const text =
-      data.candidates?.[0]?.content?.parts?.[0]?.text || "Erro ao gerar texto.";
-
-    return res.status(200).json({ text });
-
-  } catch (error) {
-    console.log("ERRO INTERNO:", error);
-    return res.status(500).json({ error: "Erro interno", details: error.message });
-  }
 }
