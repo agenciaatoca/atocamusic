@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -209,7 +210,7 @@
 
    <script>
 
-let currentType = "Vip";
+let currentType = document.querySelector('.option-card.selected')?.dataset.type || "sertanejo";
 
 document.querySelectorAll('.option-card').forEach(card => {
     card.addEventListener('click', () => {
@@ -273,27 +274,6 @@ async function generateInvite() {
         alert("Erro ao gerar convite: " + error.message);
 
     } finally {
-        btnText.innerText = "GERAR SCRIPT AGORA";
-        btnLoader.classList.add('hidden');
-    }
-}
-        // Chamada para a API passando os dados selecionados
-        const text = await callGemini(barName, extra, currentType);
-
-        // Exibição do resultado
-        output.innerText = text;
-        emptyState.classList.add('hidden');
-        resultCard.classList.remove('hidden');
-        
-        // Rolar a tela para o resultado (melhor experiência no iPhone)
-        resultCard.scrollIntoView({ behavior: 'smooth' });
-
-    } catch (error) {
-        console.error(error);
-        alert("Erro ao conectar com IA: " + error.message);
-
-    } finally {
-        // Restaura o botão independente de sucesso ou erro
         btnText.innerText = "GERAR SCRIPT AGORA";
         btnLoader.classList.add('hidden');
     }
