@@ -86,7 +86,7 @@
             </div>
             <div class="flex items-center gap-3">
                 <div class="px-4 py-1.5 rounded-full border border-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                    Status: <span class="text-green-500">Conectado ao Gemini 2.0</span>
+                    Status: <span class="text-green-500">Conectado ao Gemini 2.0 PRO</span>
                 </div>
             </div>
         </div>
@@ -239,13 +239,22 @@ async function callGemini(barName, extra, style) {
 
     if (!response.ok) {
         throw new Error(data.error || "Erro desconhecido");
-    }
-
+    }   
     if (data.candidates && data.candidates[0] && data.candidates[0].content) {
         return data.candidates[0].content.parts[0].text;
     } else {
         throw new Error("Estrutura de resposta da IA inválida");
     }
+    // Esta linha abaixo é a "chave" para abrir o pacote que você recebeu
+    if (data.candidates && data.candidates[0]) {
+    const textoFinal = data.candidates[0].content.parts[0].text;
+    
+    // Agora enviamos esse texto para a sua caixa de texto na tela
+    document.getElementById('output-text').innerText = textoFinal;
+    
+    // Escondemos o estado vazio e mostramos o resultado
+    document.getElementById('empty-state').classList.add('hidden');
+    document.getElementById('result-card').classList.remove('hidden');
 }
 
 async function generateInvite() {
@@ -261,7 +270,23 @@ async function generateInvite() {
     if (!barName) {
         alert("Informe o nome do bar.");
         return;
+    try {
+        // 1. Chama a função que você acabou de confirmar (callGemini)
+        const textoExtraido = await callGemini(barName, extra, currentType);
+
+        // 2. Coloca o texto dentro da caixa branca do seu site
+        const output = document.getElementById('output-text');
+        output.innerText = textoExtraido;
+
+        // 3. Mostra o painel de resultado e esconde o estado vazio
+        document.getElementById('empty-state').classList.add('hidden');
+        document.getElementById('result-card').classList.remove('hidden');
+
+    } catch (error) {
+        console.error(error);
+        alert("Erro ao gerar convite: " + error.message);
     }
+}
 
     // Feedback visual de carregamento
     btnText.innerText = "PROCESSANDO...";
@@ -350,14 +375,12 @@ function sendToWhatsApp() {
     const text = document.getElementById('output-text').innerText;
     if (!text) return;
 
-    // Codifica o texto para formato de URL
-    const encodedText = encodeURIComponent(text);
-    
-    // Cria o link do WhatsApp (funciona em Mobile e Desktop)
-    const whatsappUrl = `https://api.whatsapp.com/send?text=${encodedText}`;
-    
-    // Abre em uma nova aba
-    window.open(whatsappUrl, '_blank');
+    // Remove as marcações de análise da IA se você não quiser enviá-las ao cliente
+    // (Opcional: envia apenas até onde termina o convite)
+    const conviteApenas = text.split("Análise do Convite:")[0];
+
+    const encodedText = encodeURIComponent(conviteApenas.trim());
+    window.open(`https://api.whatsapp.com/send?text=${encodedText}`, '_blank');
 }
 </script>
 </body>
