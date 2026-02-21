@@ -28,15 +28,15 @@ Formatação: Use emojis de forma estratégica (não exagerada) e quebras de lin
     try {
         const apiKey = process.env.GOOGLE_API_KEY;
         
-        const response = await fetch(`google.ai.generativelanguage.v1.GenerativeService.GenerateContent?key=${apiKey}`, {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                contents: [
-                    {
-                        parts: [{ text: meuPrompt }] // <--- Agora usamos o prompt montado aqui!
-                    }
-                ]
+            headers: {
+            'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                    contents: [{
+                    parts: [{ text: meuPrompt }]
+                }]
             })
         });
 
