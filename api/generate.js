@@ -28,7 +28,7 @@ Formatação: Use emojis de forma estratégica (não exagerada) e quebras de lin
     try {
         const apiKey = process.env.GOOGLE_API_KEY;
         
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-2.5-pro:generateContent?key=${apiKey}`, {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
             method: 'POST',
             headers: {
             'Content-Type': 'application/json'
@@ -39,11 +39,30 @@ Formatação: Use emojis de forma estratégica (não exagerada) e quebras de lin
                 }]
             })
         });
-
         const data = await response.json();
-        return res.status(200).json(data);
 
+        if (!response.ok) {
+            return res.status(response.status).json(data);
+        }
+
+        // 🔥 EXTRAÇÃO DIRETA DO TEXTO AQUI NO BACKEND
+        const textoGerado =
+    data?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+    if (!textoGerado) {
+            return res.status(500).json({
+            error: "A IA não retornou texto válido",
+            raw: data
+        });
+    }
+
+return res.status(200).json({
+    text: textoGerado
+});
     } catch (error) {
-        return res.status(500).json({ error: 'Erro ao processar a IA' });
+        return res.status(500).json({
+            error: 'Erro ao processar a IA',
+            details: error.message
+        });
     }
 }
