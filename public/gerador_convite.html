@@ -1,6 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#000000">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atoca Music - Gerador de Convite AI</title>
@@ -84,7 +87,7 @@
             </div>
             <div class="flex items-center gap-3">
                 <div class="px-4 py-1.5 rounded-full border border-slate-800 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                    Status: <span class="text-green-500">Conectado ao Gemini 2.0</span>
+                    Status: <span class="text-green-500">Conectado ao Gemini 2.0 PRO</span>
                 </div>
             </div>
         </div>
@@ -96,7 +99,7 @@
                 <section class="glass-card p-6 md:p-8 rounded-[2.5rem] space-y-6">
                     <div>
                         <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 block">Nome do Bar / Evento</label>
-                        <input type="text" id="bar-name" placeholder="Ex: Villa Bar da Bel" 
+                        <input type="text" id="bar-name" placeholder="Ex: Bar da Bel" 
                                class="input-atoca w-full p-4 rounded-2xl text-white outline-none font-medium">
                     </div>
 
@@ -111,7 +114,7 @@
                                 <i class="fas fa-beer-mug-empty text-sky-400 mb-2"></i>
                                 <p class="text-xs font-bold uppercase">Happy Hour</p>
                             </div>
-                             <div class="option-card p-4 rounded-2xl text-center" data-type="Evento Vip">
+                             <div class="option-card p-4 rounded-2xl text-center selected" data-type="Evento Vip">
                                 <i class="fas fa-regular fa-face-grin-stars text-sky-400 mb-2"></i>
                                 <p class="text-xs font-bold uppercase">Vip</p>
                             </div>
@@ -123,7 +126,7 @@
                                 <i class="fas fa-solid fa-user-group text-sky-400 mb-2"></i>
                                 <p class="text-xs font-bold uppercase">Noite de Casais</p>
                             </div>
-                             <div class="option-card p-4 rounded-2xl text-center selected" data-type="rock-pop">
+                             <div class="option-card p-4 rounded-2xl text-center" data-type="rock-pop">
                                 <i class="fas fa-solid fa-hand-back-fist text-sky-400 mb-2"></i>
                                 <p class="text-xs font-bold uppercase">Rock & Pop</p>
                             </div>
@@ -170,6 +173,8 @@
                         </div>
                         <button onclick="copyContent()" class="bg-slate-800 hover:bg-slate-700 px-6 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 transition-all active:scale-95">
                             <i class="fas fa-copy"></i> COPIAR TEXTO
+                        <button onclick="sendToWhatsApp()" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2.5 rounded-xl text-[10px] font-bold flex items-center gap-2 transition-all active:scale-95 shadow-lg shadow-green-900/20">
+        <i class="fab fa-whatsapp"></i> WHATSAPP
                         </button>
                     </div>
                     
@@ -178,7 +183,7 @@
                     </div>
 
                     <div class="mt-8 flex items-center justify-between border-t border-slate-800 pt-6">
-                        <span class="text-[9px] text-slate-600 font-mono uppercase tracking-widest">Protocolo: ATOCA-AI-FLASH-2.0</span>
+                        <span class="text-[9px] text-slate-600 font-mono uppercase tracking-widest">DESENVOLVIDO POR: @DIEKSONROSA</span>
                         <span id="copy-status" class="text-green-500 text-[10px] font-bold uppercase hidden">Copiado para o ClipBoard!</span>
                     </div>
                 </div>
@@ -195,10 +200,17 @@
     <div id="message-box" class="fixed bottom-10 left-1/2 -translate-x-1/2 glass-card px-8 py-4 rounded-2xl hidden z-50 shadow-2xl border border-sky-500/50 transition-all">
         <p id="message-text" class="text-sm font-bold text-white flex items-center gap-3 text-center"></p>
     </div>
+    
+    <script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("/service-worker.js")
+      .then(() => console.log("Service Worker registrado"));
+  }
+</script>
 
    <script>
 
-let currentType = "Sertanejo";
+let currentType = "Vip";
 
 document.querySelectorAll('.option-card').forEach(card => {
     card.addEventListener('click', () => {
@@ -215,22 +227,21 @@ async function callGemini(barName, extra, style) {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-            barName,
-            extra,
-            style
-        })
+        body: JSON.stringify({ barName, extra, style })
     });
 
     const data = await response.json();
 
     if (!response.ok) {
-        throw new Error(data.error);
+        throw new Error(data.error || "Erro desconhecido");
     }
 
-    return data.text;
-}
+    if (data.candidates && data.candidates[0]) {
+        return data.candidates[0].content.parts[0].text;
+    }
 
+    throw new Error("Estrutura da IA inválida");
+}
 async function generateInvite() {
 
     const barName = document.getElementById('bar-name').value;
@@ -246,49 +257,78 @@ async function generateInvite() {
         return;
     }
 
-    btnText.innerText = "PROCESSANDO...";
-    btnLoader.classList.remove('hidden');
-
-    const sysPrompt = `
-Você é diretor de copywriting da Atoca Music Brasília.
-Crie convite magnético para Instagram e WhatsApp.
-Estrutura:
-- Gancho impactante
-- Experiência sonora
-- Oferta ou diferencial
-- CTA forte
-`;
-
-    const prompt = `
-Bar: ${barName}
-Estilo: ${currentType}
-Extras: ${extra}
-`;
-
     try {
+        btnText.innerText = "PROCESSANDO...";
+        btnLoader.classList.remove('hidden');
 
         const text = await callGemini(barName, extra, currentType);
 
         output.innerText = text;
+
         emptyState.classList.add('hidden');
         resultCard.classList.remove('hidden');
+        resultCard.scrollIntoView({ behavior: 'smooth' });
 
     } catch (error) {
+        console.error(error);
+        alert("Erro ao gerar convite: " + error.message);
 
-        alert("Erro ao conectar com IA.");
-
+    } finally {
+        btnText.innerText = "GERAR SCRIPT AGORA";
+        btnLoader.classList.add('hidden');
     }
-
-    btnText.innerText = "GERAR SCRIPT";
-    btnLoader.classList.add('hidden');
 }
+        // Chamada para a API passando os dados selecionados
+        const text = await callGemini(barName, extra, currentType);
 
+        // Exibição do resultado
+        output.innerText = text;
+        emptyState.classList.add('hidden');
+        resultCard.classList.remove('hidden');
+        
+        // Rolar a tela para o resultado (melhor experiência no iPhone)
+        resultCard.scrollIntoView({ behavior: 'smooth' });
+
+    } catch (error) {
+        console.error(error);
+        alert("Erro ao conectar com IA: " + error.message);
+
+    } finally {
+        // Restaura o botão independente de sucesso ou erro
+        btnText.innerText = "GERAR SCRIPT AGORA";
+        btnLoader.classList.add('hidden');
+    }
+}
 function copyContent() {
     const text = document.getElementById('output-text').innerText;
-    navigator.clipboard.writeText(text);
-    alert("Copiado!");
-}
+    const copyStatus = document.getElementById('copy-status');
+    const resultCard = document.getElementById('result-card');
 
+    navigator.clipboard.writeText(text).then(() => {
+        // Efeito visual no card
+        resultCard.classList.add('copy-success');
+        
+        // Mostra o status de "Copiado"
+        copyStatus.classList.remove('hidden');
+        
+        // Remove os efeitos após 2 segundos
+        setTimeout(() => {
+            copyStatus.classList.add('hidden');
+            resultCard.classList.remove('copy-success');
+        }, 2000);
+    });
+}
+function sendToWhatsApp() {
+    const text = document.getElementById('output-text').innerText;
+    if (!text) return;
+
+    // Remove as marcações de análise da IA se você não quiser enviá-las ao cliente
+    // (Opcional: envia apenas até onde termina o convite)
+    const conviteApenas = text.split("Análise do Convite:")[0];
+
+    const encodedText = encodeURIComponent(conviteApenas.trim());
+    window.open(`https://api.whatsapp.com/send?text=${encodedText}`, '_blank');
+}
 </script>
 </body>
 </html>
