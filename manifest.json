@@ -1,7 +1,7 @@
 {
   "name": "Atoca Music - Gerador de Convite AI",
   "short_name": "Atoca AI",
-  "start_url": "/gerador_convite.html",
+  "start_url": "/index.html",
   "scope": "/",
   "display": "standalone",
   "background_color": "#0a0f1d",
