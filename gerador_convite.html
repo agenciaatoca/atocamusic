@@ -173,6 +173,10 @@
                         <button onclick="copyContent()" class="bg-slate-800 hover:bg-slate-700 px-6 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 transition-all active:scale-95">
                             <i class="fas fa-copy"></i> COPIAR TEXTO
                         </button>
+                         </div>
+                        <button onclick="sendToWhatsApp()" class="bg-green-600 hover:bg-green-500 text-white px-4 py-2.5 rounded-xl text-[10px] font-bold flex items-center gap-2 transition-all active:scale-95 shadow-lg shadow-green-900/20">
+        <i class="fab fa-whatsapp"></i> WHATSAPP
+                        </button>
                     </div>
                     
                     <div id="output-text" class="flex-1 bg-slate-950/60 p-8 rounded-3xl border border-slate-800 text-slate-200 leading-relaxed whitespace-pre-wrap font-medium overflow-y-auto text-base">
@@ -180,7 +184,7 @@
                     </div>
 
                     <div class="mt-8 flex items-center justify-between border-t border-slate-800 pt-6">
-                        <span class="text-[9px] text-slate-600 font-mono uppercase tracking-widest">Protocolo: ATOCA-AI-FLASH-2.0</span>
+                        <span class="text-[9px] text-slate-600 font-mono uppercase tracking-widest">DESENVOLVIDO POR: @DIEKSONROSA</span>
                         <span id="copy-status" class="text-green-500 text-[10px] font-bold uppercase hidden">Copiado para o ClipBoard!</span>
                     </div>
                 </div>
@@ -234,14 +238,18 @@ async function callGemini(barName, extra, style) {
     const data = await response.json();
 
     if (!response.ok) {
-        throw new Error(data.error);
+        throw new Error(data.error || "Erro desconhecido");
     }
 
-    return data.text;
+    if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+        return data.candidates[0].content.parts[0].text;
+    } else {
+        throw new Error("Estrutura de resposta da IA inválida");
+    }
 }
 
 async function generateInvite() {
-
+    
     const barName = document.getElementById('bar-name').value;
     const extra = document.getElementById('extra-info').value;
     const btnText = document.getElementById('btn-text');
@@ -255,58 +263,102 @@ async function generateInvite() {
         return;
     }
 
+    // Feedback visual de carregamento
     btnText.innerText = "PROCESSANDO...";
     btnLoader.classList.remove('hidden');
 
     const sysPrompt = `
-Atue como Diretor de Copywriting da Atoca Music Brasília, especialista em marketing de experiência e indústria fonográfica.
-Objetivo: Criar um convite magnético e de alta conversão para redes sociais (Instagram/WhatsApp).
-Contexto: > - Local: ${barName}
-Estilo Musical/Vibe: ${style}
-Diferenciais da Noite: ${extra}
-Diretrizes Criativas:
-Tom de Voz: Sofisticado, energético e exclusivo. Não venda apenas um evento, venda o "lugar onde as coisas acontecem".
-O Gancho: Deve interromper o scroll. Use uma pergunta provocativa ou uma afirmação audaciosa sobre a noite.
-Imersão Sonora: Descreva a sensação da música e do ambiente (ex: o grave no peito, a harmonia das luzes, a energia do palco).
-Escassez e Urgência: Insira um gatilho de que a noite é única e as vagas/mesas são limitadas.
-Estrutura Obrigatória:
-Headline (Gancho): Curto e impactante.
-Corpo (A Experiência): 2 parágrafos curtos conectando o ${style} ao ambiente do ${barName}.
-Bullets de Destaque: Liste os ${extra} de forma irresistível.
-CTA (Chamada para Ação): Direta, clara e com senso de urgência.
-Formatação: Use emojis de forma estratégica (não exagerada) e quebras de linha para facilitar a leitura no celular.
-`;
+    Atue como Diretor de Copywriting da Atoca Music Brasília, especialista em marketing de experiência e indústria fonográfica.
+    Objetivo: Criar um convite magnético e de alta conversão para redes sociais (Instagram/WhatsApp).
+    Contexto: > - Local: ${barName}
+    Estilo Musical/Vibe: ${style}
+    Diferenciais da Noite: ${extra}
+    Diretrizes Criativas:
+    Tom de Voz: Sofisticado, energético e exclusivo. Não venda apenas um evento, venda o "lugar onde as coisas acontecem".
+    O Gancho: Deve interromper o scroll. Use uma pergunta provocativa ou uma afirmação audaciosa sobre a noite.
+    Imersão Sonora: Descreva a sensação da música e do ambiente (ex: o grave no peito, a harmonia das luzes, a energia do palco).
+    Escassez e Urgência: Insira um gatilho de que a noite é única e as vagas/mesas são limitadas.
+    Estrutura Obrigatória:
+    Headline (Gancho): Curto e impactante.
+    Corpo (A Experiência): 2 parágrafos curtos conectando o ${style} ao ambiente do ${barName}.
+    Bullets de Destaque: Liste os ${extra} de forma irresistível.
+    CTA (Chamada para Ação): Direta, clara e com senso de urgência.
+    Formatação: Use emojis de forma estratégica (não exagerada) e quebras de linha para facilitar a leitura no celular.
+    `;
 
     const prompt = `
-Bar: ${barName}
-Estilo: ${currentType}
-Extras: ${extra}
-`;
+    Atue como Diretor de Copywriting da Atoca Music Brasília, especialista em marketing de experiência e indústria fonográfica.
+    Objetivo: Criar um convite magnético e de alta conversão para redes sociais (Instagram/WhatsApp).
+    Contexto: > - Local: ${barName}
+    Estilo Musical/Vibe: ${style}
+    Diferenciais da Noite: ${extra}
+    Diretrizes Criativas:
+    Tom de Voz: Sofisticado, energético e exclusivo. Não venda apenas um evento, venda o "lugar onde as coisas acontecem".
+    O Gancho: Deve interromper o scroll. Use uma pergunta provocativa ou uma afirmação audaciosa sobre a noite.
+    Imersão Sonora: Descreva a sensação da música e do ambiente (ex: o grave no peito, a harmonia das luzes, a energia do palco).
+    Escassez e Urgência: Insira um gatilho de que a noite é única e as vagas/mesas são limitadas.
+    Estrutura Obrigatória:
+    Headline (Gancho): Curto e impactante.
+    Corpo (A Experiência): 2 parágrafos curtos conectando o ${style} ao ambiente do ${barName}.
+    Bullets de Destaque: Liste os ${extra} de forma irresistível.
+    CTA (Chamada para Ação): Direta, clara e com senso de urgência.
+    Formatação: Use emojis de forma estratégica (não exagerada) e quebras de linha para facilitar a leitura no celular.
+    `;
 
     try {
-
+        // Chamada para a API passando os dados selecionados
         const text = await callGemini(barName, extra, currentType);
 
+        // Exibição do resultado
         output.innerText = text;
         emptyState.classList.add('hidden');
         resultCard.classList.remove('hidden');
+        
+        // Rolar a tela para o resultado (melhor experiência no iPhone)
+        resultCard.scrollIntoView({ behavior: 'smooth' });
 
     } catch (error) {
+        console.error(error);
+        alert("Erro ao conectar com IA: " + error.message);
 
-        alert("Erro ao conectar com IA.");
-
+    } finally {
+        // Restaura o botão independente de sucesso ou erro
+        btnText.innerText = "GERAR SCRIPT AGORA";
+        btnLoader.classList.add('hidden');
     }
-
-    btnText.innerText = "GERAR SCRIPT";
-    btnLoader.classList.add('hidden');
 }
-
 function copyContent() {
     const text = document.getElementById('output-text').innerText;
-    navigator.clipboard.writeText(text);
-    alert("Copiado!");
-}
+    const copyStatus = document.getElementById('copy-status');
+    const resultCard = document.getElementById('result-card');
 
+    navigator.clipboard.writeText(text).then(() => {
+        // Efeito visual no card
+        resultCard.classList.add('copy-success');
+        
+        // Mostra o status de "Copiado"
+        copyStatus.classList.remove('hidden');
+        
+        // Remove os efeitos após 2 segundos
+        setTimeout(() => {
+            copyStatus.classList.add('hidden');
+            resultCard.classList.remove('copy-success');
+        }, 2000);
+    });
+}
+function sendToWhatsApp() {
+    const text = document.getElementById('output-text').innerText;
+    if (!text) return;
+
+    // Codifica o texto para formato de URL
+    const encodedText = encodeURIComponent(text);
+    
+    // Cria o link do WhatsApp (funciona em Mobile e Desktop)
+    const whatsappUrl = `https://api.whatsapp.com/send?text=${encodedText}`;
+    
+    // Abre em uma nova aba
+    window.open(whatsappUrl, '_blank');
+}
 </script>
 </body>
 </html>
