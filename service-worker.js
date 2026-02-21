@@ -2,7 +2,7 @@ const CACHE_NAME = "atoca-cache-v2";
 
 const urlsToCache = [
   "/",
-  "/index.html",
+  "/gerador_convite.html",
   "/manifest.json",
   "/icon-192.png",
   "/icon-512.png"
@@ -44,7 +44,7 @@ self.addEventListener("fetch", event => {
       })
       .catch(() => {
         // fallback opcional
-        return caches.match("/index.html");
+        return caches.match("/gerador_convite.html");
       })
   );
 });
