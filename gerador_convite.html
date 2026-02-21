@@ -228,37 +228,23 @@ async function callGemini(barName, extra, style) {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-            barName,
-            extra,
-            style
-        })
+        body: JSON.stringify({ barName, extra, style })
     });
 
     const data = await response.json();
 
     if (!response.ok) {
         throw new Error(data.error || "Erro desconhecido");
-    }   
-    if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-        return data.candidates[0].content.parts[0].text;
-    } else {
-        throw new Error("Estrutura de resposta da IA inválida");
     }
-    // Esta linha abaixo é a "chave" para abrir o pacote que você recebeu
-    if (data.candidates && data.candidates[0]) {
-    const textoFinal = data.candidates[0].content.parts[0].text;
-    
-    // Agora enviamos esse texto para a sua caixa de texto na tela
-    document.getElementById('output-text').innerText = textoFinal;
-    
-    // Escondemos o estado vazio e mostramos o resultado
-    document.getElementById('empty-state').classList.add('hidden');
-    document.getElementById('result-card').classList.remove('hidden');
-}
 
+    if (data.candidates && data.candidates[0]) {
+        return data.candidates[0].content.parts[0].text;
+    }
+
+    throw new Error("Estrutura da IA inválida");
+}
 async function generateInvite() {
-    
+
     const barName = document.getElementById('bar-name').value;
     const extra = document.getElementById('extra-info').value;
     const btnText = document.getElementById('btn-text');
@@ -270,24 +256,29 @@ async function generateInvite() {
     if (!barName) {
         alert("Informe o nome do bar.");
         return;
+    }
+
     try {
-        // 1. Chama a função que você acabou de confirmar (callGemini)
-        const textoExtraido = await callGemini(barName, extra, currentType);
+        btnText.innerText = "PROCESSANDO...";
+        btnLoader.classList.remove('hidden');
 
-        // 2. Coloca o texto dentro da caixa branca do seu site
-        const output = document.getElementById('output-text');
-        output.innerText = textoExtraido;
+        const text = await callGemini(barName, extra, currentType);
 
-        // 3. Mostra o painel de resultado e esconde o estado vazio
-        document.getElementById('empty-state').classList.add('hidden');
-        document.getElementById('result-card').classList.remove('hidden');
+        output.innerText = text;
+
+        emptyState.classList.add('hidden');
+        resultCard.classList.remove('hidden');
+        resultCard.scrollIntoView({ behavior: 'smooth' });
 
     } catch (error) {
         console.error(error);
         alert("Erro ao gerar convite: " + error.message);
+
+    } finally {
+        btnText.innerText = "GERAR SCRIPT AGORA";
+        btnLoader.classList.add('hidden');
     }
 }
-
     // Feedback visual de carregamento
     btnText.innerText = "PROCESSANDO...";
     btnLoader.classList.remove('hidden');
