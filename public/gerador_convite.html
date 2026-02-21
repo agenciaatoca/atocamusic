@@ -236,11 +236,12 @@ async function callGemini(barName, extra, style) {
         throw new Error(data.error || "Erro desconhecido");
     }
 
-    if (data.candidates && data.candidates[0]) {
-        return data.candidates[0].content.parts[0].text;
+    // 🔥 AGORA CORRETO
+    if (data.text) {
+        return data.text;
     }
 
-    throw new Error("Estrutura da IA inválida");
+    throw new Error("A IA não retornou texto");
 }
 async function generateInvite() {
 
