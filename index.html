@@ -1,507 +1,516 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>ATOCAMUSIC - Produção Musical e Assessoria em Brasília</title>
-        <meta name="description" content="ATOCAMUSIC: Produção Musical Profissional, Gestão e Assessoria em Brasília, DF. Gravação, Mixagem, Masterização, Distribuição Digital e Direitos Autorais. Transforme sua música!">
-        <meta name="keywords" content="estúdio de gravação Brasília, produção musical DF, mixagem e masterização, direitos autorais música, distribuição digital música, assessoria musical, gravar música, estúdio de áudio, produtora musical, carreira musical">
-        <link rel="canonical" href="https://www.agenciaatoca.github.io/">
-        <meta property="og:title" content="ATOCAMUSIC - Produção Musical Profissional e Assessoria">
-        <meta property="og:description" content="Transforme sua visão musical em realidade sonora com a ATOCAMUSIC. Soluções completas para artistas independentes e gestão de carreira.">
-        <meta property="og:image" content="https://www.agenciaatoca.github.io/assets/images/atocamusic-banner.jpg">
-        <meta property="og:url" content="https://www.agenciaatoca.github.io/">
-        <meta property="og:type" content="website">
-        <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="ATOCAMUSIC - Produção Musical Profissional e Assessoria">
-        <meta name="twitter:description" content="Transforme sua visão musical em realidade sonora com a ATOCAMUSIC. Soluções completas para artistas independentes e gestão de carreira.">
-        <meta name="twitter:image" content="https://www.agenciaatoca.github.io/assets/images/atocamusic-twitter-card.jpg">
-        <link rel="icon" type="image/png" href="/favicon.png">
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-        <!-- Tailwind CSS CDN -->
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        colors: {
-                            'bg-primary': '#0A0A0F',
-                            'bg-secondary': '#1A1A2E',
-                            'accent-cyan': '#00E4FF',
-                            'accent-purple': '#9B5CF6',
-                            'accent-green': '#00FF99',
-                            'text-light': '#FFFFFF',
-                            'text-muted': '#B0B0B0',
-                            'glass-bg': 'rgba(255, 255, 255, 0.08)',
-                            'glass-border': 'rgba(255, 255, 255, 0.15)',
-                        },
-                        fontFamily: {
-                            inter: ['Inter', 'sans-serif'],
-                        },
-                        keyframes: {
-                            fadeInUp: {
-                                '0%': {
-                                    opacity: '0',
-                                    transform: 'translateY(20px)'
-                                },
-                                '100%': {
-                                    opacity: '1',
-                                    transform: 'translateY(0)'
-                                },
-                            },
-                            glow: {
-                                '0%, 100%': {
-                                    boxShadow: '0 0 15px rgba(0, 228, 255, 0.4)'
-                                },
-                                '50%': {
-                                    boxShadow: '0 0 25px rgba(0, 228, 255, 0.7)'
-                                },
-                            },
-                            pulseGlow: {
-                                '0%, 100%': {
-                                    boxShadow: '0 0 10px rgba(0, 228, 255, 0.3)'
-                                },
-                                '50%': {
-                                    boxShadow: '0 0 20px rgba(0, 228, 255, 0.6)'
-                                },
-                            }
-                        },
-                        animation: {
-                            fadeInUp: 'fadeInUp 0.8s ease-out forwards',
-                            glow: 'glow 2s infinite alternate',
-                            pulseGlow: 'pulseGlow 2s infinite alternate',
-                        }
-                    }
-                }
-            }
-        </script>
-        <!-- Font Awesome para ícones -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
-        <!-- Google Fonts - Inter -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
-        <!-- Link para o arquivo CSS personalizado (style.css) -->
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body class="font-inter bg-bg-primary text-text-light min-h-screen flex flex-col loaded">
-        <!-- Canvas para partículas de fundo -->
-        <canvas id="particles-canvas" class="fixed inset-0 w-full h-full z-0"></canvas>
-        <!-- Cabeçalho Fixo -->
-        <header class="header fixed top-0 left-0 w-full z-50 py-6 transition-all duration-300 ease-in-out bg-bg-primary bg-opacity-80 backdrop-blur-md shadow-lg">
-            <div class="container mx-auto flex justify-between items-center px-4 md:px-8">
-                <div class="nav-brand flex flex-col items-start">
-                    <a href="#home" class="logo text-3xl md:text-4xl font-extrabold text-accent-cyan tracking-widest leading-none">ATOCAMUSIC</a>
-                    <span class="tagline text-xs md:text-sm text-text-muted uppercase tracking-widest mt-1">seu mundo da música</span>
-                </div>
-                <nav class="hidden md:flex space-x-8 lg:space-x-12" aria-label="Navegação Principal">
-                    <ul class="flex items-center space-x-8">
-                        <li>
-                            <a href="#home" class="nav-link text-lg text-text-light font-medium relative py-1 hover:text-accent-cyan transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent-cyan after:transition-all after:duration-300 hover:after:w-full">Home</a>
-                        </li>
-                        <li>
-                            <a href="#servicos" class="nav-link text-lg text-text-light font-medium relative py-1 hover:text-accent-cyan transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent-cyan after:transition-all after:duration-300 hover:after:w-full">Serviços</a>
-                        </li>
-                        <li>
-                            <a href="#artistas" class="nav-link text-lg text-text-light font-medium relative py-1 hover:text-accent-cyan transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent-cyan after:transition-all after:duration-300 hover:after:w-full">Artistas</a>
-                        </li>
-                        <li>
-                            <a href="#compositores" class="nav-link text-lg text-text-light font-medium relative py-1 hover:text-accent-cyan transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent-cyan after:transition-all after:duration-300 hover:after:w-full">Compositores</a>
-                        </li>
-                        <li>
-                            <a href="#sobre" class="nav-link text-lg text-text-light font-medium relative py-1 hover:text-accent-cyan transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent-cyan after:transition-all after:duration-300 hover:after:w-full">Sobre Nós</a>
-                        </li>
-                        <li>
-                            <a href="#contato" class="nav-link text-lg text-text-light font-medium relative py-1 hover:text-accent-cyan transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent-cyan after:transition-all after:duration-300 hover:after:w-full">Contato</a>
-                        </li>
-                        <li>
-                            <a href="#tour-virtual" class="nav-link text-lg text-text-light font-medium relative py-1 hover:text-accent-cyan transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent-cyan after:transition-all after:duration-300 hover:after:w-full">O Estúdio</a>
-                        </li>
-                        <li>
-                            <a href="portifolio.html" class="nav-link text-lg text-text-light font-medium relative py-1 hover:text-accent-cyan transition-colors duration-300 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent-cyan after:transition-all after:duration-300 hover:after:w-full">Portfólio</a>
-                        </li>
-                    </ul>
-                </nav>
-                <button class="mobile-menu-btn md:hidden flex flex-col space-y-1 p-2 focus:outline-none focus:ring-2 focus:ring-accent-cyan rounded-md" aria-label="Abrir Menu">
-                    <span class="block w-6 h-0.5 bg-text-light transition-all duration-300"></span>
-                    <span class="block w-6 h-0.5 bg-text-light transition-all duration-300"></span>
-                    <span class="block w-6 h-0.5 bg-text-light transition-all duration-300"></span>
-                </button>
-            </div>
-        </header>
-        <!-- Overlay do Menu Mobile -->
-        <div class="mobile-menu-overlay fixed inset-0 bg-bg-primary bg-opacity-95 backdrop-blur-xl z-40 flex flex-col items-center justify-center transform translate-x-full transition-transform duration-500 ease-in-out">
-            <nav class="mobile-nav text-center" aria-label="Menu Mobile">
-                <ul class="mobile-nav-list flex flex-col space-y-6">
-                    <li>
-                        <a href="#home" class="mobile-nav-link text-2xl text-text-light font-medium py-2 hover:text-accent-cyan transition-colors duration-300">Home</a>
-                    </li>
-                    <li>
-                        <a href="#servicos" class="mobile-nav-link text-2xl text-text-light font-medium py-2 hover:text-accent-cyan transition-colors duration-300">Serviços</a>
-                    </li>
-                    <li>
-                        <a href="#artistas" class="mobile-nav-link text-2xl text-text-light font-medium py-2 hover:text-accent-cyan transition-colors duration-300">Artistas</a>
-                    </li>
-                    <li>
-                        <a href="#compositores" class="mobile-nav-link text-2xl text-text-light font-medium py-2 hover:text-accent-cyan transition-colors duration-300">Compositores</a>
-                    </li>
-                    <li>
-                        <a href="#sobre" class="mobile-nav-link text-2xl text-text-light font-medium py-2 hover:text-accent-cyan transition-colors duration-300">Sobre Nós</a>
-                    </li>
-                    <li>
-                        <a href="#contato" class="mobile-nav-link text-2xl text-text-light font-medium py-2 hover:text-accent-cyan transition-colors duration-300">Contato</a>
-                    </li>
-                    <li>
-                        <a href="#tour-virtual" class="mobile-nav-link text-2xl text-text-light font-medium py-2 hover:text-accent-cyan transition-colors duration-300">O Estúdio</a>
-                    </li>
-                    <li>
-                        <a href="portifolio.html" class="mobile-nav-link text-2xl text-text-light font-medium py-2 hover:text-accent-cyan transition-colors duration-300">Portfólio</a>
-                    </li>
-                </ul>
-            </nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ATOCAMUSIC | Produção Musical, Distribuição e Assessoria em Brasília - DF</title>
+  <meta name="description" content="Produção musical, gravação, mixagem, masterização, distribuição digital, licenciamento de covers e assessoria artística em Brasília - DF. Atendimento profissional para artistas independentes." />
+  <meta name="keywords" content="produção musical Brasília, estúdio de gravação DF, mixagem e masterização Brasília, distribuição digital música DF, assessoria musical Brasília, licenciamento cover, direitos autorais música" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://atocamusic.com.br/" />
+
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="ATOCAMUSIC | Produção Musical e Assessoria em Brasília - DF" />
+  <meta property="og:description" content="Estúdio e assessoria musical em Brasília - DF para artistas independentes: gravação, produção, distribuição, covers e direitos autorais." />
+  <meta property="og:url" content="https://atocamusic.com.br/" />
+  <meta property="og:site_name" content="ATOCAMUSIC" />
+  <meta property="og:image" content="https://atocamusic.com.br/assets/images/og-atocamusic.jpg" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ATOCAMUSIC | Produção Musical e Assessoria em Brasília - DF" />
+  <meta name="twitter:description" content="Produção musical, gravação, mixagem, distribuição e assessoria para artistas independentes no DF." />
+  <meta name="twitter:image" content="https://atocamusic.com.br/assets/images/og-atocamusic.jpg" />
+
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              950: '#050816',
+              900: '#081126',
+              800: '#0d1838',
+              700: '#12255a',
+              600: '#1c3faa',
+              500: '#2f65ff',
+              400: '#5b8cff',
+              300: '#9eb7ff'
+            },
+            gold: '#c9a86a',
+            ink: '#e8eefc',
+            muted: '#95a4c5'
+          },
+          boxShadow: {
+            soft: '0 10px 40px rgba(0,0,0,.28)',
+            glow: '0 0 0 1px rgba(255,255,255,.06), 0 20px 60px rgba(47,101,255,.18)'
+          },
+          backgroundImage: {
+            grid: 'radial-gradient(circle at 1px 1px, rgba(255,255,255,.08) 1px, transparent 0)',
+            hero: 'linear-gradient(180deg, rgba(5,8,22,.6), rgba(5,8,22,.92)), radial-gradient(circle at top, rgba(47,101,255,.18), transparent 30%), radial-gradient(circle at 80% 20%, rgba(201,168,106,.14), transparent 22%)'
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; }
+    .glass {
+      background: rgba(255,255,255,.04);
+      backdrop-filter: blur(18px);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+    .section-anchor { scroll-margin-top: 96px; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MusicRecordingStudio",
+    "name": "ATOCAMUSIC",
+    "url": "https://atocamusic.com.br/",
+    "telephone": "+55 61 98211-5374",
+    "email": "gravadoraatocamusic@gmail.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Brazlândia",
+      "addressRegion": "DF",
+      "addressCountry": "BR"
+    },
+    "sameAs": [
+      "https://www.instagram.com/atoca.music",
+      "https://www.tiktok.com/@atoca.music",
+      "https://www.youtube.com/@atocamusic",
+      "https://www.facebook.com/atocamusic"
+    ],
+    "areaServed": "Distrito Federal"
+  }
+  </script>
+</head>
+<body class="bg-brand-950 text-ink antialiased selection:bg-brand-500 selection:text-white">
+  <div class="fixed inset-0 -z-10 bg-hero"></div>
+  <div class="fixed inset-0 -z-10 opacity-[0.06] bg-grid bg-[size:24px_24px]"></div>
+
+  <header class="sticky top-0 z-50 border-b border-white/10 bg-brand-950/80 backdrop-blur-xl">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <a href="#inicio" class="flex items-center gap-3">
+        <div class="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-lg font-black text-white shadow-glow">A</div>
+        <div>
+          <div class="text-lg font-extrabold tracking-[0.22em] text-white">ATOCAMUSIC</div>
+          <div class="text-xs uppercase tracking-[0.28em] text-muted">Brasília · Distrito Federal</div>
         </div>
-        <!-- Conteúdo Principal -->
-        <main class="flex-grow z-10">
-            <!-- Seção Hero -->
-            <section id="home" class="hero min-h-screen flex items-center justify-center text-center relative overflow-hidden pt-24 md:pt-32 pb-16">
-                <div class="container mx-auto px-4 md:px-8 relative z-10 animate-fadeInUp">
-                    <h2 class="hero-title text-4xl md:text-6xl lg:text-7xl font-light leading-tight mb-6 text-text-light animate-pulseGlow-text">
-                        Produção Musical,<br>Gestão e Assessoria Musical
-                    </h2>
-                    <p class="hero-subtitle text-lg md:text-xl text-text-muted mb-10 font-light">Transforme sua visão em realidade sonora e impulsione sua carreira.</p>
-                    <div class="hero-stats flex justify-center items-center gap-10 mb-12">
-                        <div class="stat-item flex flex-col items-center">
-                            <span class="stat-number text-5xl md:text-7xl font-thin text-accent-green leading-none" data-target="1000000">0</span>
-                            <span class="stat-label text-base md:text-lg text-text-muted font-light mt-2">+ de 1.000.000 de streams com nossos artistas</span>
-                        </div>
-                    </div>
-                    <a href="#servicos" class="hero-cta btn btn--primary px-8 py-4 text-xl md:text-2xl font-semibold rounded-full relative overflow-hidden group">
-                        Descubra Nossos Serviços
-                    <span class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
-                    </a>
-                </div>
-            </section>
-            <!-- Seção Serviços -->
-            <section id="servicos" class="services py-20 md:py-32 bg-bg-secondary relative z-10">
-                <div class="container mx-auto px-4 md:px-8">
-                    <h2 class="section-title text-3xl md:text-5xl font-light text-center mb-16 text-text-light">Nossos Serviços Criativos</h2>
-                    <div class="services-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-12">
-                        <!-- Cards de Serviço (mantidos como no original, mas com classes Tailwind e glass-card) -->
-                        <div class="service-card glass-card p-8 md:p-10 text-center rounded-2xl shadow-xl flex flex-col justify-between transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-accent-cyan/30 animate-fadeInUp">
-                            <div class="service-icon text-5xl mb-4 text-accent-cyan block mx-auto text-shadow-glow">🎵</div>
-                            <h3 class="service-title text-2xl font-medium mb-3 text-text-light">Produção Musical Completa</h3>
-                            <p class="service-description text-text-muted leading-relaxed flex-grow mb-6">
-                                <i>POR FAIXA!</i>
-                                <br>Arranjos personalizados e produção executiva para transformar sua visão em realidade sonora de alta qualidade.
-                            </p>
-                            <div class="service-price text-3xl font-semibold text-accent-green mb-6">
-                                A partir de <span>R$ 149,00</span>
-                            </div>
-                            <a href="https://wa.link/57vzhq" class="btn btn--secondary px-6 py-3 text-lg font-medium rounded-full self-center">Orçar Produção</a>
-                        </div>
-                        <div class="service-card glass-card p-8 md:p-10 text-center rounded-2xl shadow-xl flex flex-col justify-between transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-accent-cyan/30 animate-fadeInUp">
-                            <div class="service-icon text-5xl mb-4 text-accent-cyan block mx-auto text-shadow-glow">🎙️</div>
-                            <h3 class="service-title text-2xl font-medium mb-3 text-text-light">Gravação de Áudio Profissional</h3>
-                            <p class="service-description text-text-muted leading-relaxed flex-grow mb-6">Estúdios equipados com tecnologia de ponta para capturar a essência e a emoção da sua performance vocal e instrumental.</p>
-                            <div class="service-price text-3xl font-semibold text-accent-green mb-6">
-                                A partir de <span>R$ 50,00</span>
-                            </div>
-                            <a href="https://wa.link/m5tncn" class="btn btn--secondary px-6 py-3 text-lg font-medium rounded-full self-center">Agendar Gravação</a>
-                        </div>
-                        <div class="service-card glass-card p-8 md:p-10 text-center rounded-2xl shadow-xl flex flex-col justify-between transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-accent-cyan/30 animate-fadeInUp">
-                            <div class="service-icon text-5xl mb-4 text-accent-cyan block mx-auto text-shadow-glow">🎚️</div>
-                            <h3 class="service-title text-2xl font-medium mb-3 text-text-light">Mixagem e Masterização Premium</h3>
-                            <p class="service-description text-text-muted leading-relaxed flex-grow mb-6">Finalização profissional com os melhores plugins do mercado, garantindo que sua música soe impecável em qualquer plataforma ou dispositivo.</p>
-                            <div class="service-price text-3xl font-semibold text-accent-green mb-6">
-                                A partir de <span>R$ 150,00</span>
-                            </div>
-                            <a href="https://wa.link/3u4i4l" class="btn btn--secondary px-6 py-3 text-lg font-medium rounded-full self-center">Solicitar Mix/Master</a>
-                        </div>
-                        <div class="service-card glass-card p-8 md:p-10 text-center rounded-2xl shadow-xl flex flex-col justify-between transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-accent-cyan/30 animate-fadeInUp">
-                            <div class="service-icon text-5xl mb-4 text-accent-cyan block mx-auto text-shadow-glow">🎤</div>
-                            <h3 class="service-title text-2xl font-medium mb-3 text-text-light">Afinação de Voz e Edição</h3>
-                            <p class="service-description text-text-muted leading-relaxed flex-grow mb-6">Sua voz é o coração da sua música. Garanta que ela brilhe com clareza, precisão e emoção, sem perder a naturalidade.</p>
-                            <div class="service-price text-3xl font-semibold text-accent-green mb-6">
-                                A partir de <span>R$ 50,00</span>
-                            </div>
-                            <a href="https://wa.link/wf3vsh" class="btn btn--secondary px-6 py-3 text-lg font-medium rounded-full self-center">Detalhes Sobre a Afinação</a>
-                        </div>
-                        <div class="service-card glass-card p-8 md:p-10 text-center rounded-2xl shadow-xl flex flex-col justify-between transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-accent-cyan/30 animate-fadeInUp">
-                            <div class="service-icon text-5xl mb-4 text-accent-cyan block mx-auto text-shadow-glow">📲</div>
-                            <h3 class="service-title text-2xl font-medium mb-3 text-text-light">Distribuição Digital Global</h3>
-                            <p class="service-description text-text-muted leading-relaxed flex-grow mb-6">Realize o Lançamento em até 2 dias! Sua música em mais de 150 plataformas digitais (Spotify, Apple Music, Deezer, Amazon Music, Instagram, TikTok, etc.), alcançando milhões de ouvintes globalmente.</p>
-                            <div class="service-price text-3xl font-semibold text-accent-green mb-6">
-                                Valor Fixo: <span>R$ 500,00</span>
-                            </div>
-                            <a href="https://wa.link/9wgzae" class="btn btn--secondary px-6 py-3 text-lg font-medium rounded-full self-center">Distribuir Agora</a>
-                        </div>
-                        <div class="service-card glass-card p-8 md:p-10 text-center rounded-2xl shadow-xl flex flex-col justify-between transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-accent-cyan/30 animate-fadeInUp">
-                            <div class="service-icon text-5xl mb-4 text-accent-cyan block mx-auto text-shadow-glow">📈</div>
-                            <h3 class="service-title text-2xl font-medium mb-3 text-text-light">Assessoria e Gestão Musical</h3>
-                            <p class="service-description text-text-muted leading-relaxed flex-grow mb-6">Consultoria especializada e estratégica para impulsionar e gerenciar sua carreira musical, do planejamento à execução. PASSO 1: Entender onde você está e onde quer chegar. PASSO 2: Trilhar sua jornada para o Sucesso.</p>
-                            <div class="service-price text-3xl font-semibold text-accent-green mb-6">
-                                <span>A partir de R$ 997,00</span>
-                            </div>
-                            <a href="https://wa.link/zej816" class="btn btn--secondary px-6 py-3 text-lg font-medium rounded-full self-center">Agendar Consultoria</a>
-                        </div>
-                        <div class="service-card glass-card p-8 md:p-10 text-center rounded-2xl shadow-xl flex flex-col justify-between transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-accent-cyan/30 animate-fadeInUp">
-                            <div class="service-icon text-5xl mb-4 text-accent-cyan block mx-auto text-shadow-glow">⚖️</div>
-                            <h3 class="service-title text-2xl font-medium mb-3 text-text-light">Direitos Autorais e Royalties</h3>
-                            <p class="service-description text-text-muted leading-relaxed flex-grow mb-6">Tenha um Advogado Especialista em Direitos Musicais ao seu alcance para proteger suas criações e garantir sua remuneração jusa.</p>
-                            <div class="service-price text-3xl font-semibold text-accent-green mb-6">
-                                <span>CONSULTAR</span>
-                            </div>
-                            <a href="https://wa.link/fmne4v" class="btn btn--secondary px-6 py-3 text-lg font-medium rounded-full self-center">Agendar Consultoria</a>
-                        </div>
-                        <div class="service-card glass-card p-8 md:p-10 text-center rounded-2xl shadow-xl flex flex-col justify-between transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-accent-cyan/30 animate-fadeInUp">
-                            <div class="service-icon text-5xl mb-4 text-accent-cyan block mx-auto text-shadow-glow">📝</div>
-                            <h3 class="service-title text-2xl font-medium mb-3 text-text-light">Licenciamento de Covers Simplificado</h3>
-                            <p class="service-description text-text-muted leading-relaxed flex-grow mb-6">Autorização legal e descomplicada para suas regravações, evitando problemas futuros e garantindo seus royalties de cover.</p>
-                            <div class="service-price text-3xl font-semibold text-accent-green mb-6">
-                                A partir de <span>R$ 100,00</span>
-                            </div>
-                            <a href="https://wa.link/om81h3" class="btn btn--secondary px-6 py-3 text-lg font-medium rounded-full self-center">Saiba Mais</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- Seção Artistas -->
-            <section id="artistas" class="artists py-20 md:py-32 bg-bg-primary relative z-10">
-                <div class="container mx-auto px-4 md:px-8">
-                    <h2 class="section-title text-3xl md:text-5xl font-light text-center mb-16 text-text-light">Conheça Nossos Artistas em Destaque</h2>
-                    <div class="artists-grid grid grid-cols-1 lg:grid-cols-2 gap-8 xl:gap-12 max-w-5xl mx-auto">
-                        <div class="artist-card glass-card p-8 md:p-10 text-center rounded-2xl shadow-xl flex flex-col justify-between transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-accent-purple/30 animate-fadeInUp">
-                            <div class="artist-genre text-sm text-accent-cyan uppercase tracking-widest font-bold mb-2">GOSPEL</div>
-                            <h3 class="artist-name text-3xl font-light mb-6 text-text-light">Louvor e Adoração Vida</h3>
-                             <p class="artist-description text-text-muted leading-relaxed flex-grow mb-6">Louvor e Adoração Vida é mais do que um ministério musical; é uma voz que ecoa por todo o mundo. Com uma trajetória marcada pela dedicação, álbuns gravados na Argentina e uma presença global inegável através de milhões de streams em plataformas digitais, propagando uma mensagem de fé e esperança que constrói pontes e une corações, movida pela adoração que transcende fronteiras e culturas.</p>
-                            <div class="artist-media w-full aspect-video mb-6 rounded-lg overflow-hidden shadow-lg border border-glass-border">
-                                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/12pSdibAENbtGLJEYhntE5?utm_source=generator" width="100%" height="352%" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                            </div>
-                            <div class="artist-links flex flex-wrap justify-center gap-4 mt-auto">
-                                <a href="https://www.instagram.com/louvoreadoracaovida" target="_blank" class="artist-link btn btn--secondary flex items-center justify-center gap-2 px-6 py-3 text-lg font-medium rounded-full">
-                                    <i class="fa-brands fa-instagram text-xl"></i>
-                                    Instagram
-                                </a>
-                                <a href="https://www.youtube.com/@louvoreadoracaovida" target="_blank" class="artist-link btn btn--secondary flex items-center justify-center gap-2 px-6 py-3 text-lg font-medium rounded-full">
-                                    <i class="fa-brands fa-youtube text-xl"></i>
-                                    YouTube
-                                </a>
-                            </div>
-                        </div>
-                        <div class="artist-card glass-card p-8 md:p-10 text-center rounded-2xl shadow-xl flex flex-col justify-between transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-accent-purple/30 animate-fadeInUp">
-                            <div class="artist-genre text-sm text-accent-cyan uppercase tracking-widest font-bold mb-2">Sertanejo</div>
-                            <h3 class="artist-name text-3xl font-light mb-6 text-text-light">Luiz Gustavo</h3>
-                            <p class="artist-description text-text-muted leading-relaxed flex-grow mb-6">Luiz Gustavo é uma nova sensação musical, com uma voz potente e carisma que cativam multidões. Sua arte transcende fronteiras, consolidando-o como uma grande revelação e buscando sempre uma conexão autêntica com seus fãs.</p>
-                            <div class="artist-media w-full aspect-video mb-6 rounded-lg overflow-hidden shadow-lg border border-glass-border">
-                                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/0QcMU0Kbt2wYTVpRUiCB0S?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-                            </div>
-                            <div class="artist-links flex flex-wrap justify-center gap-4 mt-auto">
-                                <a href="https://www.instagram.com/luiizgustavoofc" target="_blank" class="artist-link btn btn--secondary flex items-center justify-center gap-2 px-6 py-3 text-lg font-medium rounded-full">
-                                    <i class="fa-brands fa-instagram text-xl"></i>
-                                    Instagram
-                                </a>
-                                <a href="https://www.youtube.com/watch?v=NtEe45RUdMo&list=OLAK5uy_kI7IbFkvkqV--JLcFxgAMhD3rTutWAW0I" target="_blank" class="artist-link btn btn--secondary flex items-center justify-center gap-2 px-6 py-3 text-lg font-medium rounded-full">
-                                    <i class="fa-brands fa-youtube text-xl"></i>
-                                    YouTube
-                                </a>
-                            </div>
-                    </div>
-                    <div class="section-cta text-center mt-16">
-                        <a href="portifolio.html" class="hero-cta btn btn--primary px-8 py-4 text-xl md:text-2xl font-semibold rounded-full relative overflow-hidden group">
-                        Ver Portfólio Completo
-                    <span class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
-                    </a>
-                    </div>
-                </div>
-            </section>
-            <!-- Seção Compositores -->
-            <section id="compositores" class="composers py-20 md:py-32 bg-bg-secondary relative z-10">
-                <div class="container mx-auto px-4 md:px-8">
-                    <div class="composers-content glass-card p-8 md:p-12 max-w-3xl mx-auto text-center rounded-2xl shadow-xl transform transition-transform duration-300 hover:scale-[1.01] hover:shadow-2xl hover:shadow-accent-green/30 animate-fadeInUp">
-                        <h2 class="section-title text-3xl md:text-5xl font-light mb-10 text-text-light">Oportunidades para Compositores</h2>
-                        <p class="composers-text text-lg text-text-muted mb-6 leading-relaxed">Transforme sua criatividade em oportunidade. Conectamos compositores talentosos
-                        com artistas em busca de material original. Junte-se à nossa rede e veja suas
-                        composições ganharem vida no mercado musical.
-                    </p>
-                        <p class="composers-text-highlight text-xl text-accent-green font-medium mb-10 leading-relaxed animate-pulseGlow">Envie-nos sua demo e saiba como podemos impulsionar sua carreira!</p>
-                        <a href="#contato" class="btn btn--primary px-8 py-4 text-xl font-semibold rounded-full relative overflow-hidden group">
-                            Quero Participar
-                        <span class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
-                        </a>
-                    </div>
-                </div>
-            </section>
-            <!-- Seção Quem Somos (About) -->
-            <section id="sobre" class="about py-20 md:py-32 bg-bg-primary relative z-10">
-                <div class="container mx-auto px-4 md:px-8">
-                    <h2 class="section-title text-3xl md:text-5xl font-light text-center mb-16 text-text-light">Nossa História e Paixão</h2>
-                    <div class="about-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 xl:gap-12">
-                        <div class="about-card glass-card p-8 rounded-2xl shadow-xl flex flex-col justify-start transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-accent-cyan/30 animate-fadeInUp">
-                            <h3 class="about-card-title text-2xl font-medium mb-4 text-accent-cyan">Nossa Missão</h3>
-                            <p class="about-card-text text-text-muted leading-relaxed flex-grow">Democratizar o acesso ao mercado musical brasileiro, oferecendo soluções completas e acessíveis para artistas independentes realizarem seus sonhos musicais, com foco na qualidade e no suporte integral.</p>
-                        </div>
-                        <div class="about-card glass-card p-8 rounded-2xl shadow-xl flex flex-col justify-start transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-accent-cyan/30 animate-fadeInUp">
-                            <h3 class="about-card-title text-2xl font-medium mb-4 text-accent-cyan">Nossa Visão</h3>
-                            <p class="about-card-text text-text-muted leading-relaxed flex-grow">Ser a principal referência em gestão, produção e assessoria musical no Brasil, reconhecida pela inovação, excelência e impacto positivo na carreira de artistas e compositores.</p>
-                        </div>
-                        <div class="about-card glass-card p-8 rounded-2xl shadow-xl flex flex-col justify-start transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-accent-cyan/30 animate-fadeInUp">
-                            <h3 class="about-card-title text-2xl font-medium mb-4 text-accent-cyan">Nossos Valores</h3>
-                            <ul class="about-values list-none mt-4 space-y-3">
-                                <li class="text-text-muted relative pl-6 before:content-['→'] before:absolute before:left-0 before:text-accent-green before:font-bold before:text-xl">Excelência Artística: Qualidade impecável em cada produção.</li>
-                                <li class="text-text-muted relative pl-6 before:content-['→'] before:absolute before:left-0 before:text-accent-green before:font-bold before:text-xl">Transparência Comercial: Relações justas e claras com todos.</li>
-                                <li class="text-text-muted relative pl-6 before:content-['→'] before:absolute before:left-0 before:text-accent-green before:font-bold before:text-xl">Inovação Tecnológica: Sempre na vanguarda das ferramentas e processos.</li>
-                                <li class="text-text-muted relative pl-6 before:content-['→'] before:absolute before:left-0 before:text-accent-green before:font-bold before:text-xl">Paixão pela Música: O amor pela arte nos impulsiona.</li>
-                            </ul>
-                        </div>
-                        <div class="about-card glass-card p-8 rounded-2xl shadow-xl flex flex-col justify-between transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-accent-cyan/30 animate-fadeInUp">
-                            <h3 class="about-card-title text-2xl font-medium mb-4 text-accent-cyan">Nossa Equipe</h3>
-                            <p class="about-card-text text-text-muted leading-relaxed flex-grow">Conheça os profissionais apaixonados que estão por trás do seu sucesso. Engenheiros de som, produtores, assessores... Somos um time dedicado à sua arte.</p>
-                            <a href="#equipe" class="btn btn--secondary px-6 py-3 text-lg font-medium rounded-full mt-6 self-center">Conhecer a Equipe</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- Seção Tour Virtual (O Estúdio) -->
-            <section id="tour-virtual" class="tour-virtual py-20 md:py-32 bg-bg-secondary relative z-10">
-                <div class="container mx-auto px-4 md:px-8">
-                    <h2 class="section-title text-3xl md:text-5xl font-light text-center mb-16 text-text-light">Explore Nosso Estúdio em Tour Virtual</h2>
-                    <div class="tour-virtual-content glass-card p-8 md:p-12 max-w-4xl mx-auto text-center rounded-2xl shadow-xl flex flex-col items-center transform transition-transform duration-300 hover:scale-[1.01] hover:shadow-2xl hover:shadow-accent-purple/30 animate-fadeInUp">
-                        <p class="tour-virtual-text text-lg text-text-muted mb-8 leading-relaxed">Em breve, você poderá caminhar virtualmente por nossos ambientes de gravação, sala de controle e áreas de lounge. Prepare-se para uma experiência imersiva!</p>
-                        <div class="video-placeholder w-full max-w-3xl mb-8 rounded-xl overflow-hidden shadow-2xl border-2 border-accent-purple">
-                            <img src="https://placehold.co/800x450/0A0A0F/B0B0B0?text=Tour+Virtual+do+Estudio+EM+BREVE" alt="Placeholder para Tour Virtual do Estúdio ATOCAMUSIC" class="w-full h-auto block">
-                        </div>
-                        <p class="tour-virtual-text text-lg text-text-muted mb-8 leading-relaxed">Queremos que você sinta a energia do nosso espaço antes mesmo de nos visitar. Descubra os equipamentos e a atmosfera ideal para sua próxima produção.</p>
-                        <a href="#contato" class="btn btn--primary px-8 py-4 text-xl font-semibold rounded-full relative overflow-hidden group">
-                            Agendar Visita Presencial
-                        <span class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
-                        </a>
-                    </div>
-                </div>
-            </section>
-        </main>
-        <!-- Rodapé -->
-        <footer id="contato" class="footer bg-bg-primary py-20 relative z-10">
-            <div class="container mx-auto px-4 md:px-8">
-                <div class="footer-content glass-card p-8 md:p-12 rounded-2xl shadow-xl flex flex-col lg:flex-row justify-between items-start gap-12 lg:gap-16">
-                    <!-- Informações de Contato e Redes Sociais -->
-                    <div class="footer-left-combined flex flex-col gap-10 flex-1 min-w-[300px]">
-                        <div class="footer-section contact-info">
-                            <h3 class="footer-title text-3xl font-medium mb-6 text-accent-cyan">Conecte-se Conosco</h3>
-                            <p class="contact-intro text-lg text-text-muted mb-8 leading-relaxed">Estamos prontos para transformar sua música e sua carreira!</p>
-                            <div class="space-y-4">
-                                <div class="contact-item flex items-center gap-4">
-                                    <span class="social-icon text-accent-green text-3xl">
-                                        <i class="fa-brands fa-whatsapp"></i>
-                                    </span>
-                                    <a href="https://wa.me/5561982115374" target="_blank" class="contact-link text-text-muted text-lg hover:text-accent-cyan transition-colors duration-300">(61) 98211-5374</a>
-                                </div>
-                                <div class="contact-item flex items-center gap-4">
-                                    <span class="social-icon text-accent-green text-3xl">
-                                        <i class="fa-solid fa-envelope"></i>
-                                    </span>
-                                    <a href="mailto:gravadoraatocamusic@gmail.com" class="contact-link text-text-muted text-lg hover:text-accent-cyan transition-colors duration-300">gravadoraatocamusic@gmail.com</a>
-                                </div>
-                                <div class="contact-item flex items-center gap-4">
-                                    <span class="social-icon text-accent-green text-3xl">
-                                        <i class="fa-solid fa-location-dot"></i>
-                                    </span>
-                                    <a href="https://www.google.com/maps/place/ATOCAMUSIC/@-15.682958,-48.2054179,17z/data=!3m1!4b1!4m6!3m5!1s0x935a6d14cb2c2639:0x97f48753052eb3e2!8m2!3d-15.6829581!4d-48.200547!16s%2Fg%2F11qsp20s6t?entry=ttu&g_ep=EgoyMDI1MDYwMy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="contact-link text-text-muted text-lg hover:text-accent-cyan transition-colors duration-300">Setor Tradicional, Brazlândia-DF</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Fusion Social Networks Wrapper -->
-                        <div class="footer-section fusion-social-networks-wrapper">
-                            <h3 class="footer-title text-3xl font-medium mb-6 text-accent-cyan">Acesse Nossas Redes Sociais</h3>
-                            <div class="flex flex-wrap gap-6 justify-center lg:justify-start">
-                                <a href="https://www.instagram.com/atoca.music" target="_blank" class="social-link w-16 h-16 rounded-full bg-glass-bg flex items-center justify-center transform transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-accent-purple/40" aria-label="Instagram da Atoca Music">
-                                    <i class="fa-brands fa-instagram text-4xl text-text-light hover:text-pink-500 transition-colors duration-300"></i>
-                                </a>
-                                <a href="https://www.tiktok.com/@atoca.music" target="_blank" class="social-link w-16 h-16 rounded-full bg-glass-bg flex items-center justify-center transform transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-accent-purple/40" aria-label="TikTok da Atoca Music">
-                                    <i class="fa-brands fa-tiktok text-4xl text-text-light hover:text-gray-400 transition-colors duration-300"></i>
-                                </a>
-                                <a href="https://www.youtube.com/@atocamusic" target="_blank" class="social-link w-16 h-16 rounded-full bg-glass-bg flex items-center justify-center transform transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-accent-purple/40" aria-label="YouTube da Atoca Music">
-                                    <i class="fa-brands fa-youtube text-4xl text-text-light hover:text-red-600 transition-colors duration-300"></i>
-                                </a>
-                                <!-- Adicione o Facebook se tiver um perfil -->
-                                <a href="https://www.facebook.com/atocamusic" target="_blank" class="social-link w-16 h-16 rounded-full bg-glass-bg flex items-center justify-center transform transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-accent-purple/40" aria-label="Facebook da Atoca Music">
-                                    <i class="fa-brands fa-facebook-f text-4xl text-text-light hover:text-blue-600 transition-colors duration-300"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Formulário de Contato -->
-                    <div class="footer-right flex-1 min-w-[300px] lg:max-w-xl">
-                        <div class="footer-section contact-form-section">
-                            <h3 class="footer-title text-3xl font-medium mb-6 text-accent-cyan">Envie sua Mensagem para a ATOCAMUSIC</h3>
-                            <form class="contact-form space-y-6" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-                                <input type="hidden" name="form-name" value="contact"/>
-                                <p class="hidden">
-                                    <label>
-                                        Não preencha este campo: <input name="bot-field"/>
-                                    </label>
-                                </p>
-                                <div class="form-group">
-                                    <label for="name" class="sr-only">Nome Completo</label>
-                                    <input type="text" id="name" name="name" class="form-control w-full p-4 rounded-lg bg-glass-bg border border-glass-border text-text-light placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent-cyan transition-colors duration-300" placeholder="Seu Nome Completo" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="email" class="sr-only">Seu Melhor E-mail</label>
-                                    <input type="email" id="email" name="email" class="form-control w-full p-4 rounded-lg bg-glass-bg border border-glass-border text-text-light placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent-cyan transition-colors duration-300" placeholder="Seu Melhor E-mail" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="phone" class="sr-only">Telefone (Opcional)</label>
-                                    <input type="tel" id="phone" name="phone" class="form-control w-full p-4 rounded-lg bg-glass-bg border border-glass-border text-text-light placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent-cyan transition-colors duration-300" placeholder="Seu Telefone (Opcional)">
-                                </div>
-                                <div class="form-group">
-                                    <label for="subject" class="sr-only">Assunto da Mensagem</label>
-                                    <input type="text" id="subject" name="subject" class="form-control w-full p-4 rounded-lg bg-glass-bg border border-glass-border text-text-light placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent-cyan transition-colors duration-300" placeholder="Assunto (Ex: Orçamento de Mixagem)" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="message" class="sr-only">Sua Mensagem</label>
-                                    <textarea id="message" name="message" class="form-control w-full p-4 rounded-lg bg-glass-bg border border-glass-border text-text-light placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent-cyan transition-colors duration-300 min-h-[120px]" rows="5" placeholder="Descreva seu projeto ou dúvida..." required></textarea>
-                                </div>
-                                <button type="submit" class="btn btn--primary w-full py-4 text-xl font-semibold rounded-full relative overflow-hidden group">
-                                    Enviar Mensagem
-                                <span class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <!-- Direitos Autorais -->
-                <div class="footer-bottom text-center text-text-muted text-sm mt-12 pt-8 border-t border-glass-border">
-                    <p>
-                        &copy;2025 ATOCAMUSIC. Todos os direitos reservados. | <a href="/politica-de-privacidade.html" class="text-text-muted hover:text-accent-cyan transition-colors duration-300 underline">Política de Privacidade</a>
-                    </p>
-                </div>
+      </a>
+
+      <nav class="hidden items-center gap-7 lg:flex">
+        <a href="#servicos" class="text-sm font-medium text-muted transition hover:text-white">Serviços</a>
+        <a href="#processo" class="text-sm font-medium text-muted transition hover:text-white">Como funciona</a>
+        <a href="#portfolio" class="text-sm font-medium text-muted transition hover:text-white">Portfólio</a>
+        <a href="#faq" class="text-sm font-medium text-muted transition hover:text-white">FAQ</a>
+        <a href="#contato" class="text-sm font-medium text-muted transition hover:text-white">Contato</a>
+      </nav>
+
+      <div class="hidden lg:block">
+        <a href="https://wa.me/5561982115374?text=Olá%2C%20vim%20pelo%20site%20da%20ATOCAMUSIC%20e%20quero%20um%20orçamento." target="_blank" rel="noopener" class="inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-brand-950 transition hover:scale-[1.02] hover:shadow-soft">
+          <span>Falar no WhatsApp</span>
+        </a>
+      </div>
+
+      <button id="menuBtn" class="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 text-white lg:hidden" aria-label="Abrir menu">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
+
+    <div id="mobileMenu" class="hidden border-t border-white/10 bg-brand-950/95 lg:hidden">
+      <div class="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-5 sm:px-6">
+        <a href="#servicos" class="text-base text-muted">Serviços</a>
+        <a href="#processo" class="text-base text-muted">Como funciona</a>
+        <a href="#portfolio" class="text-base text-muted">Portfólio</a>
+        <a href="#faq" class="text-base text-muted">FAQ</a>
+        <a href="#contato" class="text-base text-muted">Contato</a>
+        <a href="https://wa.me/5561982115374?text=Olá%2C%20vim%20pelo%20site%20da%20ATOCAMUSIC%20e%20quero%20um%20orçamento." target="_blank" rel="noopener" class="mt-2 inline-flex justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-brand-950">Falar no WhatsApp</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="inicio" class="section-anchor">
+      <div class="mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:px-8 lg:py-28">
+        <div>
+          <div class="mb-6 inline-flex items-center gap-2 rounded-full border border-brand-400/30 bg-brand-500/10 px-4 py-2 text-sm text-brand-300">
+            <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+            Atendimento em Brasília, Brazlândia e todo o DF
+          </div>
+          <h1 class="max-w-3xl text-4xl font-black leading-tight text-white sm:text-5xl lg:text-6xl">
+            Sua música pronta para <span class="text-brand-400">soar profissional</span>, ser lançada e crescer com estratégia.
+          </h1>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-muted sm:text-xl">
+            Produção musical, gravação, mixagem, masterização, distribuição digital, licenciamento de covers e assessoria artística para quem quer sair do improviso e lançar com segurança.
+          </p>
+
+          <div class="mt-8 flex flex-col gap-4 sm:flex-row">
+            <a href="https://wa.me/5561982115374?text=Olá%2C%20quero%20um%20orçamento%20para%20meu%20projeto%20musical." target="_blank" rel="noopener" class="inline-flex items-center justify-center rounded-full bg-white px-7 py-4 text-base font-bold text-brand-950 transition hover:scale-[1.02] hover:shadow-soft">
+              Solicitar orçamento
+            </a>
+            <a href="#servicos" class="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-7 py-4 text-base font-semibold text-white transition hover:bg-white/10">
+              Ver serviços
+            </a>
+          </div>
+
+          <div class="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <div class="glass rounded-2xl p-4 shadow-soft">
+              <div class="text-sm font-semibold text-white">Atendimento local</div>
+              <div class="mt-1 text-sm text-muted">Brasília e Distrito Federal</div>
             </div>
-        </footer>
-        <!-- Modal de Newsletter -->
-        <div id="newsletter-modal" class="modal-overlay fixed inset-0 bg-black bg-opacity-80 backdrop-blur-xl z-[999] flex items-center justify-center opacity-0 invisible transition-all duration-300">
-            <div class="modal-content glass-card p-8 md:p-10 max-w-lg w-11/12 rounded-3xl text-center relative transform translate-y-8 opacity-0 transition-all duration-300">
-                <button class="close-modal-btn absolute top-4 right-4 text-text-muted text-4xl leading-none bg-transparent border-none cursor-pointer p-2 hover:text-accent-cyan transform hover:rotate-90 transition-all duration-300" aria-label="Fechar">×</button>
-                <h3 class="modal-title text-3xl font-medium mb-4 text-accent-cyan">Receba Nossas Novidades Musicais!</h3>
-                <p class="modal-description text-text-muted text-lg mb-8 leading-relaxed">Fique por dentro dos lançamentos, dicas exclusivas e promoções da ATOCAMUSIC.</p>
-                <form class="newsletter-form space-y-6" name="newsletter" method="POST" data-netlify="true">
-                    <input type="hidden" name="form-name" value="newsletter"/>
-                    <p class="hidden">
-                        <label>
-                            Não preencha este campo: <input name="bot-field"/>
-                        </label>
-                    </p>
-                    <div class="form-group">
-                        <label for="newsletter-email" class="sr-only">Seu E-mail</label>
-                        <input type="email" id="newsletter-email" name="email" class="form-control w-full p-4 rounded-lg bg-glass-bg border border-glass-border text-text-light placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent-cyan transition-colors duration-300" placeholder="Seu E-mail" required>
-                    </div>
-                    <button type="submit" class="btn btn--primary w-full py-4 text-xl font-semibold rounded-full relative overflow-hidden group">
-                        Assinar Newsletter
-                    <span class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
-                    </button>
-                </form>
+            <div class="glass rounded-2xl p-4 shadow-soft">
+              <div class="text-sm font-semibold text-white">Lançamento assistido</div>
+              <div class="mt-1 text-sm text-muted">Do áudio à distribuição</div>
             </div>
+            <div class="glass rounded-2xl p-4 shadow-soft">
+              <div class="text-sm font-semibold text-white">Suporte estratégico</div>
+              <div class="mt-1 text-sm text-muted">Para artistas independentes</div>
+            </div>
+          </div>
         </div>
-        <!-- Link para o arquivo JavaScript (app.js) -->
-        <script src="app.js"></script>
-    </body>
+
+        <div class="relative">
+          <div class="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-brand-500/20 to-gold/10 blur-3xl"></div>
+          <div class="glass relative overflow-hidden rounded-[2rem] p-5 shadow-glow">
+            <div class="rounded-[1.5rem] border border-white/10 bg-gradient-to-br from-white/8 to-white/3 p-6">
+              <div class="mb-5 flex items-center justify-between">
+                <div>
+                  <div class="text-xs uppercase tracking-[0.26em] text-brand-300">ATOCAMUSIC</div>
+                  <div class="mt-2 text-2xl font-bold text-white">Estrutura para quem quer lançar de verdade</div>
+                </div>
+                <span class="rounded-full bg-emerald-400/15 px-3 py-1 text-xs font-semibold text-emerald-300">online + presencial</span>
+              </div>
+              <div class="grid gap-4">
+                <div class="rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <div class="text-sm font-semibold text-white">1. Produção e gravação</div>
+                  <p class="mt-1 text-sm text-muted">Captação, arranjo e direção para transformar ideia em faixa profissional.</p>
+                </div>
+                <div class="rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <div class="text-sm font-semibold text-white">2. Mix e master</div>
+                  <p class="mt-1 text-sm text-muted">Finalização com padrão comercial para streaming, redes e distribuição.</p>
+                </div>
+                <div class="rounded-2xl border border-white/10 bg-black/20 p-4">
+                  <div class="text-sm font-semibold text-white">3. Lançamento e regularização</div>
+                  <p class="mt-1 text-sm text-muted">Distribuição, covers, cadastro e orientação para evitar erros no lançamento.</p>
+                </div>
+              </div>
+              <a href="https://wa.me/5561982115374?text=Olá%2C%20quero%20entender%20qual%20serviço%20faz%20mais%20sentido%20para%20mim." target="_blank" rel="noopener" class="mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-brand-500 px-5 py-4 text-sm font-bold text-white transition hover:bg-brand-400">Quero saber qual serviço é ideal para mim</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-anchor border-y border-white/8 bg-white/[0.02]" aria-label="Diferenciais">
+      <div class="mx-auto grid max-w-7xl gap-6 px-4 py-8 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
+        <div>
+          <div class="text-sm font-semibold text-white">Foco no artista independente</div>
+          <p class="mt-2 text-sm leading-6 text-muted">Serviços pensados para quem quer lançar com qualidade sem depender de grandes estruturas.</p>
+        </div>
+        <div>
+          <div class="text-sm font-semibold text-white">Atendimento consultivo</div>
+          <p class="mt-2 text-sm leading-6 text-muted">Orientação clara sobre etapas, custos, prioridades e próximos passos.</p>
+        </div>
+        <div>
+          <div class="text-sm font-semibold text-white">Operação local no DF</div>
+          <p class="mt-2 text-sm leading-6 text-muted">Facilidade para artistas de Brazlândia, Brasília e cidades do entorno.</p>
+        </div>
+        <div>
+          <div class="text-sm font-semibold text-white">Soluções em um só lugar</div>
+          <p class="mt-2 text-sm leading-6 text-muted">Da produção ao lançamento, com menos ruído e mais agilidade no processo.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="servicos" class="section-anchor py-20 sm:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold uppercase tracking-[0.28em] text-brand-300">Serviços</p>
+          <h2 class="mt-3 text-3xl font-black text-white sm:text-4xl">Soluções para gravar, lançar e organizar sua carreira musical</h2>
+          <p class="mt-4 text-lg leading-8 text-muted">Organizamos os serviços por etapa para o cliente entender mais rápido, comparar melhor e pedir orçamento com menos dúvida.</p>
+        </div>
+
+        <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <article class="glass rounded-3xl p-7 shadow-soft">
+            <div class="mb-4 inline-flex rounded-2xl bg-brand-500/15 px-3 py-2 text-xl">🎵</div>
+            <h3 class="text-xl font-bold text-white">Produção musical completa</h3>
+            <p class="mt-3 text-sm leading-7 text-muted">Arranjo, direção e construção da faixa com visão artística e padrão profissional.</p>
+            <div class="mt-5 text-sm text-muted">A partir de</div>
+            <div class="mt-1 text-3xl font-black text-white">R$ 149</div>
+            <a href="https://wa.link/57vzhq" target="_blank" rel="noopener" class="mt-6 inline-flex w-full justify-center rounded-2xl bg-white px-5 py-3 font-semibold text-brand-950 transition hover:scale-[1.01]">Orçar produção</a>
+          </article>
+
+          <article class="glass rounded-3xl p-7 shadow-soft">
+            <div class="mb-4 inline-flex rounded-2xl bg-brand-500/15 px-3 py-2 text-xl">🎙️</div>
+            <h3 class="text-xl font-bold text-white">Gravação profissional</h3>
+            <p class="mt-3 text-sm leading-7 text-muted">Captação de voz e instrumentos com direção para extrair mais presença e segurança na performance.</p>
+            <div class="mt-5 text-sm text-muted">A partir de</div>
+            <div class="mt-1 text-3xl font-black text-white">R$ 50</div>
+            <a href="https://wa.link/m5tncn" target="_blank" rel="noopener" class="mt-6 inline-flex w-full justify-center rounded-2xl border border-white/10 bg-white/5 px-5 py-3 font-semibold text-white transition hover:bg-white/10">Agendar gravação</a>
+          </article>
+
+          <article class="glass rounded-3xl p-7 shadow-soft">
+            <div class="mb-4 inline-flex rounded-2xl bg-brand-500/15 px-3 py-2 text-xl">🎚️</div>
+            <h3 class="text-xl font-bold text-white">Mixagem e masterização</h3>
+            <p class="mt-3 text-sm leading-7 text-muted">Finalização técnica para sua música soar melhor em plataformas, redes sociais e sistemas de som.</p>
+            <div class="mt-5 text-sm text-muted">A partir de</div>
+            <div class="mt-1 text-3xl font-black text-white">R$ 150</div>
+            <a href="https://wa.link/3u4i4l" target="_blank" rel="noopener" class="mt-6 inline-flex w-full justify-center rounded-2xl border border-white/10 bg-white/5 px-5 py-3 font-semibold text-white transition hover:bg-white/10">Solicitar mix e master</a>
+          </article>
+
+          <article class="glass rounded-3xl p-7 shadow-soft">
+            <div class="mb-4 inline-flex rounded-2xl bg-brand-500/15 px-3 py-2 text-xl">📲</div>
+            <h3 class="text-xl font-bold text-white">Distribuição digital</h3>
+            <p class="mt-3 text-sm leading-7 text-muted">Lançamento em plataformas digitais com acompanhamento para reduzir erros no processo de publicação.</p>
+            <div class="mt-5 text-sm text-muted">Valor fixo</div>
+            <div class="mt-1 text-3xl font-black text-white">R$ 500</div>
+            <a href="https://wa.link/9wgzae" target="_blank" rel="noopener" class="mt-6 inline-flex w-full justify-center rounded-2xl border border-white/10 bg-white/5 px-5 py-3 font-semibold text-white transition hover:bg-white/10">Distribuir agora</a>
+          </article>
+
+          <article class="glass rounded-3xl p-7 shadow-soft">
+            <div class="mb-4 inline-flex rounded-2xl bg-brand-500/15 px-3 py-2 text-xl">📝</div>
+            <h3 class="text-xl font-bold text-white">Licenciamento de cover</h3>
+            <p class="mt-3 text-sm leading-7 text-muted">Orientação e tramitação para covers, com foco em reduzir risco e organizar o lançamento de forma mais segura.</p>
+            <div class="mt-5 text-sm text-muted">A partir de</div>
+            <div class="mt-1 text-3xl font-black text-white">R$ 100</div>
+            <a href="https://wa.link/om81h3" target="_blank" rel="noopener" class="mt-6 inline-flex w-full justify-center rounded-2xl border border-white/10 bg-white/5 px-5 py-3 font-semibold text-white transition hover:bg-white/10">Quero regularizar meu cover</a>
+          </article>
+
+          <article class="glass rounded-3xl border border-brand-400/30 bg-gradient-to-b from-brand-500/10 to-white/[0.02] p-7 shadow-glow">
+            <div class="mb-4 inline-flex rounded-2xl bg-brand-500/20 px-3 py-2 text-xl">📈</div>
+            <div class="mb-3 inline-flex rounded-full border border-brand-400/30 bg-brand-500/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-brand-300">Serviço estratégico</div>
+            <h3 class="text-xl font-bold text-white">Assessoria e gestão musical</h3>
+            <p class="mt-3 text-sm leading-7 text-muted">Diagnóstico, direcionamento e plano de ação para artistas que querem parar de lançar no escuro.</p>
+            <div class="mt-5 text-sm text-muted">A partir de</div>
+            <div class="mt-1 text-3xl font-black text-white">R$ 997</div>
+            <a href="https://wa.link/zej816" target="_blank" rel="noopener" class="mt-6 inline-flex w-full justify-center rounded-2xl bg-white px-5 py-3 font-semibold text-brand-950 transition hover:scale-[1.01]">Agendar consultoria</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="processo" class="section-anchor border-y border-white/8 bg-white/[0.02] py-20 sm:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold uppercase tracking-[0.28em] text-brand-300">Como funciona</p>
+          <h2 class="mt-3 text-3xl font-black text-white sm:text-4xl">Um processo simples para tirar sua música do papel</h2>
+        </div>
+        <div class="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <div class="glass rounded-3xl p-6">
+            <div class="text-4xl font-black text-brand-400">01</div>
+            <h3 class="mt-4 text-lg font-bold text-white">Você chama</h3>
+            <p class="mt-2 text-sm leading-7 text-muted">Envia sua ideia, necessidade ou estágio atual do projeto pelo WhatsApp.</p>
+          </div>
+          <div class="glass rounded-3xl p-6">
+            <div class="text-4xl font-black text-brand-400">02</div>
+            <h3 class="mt-4 text-lg font-bold text-white">Recebe orientação</h3>
+            <p class="mt-2 text-sm leading-7 text-muted">A gente identifica o que faz sentido: gravar, mixar, distribuir ou estruturar melhor o lançamento.</p>
+          </div>
+          <div class="glass rounded-3xl p-6">
+            <div class="text-4xl font-black text-brand-400">03</div>
+            <h3 class="mt-4 text-lg font-bold text-white">Executa com clareza</h3>
+            <p class="mt-2 text-sm leading-7 text-muted">Seu projeto entra em produção com alinhamento de etapas, prazo e entregas.</p>
+          </div>
+          <div class="glass rounded-3xl p-6">
+            <div class="text-4xl font-black text-brand-400">04</div>
+            <h3 class="mt-4 text-lg font-bold text-white">Lança melhor</h3>
+            <p class="mt-2 text-sm leading-7 text-muted">Você evita improviso, ganha padrão profissional e segue com mais direção.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="section-anchor py-20 sm:py-24">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div class="max-w-3xl">
+            <p class="text-sm font-semibold uppercase tracking-[0.28em] text-brand-300">Portfólio</p>
+            <h2 class="mt-3 text-3xl font-black text-white sm:text-4xl">Projetos e artistas atendidos</h2>
+            <p class="mt-4 text-lg leading-8 text-muted">Do estúdio para as plataformas. Conheça as histórias, os áudios e os materiais de divulgação de quem já transformou sua visão artística conosco.</p>
+          </div>
+          <a href="portfolio.html" class="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-6 py-3 font-semibold text-white transition hover:bg-white/10">Ver portfólio completo</a>
+        </div>
+
+        <div class="mt-12 grid gap-6 lg:grid-cols-2">
+          <article class="glass rounded-[2rem] p-6 shadow-soft">
+            <div class="text-xs font-semibold uppercase tracking-[0.26em] text-brand-300">Gospel</div>
+            <h3 class="mt-2 text-2xl font-bold text-white">Louvor e Adoração Vida</h3>
+            <p class="mt-3 text-sm leading-7 text-muted">Projeto com presença digital ativa e catálogo publicado. Com uma trajetória marcada pela dedicação, álbuns gravados na Argentina e uma presença global inegável através de milhões de streams em plataformas digitais.</p>
+            <div class="mt-6 overflow-hidden rounded-2xl border border-white/10">
+              <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/12pSdibAENbtGLJEYhntE5?utm_source=generator" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+            <div class="mt-5 flex flex-wrap gap-3">
+              <a href="https://www.instagram.com/louvoreadoracaovida" target="_blank" rel="noopener" class="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">Instagram</a>
+              <a href="https://www.youtube.com/@louvoreadoracaovida" target="_blank" rel="noopener" class="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">YouTube</a>
+            </div>
+          </article>
+
+          <article class="glass rounded-[2rem] p-6 shadow-soft">
+            <div class="text-xs font-semibold uppercase tracking-[0.26em] text-brand-300">Sertanejo</div>
+            <h3 class="mt-2 text-2xl font-bold text-white">Luiz Gustavo</h3>
+            <p class="mt-3 text-sm leading-7 text-muted">Artista com presença em streaming e rede com uma voz potente e carisma que cativam multidões.</p>
+            <div class="mt-6 overflow-hidden rounded-2xl border border-white/10">
+              <iframe style="border-radius:12px" src="https://open.spotify.com/embed/artist/0QcMU0Kbt2wYTVpRUiCB0S?utm_source=generator" width="100%" height="352" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+            <div class="mt-5 flex flex-wrap gap-3">
+              <a href="https://www.instagram.com/luiizgustavoofc" target="_blank" rel="noopener" class="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">Instagram</a>
+              <a href="https://www.youtube.com/watch?v=NtEe45RUdMo&list=OLAK5uy_kI7IbFkvkqV--JLcFxgAMhD3rTutWAW0I" target="_blank" rel="noopener" class="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">YouTube</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-anchor border-y border-white/8 bg-white/[0.02] py-20 sm:py-24">
+      <div class="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[1.1fr_.9fr] lg:px-8">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.28em] text-brand-300">Sobre a ATOCAMUSIC</p>
+          <h2 class="mt-3 text-3xl font-black text-white sm:text-4xl">Mais do que estúdio: direção para quem quer evoluir na música</h2>
+          <p class="mt-5 text-lg leading-8 text-muted">A nova versão da sua home precisa transmitir maturidade, não só efeito visual. Por isso, esta seção ficou mais objetiva, mais confiável e mais próxima da realidade de quem está contratando no DF.</p>
+          <div class="mt-8 grid gap-4 sm:grid-cols-2">
+            <div class="glass rounded-2xl p-5">
+              <h3 class="text-base font-bold text-white">Missão</h3>
+              <p class="mt-2 text-sm leading-7 text-muted">Ajudar artistas independentes a gravarem, lançarem e estruturarem seus projetos com mais qualidade e menos improviso.</p>
+            </div>
+            <div class="glass rounded-2xl p-5">
+              <h3 class="text-base font-bold text-white">Posicionamento</h3>
+              <p class="mt-2 text-sm leading-7 text-muted">Atendimento em Brasília e no Distrito Federal com linguagem clara, visão prática e foco em resultado real.</p>
+            </div>
+            <div class="glass rounded-2xl p-5">
+              <h3 class="text-base font-bold text-white">Diferencial</h3>
+              <p class="mt-2 text-sm leading-7 text-muted">Unir produção, lançamento e orientação estratégica em uma operação mais simples para o artista.</p>
+            </div>
+            <div class="glass rounded-2xl p-5">
+              <h3 class="text-base font-bold text-white">Importante</h3>
+              <p class="mt-2 text-sm leading-7 text-muted">Troque qualquer texto genérico por nomes, provas, casos e fotos reais. Isso muda seu site de patamar.</p>
+            </div>
+          </div>
+        </div>
+        <div class="glass rounded-[2rem] p-7 shadow-glow">
+          <h3 class="text-2xl font-black text-white">Para quem é</h3>
+          <div class="mt-6 space-y-4">
+            <div class="rounded-2xl border border-white/10 bg-black/20 p-4">
+              <div class="font-semibold text-white">Artista que quer gravar com mais qualidade</div>
+              <p class="mt-1 text-sm text-muted">Ideal para quem já tem música, guia, letra ou ideia pronta e quer profissionalizar o som.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-black/20 p-4">
+              <div class="font-semibold text-white">Quem quer lançar sem erro</div>
+              <p class="mt-1 text-sm text-muted">Bom para quem precisa distribuir, regularizar cover ou entender o caminho certo do lançamento.</p>
+            </div>
+            <div class="rounded-2xl border border-white/10 bg-black/20 p-4">
+              <div class="font-semibold text-white">Quem precisa de direção</div>
+              <p class="mt-1 text-sm text-muted">Perfeito para artistas que sentem que estão fazendo tudo sozinhos e sem clareza.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section-anchor py-20 sm:py-24">
+      <div class="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center">
+          <p class="text-sm font-semibold uppercase tracking-[0.28em] text-brand-300">FAQ</p>
+          <h2 class="mt-3 text-3xl font-black text-white sm:text-4xl">Dúvidas frequentes</h2>
+        </div>
+        <div class="mt-12 space-y-4">
+          <details class="glass rounded-2xl p-6">
+            <summary class="cursor-pointer list-none text-lg font-bold text-white">Vocês atendem apenas presencialmente?</summary>
+            <p class="mt-4 text-sm leading-7 text-muted">Não. Você pode contratar serviços presenciais e também etapas que funcionam de forma remota, dependendo do projeto.</p>
+          </details>
+          <details class="glass rounded-2xl p-6">
+            <summary class="cursor-pointer list-none text-lg font-bold text-white">Quem está no DF pode visitar o estúdio?</summary>
+            <p class="mt-4 text-sm leading-7 text-muted">Sim. O ideal é trabalhar com agendamento para alinhar disponibilidade e tipo de atendimento desejado.</p>
+          </details>
+          <details class="glass rounded-2xl p-6">
+            <summary class="cursor-pointer list-none text-lg font-bold text-white">Vocês ajudam com cover e direitos autorais?</summary>
+            <p class="mt-4 text-sm leading-7 text-muted">Sim. Há serviços específicos de orientação para covers, licenciamento e encaminhamento de questões ligadas à regularização e proteção da obra.</p>
+          </details>
+          <details class="glass rounded-2xl p-6">
+            <summary class="cursor-pointer list-none text-lg font-bold text-white">Posso pedir orçamento mesmo sem entender exatamente o que preciso?</summary>
+            <p class="mt-4 text-sm leading-7 text-muted">Sim. Essa é uma das funções do atendimento consultivo: entender seu momento e indicar o caminho mais adequado.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="section-anchor border-t border-white/8 bg-white/[0.02] py-20 sm:py-24">
+      <div class="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[.9fr_1.1fr] lg:px-8">
+        <div class="glass rounded-[2rem] p-8 shadow-soft">
+          <p class="text-sm font-semibold uppercase tracking-[0.28em] text-brand-300">Contato</p>
+          <h2 class="mt-3 text-3xl font-black text-white">Fale com a ATOCAMUSIC</h2>
+          <p class="mt-4 text-base leading-7 text-muted">Se você está em Brasília, Brazlândia ou em qualquer cidade do DF, pode chamar para orçamento, orientação ou agendamento.</p>
+
+          <div class="mt-8 space-y-5 text-sm text-muted">
+            <div>
+              <div class="font-semibold text-white">WhatsApp</div>
+              <a href="https://wa.me/5561982115374" target="_blank" rel="noopener" class="mt-1 inline-block hover:text-white">(61) 98211-5374</a>
+            </div>
+            <div>
+              <div class="font-semibold text-white">E-mail</div>
+              <a href="mailto:gravadoraatocamusic@gmail.com" class="mt-1 inline-block hover:text-white">gravadoraatoca@gmail.com</a>
+            </div>
+            <div>
+              <div class="font-semibold text-white">Localização</div>
+              <a href="https://www.google.com/maps/place/ATOCAMUSIC/@-15.6829581,-48.200547,17z" target="_blank" rel="noopener" class="mt-1 inline-block hover:text-white">Setor Tradicional, Brazlândia - DF</a>
+            </div>
+          </div>
+
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="https://www.instagram.com/atoca.music" target="_blank" rel="noopener" class="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">Instagram</a>
+            <a href="https://www.tiktok.com/@atoca.music" target="_blank" rel="noopener" class="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">TikTok</a>
+            <a href="https://www.youtube.com/@atocamusic" target="_blank" rel="noopener" class="rounded-full border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">YouTube</a>
+          </div>
+        </div>
+
+        <div class="glass rounded-[2rem] p-8 shadow-glow">
+          <h3 class="text-2xl font-black text-white">Envie sua mensagem</h3>
+          <p class="mt-3 text-sm leading-7 text-muted">Formulário mais limpo, sem excesso visual e com foco em resposta comercial rápida.</p>
+          <form class="mt-8 space-y-5" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+            <input type="hidden" name="form-name" value="contact" />
+            <p class="hidden"><label>Não preencha este campo: <input name="bot-field" /></label></p>
+            <div class="grid gap-5 sm:grid-cols-2">
+              <input type="text" name="name" placeholder="Seu nome" required class="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-4 text-white placeholder:text-muted outline-none transition focus:border-brand-400" />
+              <input type="tel" name="phone" placeholder="Seu WhatsApp" class="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-4 text-white placeholder:text-muted outline-none transition focus:border-brand-400" />
+            </div>
+            <input type="email" name="email" placeholder="Seu e-mail" required class="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-4 text-white placeholder:text-muted outline-none transition focus:border-brand-400" />
+            <input type="text" name="subject" placeholder="Assunto" required class="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-4 text-white placeholder:text-muted outline-none transition focus:border-brand-400" />
+            <textarea name="message" rows="6" placeholder="Me conte sobre seu projeto" required class="w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-4 text-white placeholder:text-muted outline-none transition focus:border-brand-400"></textarea>
+            <button type="submit" class="inline-flex w-full justify-center rounded-2xl bg-white px-6 py-4 text-base font-bold text-brand-950 transition hover:scale-[1.01]">Enviar mensagem</button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/8 py-8">
+    <div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 text-sm text-muted sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+      <p>© 2026 ATOCAMUSIC. Todos os direitos reservados.</p>
+      <div class="flex gap-5">
+        <a href="/politica-de-privacidade.html" class="hover:text-white">Política de Privacidade</a>
+        <a href="/termos-de-uso.html" class="hover:text-white">Termos de Uso</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (menuBtn && mobileMenu) {
+      menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+      mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+      });
+    }
+  </script>
+</body>
 </html>
