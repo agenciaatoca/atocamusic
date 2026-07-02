@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop: O Desafio de Começar - Brazlândia-DF</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#0f172a', // Slate 900
+                            darker: '#020617', // Slate 950
+                            primary: '#ea580c', // Orange 600 (Burnt Orange)
+                            primaryHover: '#f97316', // Orange 500
+                            accent: '#22c55e' // Green for Whatsapp/Neon details
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom Styles for extra polish */
+        .gradient-text {
+            background: linear-gradient(135deg, #f97316, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .bg-studio {
+            background-image: linear-gradient(to bottom, rgba(2, 6, 23, 0.8), rgba(2, 6, 23, 1)), url('https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .glow-effect:hover {
+            box-shadow: 0 0 25px rgba(234, 88, 12, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-brand-darker text-slate-200 font-sans antialiased selection:bg-brand-primary selection:text-white">
+
+    <!-- SEÇÃO 1: HERO - A PRIMEIRA IMPRESSÃO -->
+    <header class="relative min-h-screen flex items-center justify-center pt-10 pb-16 px-4 bg-studio">
+        <div class="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center">
+            
+            <span class="inline-block py-1 px-3 rounded-full bg-brand-primary/20 text-brand-primary font-semibold text-sm uppercase tracking-wider mb-6 border border-brand-primary/30 shadow-[0_0_15px_rgba(234,88,12,0.3)]">
+                Apenas para quem deseja dar o primeiro passo real na música neste ano.
+            </span>
+            
+            <h1 class="text-4xl md:text-5xl lg:text-7xl font-heading font-900 text-white leading-tight mb-6 tracking-tight">
+                O Mapa Definitivo Para Tirar o Seu <span class="gradient-text">Talento Musical</span> do Papel.
+            </h1>
+            
+            <p class="text-lg md:text-xl text-slate-300 font-light max-w-2xl mx-auto mb-8">
+                (Sem Se Perder no Caminho). Aprenda os passos exatos com produtores e músicos profissionais em uma tarde de imersão presencial em Brazlândia-DF. <br class="hidden md:block">
+                <span class="font-semibold text-white mt-2 block">Bônus: os bastidores de como alcançamos mais de 1 Milhão de streams.</span>
+            </p>
+
+            <!-- Info Bar -->
+            <div class="flex flex-col md:flex-row items-center justify-center gap-6 bg-slate-900/60 backdrop-blur-md border border-slate-700/50 rounded-2xl p-6 mb-10 w-full max-w-3xl">
+                <div class="flex items-center gap-3">
+                    <i class="fa-regular fa-calendar-check text-2xl text-brand-primary"></i>
+                    <div class="text-left">
+                        <p class="text-xs text-slate-400 uppercase tracking-wide">Data</p>
+                        <p class="font-bold text-white">11 de Julho de 2026</p>
+                    </div>
+                </div>
+                <div class="hidden md:block w-px h-10 bg-slate-700"></div>
+                <div class="flex items-center gap-3">
+                    <i class="fa-regular fa-clock text-2xl text-brand-primary"></i>
+                    <div class="text-left">
+                        <p class="text-xs text-slate-400 uppercase tracking-wide">Horário</p>
+                        <p class="font-bold text-white">14h às 18h</p>
+                    </div>
+                </div>
+                <div class="hidden md:block w-px h-10 bg-slate-700"></div>
+                <div class="flex items-center gap-3">
+                    <i class="fa-solid fa-location-dot text-2xl text-brand-primary"></i>
+                    <div class="text-left">
+                        <p class="text-xs text-slate-400 uppercase tracking-wide">Local</p>
+                        <p class="font-bold text-white">Brazlândia-DF</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA -->
+            <a href="#checkout" class="group relative inline-flex items-center justify-center gap-3 bg-brand-primary hover:bg-brand-primaryHover text-white font-heading font-bold text-lg md:text-xl py-5 px-10 rounded-full transition-all duration-300 transform hover:scale-105 glow-effect w-full md:w-auto">
+                <span>QUERO GARANTIR MEU INGRESSO POR R$ 50</span>
+                <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i>
+            </a>
+            <p class="mt-4 text-sm text-slate-400 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-lock text-xs"></i> Compra 100% Segura. Vagas limitadas.
+            </p>
+        </div>
+    </header>
+
+    <!-- SEÇÃO 2: AGITAÇÃO DA DOR -->
+    <section class="py-20 px-4 bg-brand-dark">
+        <div class="max-w-5xl mx-auto flex flex-col lg:flex-row items-center gap-12">
+            <div class="w-full lg:w-1/2">
+                <div class="relative rounded-2xl overflow-hidden border border-slate-700/50 shadow-2xl">
+                    <img src="https://images.unsplash.com/photo-1516280440502-65f653457a3e?q=80&w=1000&auto=format&fit=crop" alt="Músico frustrado tocando violão" class="w-full h-auto object-cover opacity-80 mix-blend-luminosity hover:mix-blend-normal transition-all duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-transparent to-transparent"></div>
+                </div>
+            </div>
+            
+            <div class="w-full lg:w-1/2">
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white mb-6">
+                    Por que começar na música parece tão <span class="text-brand-primary">difícil?</span>
+                </h2>
+                <p class="text-lg text-slate-300 mb-8 leading-relaxed">
+                    Você tem o desejo, talvez até tenha o instrumento, mas na hora de agir, a dúvida paralisa. Você se pergunta: <span class="italic text-white">Por onde eu começo? Preciso de dom? Como entro no mercado sem parecer amador?</span>
+                </p>
+                
+                <ul class="space-y-5 mb-8">
+                    <li class="flex items-start gap-4 p-4 rounded-xl bg-slate-800/50 border border-slate-700/30">
+                        <i class="fa-solid fa-circle-xmark text-red-500 text-xl mt-1 shrink-0"></i>
+                        <p class="text-slate-200">Você se sente estagnado tentando aprender sozinho no YouTube sem um método claro.</p>
+                    </li>
+                    <li class="flex items-start gap-4 p-4 rounded-xl bg-slate-800/50 border border-slate-700/30">
+                        <i class="fa-solid fa-circle-xmark text-red-500 text-xl mt-1 shrink-0"></i>
+                        <p class="text-slate-200">Não sabe como se posicionar como artista ou gravar suas primeiras músicas.</p>
+                    </li>
+                    <li class="flex items-start gap-4 p-4 rounded-xl bg-slate-800/50 border border-slate-700/30">
+                        <i class="fa-solid fa-circle-xmark text-red-500 text-xl mt-1 shrink-0"></i>
+                        <p class="text-slate-200">Tem medo de investir tempo e dinheiro no caminho errado e se frustrar.</p>
+                    </li>
+                </ul>
+                
+                <div class="p-5 border-l-4 border-brand-primary bg-brand-primary/10 rounded-r-xl">
+                    <p class="font-semibold text-white text-lg">
+                        O Workshop <span class="text-brand-primary">"O Desafio de Começar"</span> foi criado exatamente para quebrar essa barreira de uma vez por todas.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 3: O CONTEÚDO E O CASE DE SUCESSO -->
+    <section class="py-20 px-4 bg-brand-darker relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-brand-primary/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+        
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-heading font-bold text-white mb-4">O que você vai descobrir nesta <br class="hidden md:block">imersão de <span class="gradient-text">4 horas:</span></h2>
+            </div>
+
+            <!-- Content Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <!-- Card 1 -->
+                <div class="bg-slate-900 border border-slate-800 p-8 rounded-2xl hover:border-brand-primary/50 transition-colors duration-300">
+                    <div class="w-14 h-14 bg-brand-primary/20 text-brand-primary rounded-xl flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-brain"></i>
+                    </div>
+                    <h3 class="text-xl font-heading font-bold text-white mb-3">Mentalidade Musical</h3>
+                    <p class="text-slate-400">Descubra como vencer a trava do iniciante, perder o medo da exposição e preparar sua mente para viver de música.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-slate-900 border border-slate-800 p-8 rounded-2xl hover:border-brand-primary/50 transition-colors duration-300">
+                    <div class="w-14 h-14 bg-brand-primary/20 text-brand-primary rounded-xl flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-map-location-dot"></i>
+                    </div>
+                    <h3 class="text-xl font-heading font-bold text-white mb-3">O Caminho Prático</h3>
+                    <p class="text-slate-400">Saiba exatamente o que estudar primeiro, como organizar sua rotina de evolução e evitar vícios amadores.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-slate-900 border border-slate-800 p-8 rounded-2xl hover:border-brand-primary/50 transition-colors duration-300">
+                    <div class="w-14 h-14 bg-brand-primary/20 text-brand-primary rounded-xl flex items-center justify-center text-2xl mb-6">
+                        <i class="fa-solid fa-sliders"></i>
+                    </div>
+                    <h3 class="text-xl font-heading font-bold text-white mb-3">Estúdio e Mercado</h3>
+                    <p class="text-slate-400">Entenda de forma clara como funciona o mundo real da produção musical e o que é necessário para gravar com qualidade.</p>
+                </div>
+            </div>
+
+            <!-- Highlight Box: Case Study -->
+            <div class="bg-gradient-to-br from-orange-600 to-amber-600 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+                <div class="absolute -bottom-10 -right-10 opacity-20 transform rotate-12">
+                    <i class="fa-brands fa-spotify text-9xl"></i>
+                </div>
+                <div class="relative z-10 flex flex-col md:flex-row items-center gap-8">
+                    <div class="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center shrink-0">
+                        <i class="fa-solid fa-trophy text-4xl text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-bold text-white mb-2 uppercase tracking-wide">Estudo de Caso Exclusivo</h3>
+                        <h4 class="text-2xl md:text-4xl font-heading font-900 text-white mb-4">Os bastidores do Louvor e Adoração Vida</h4>
+                        <p class="text-orange-100 text-lg md:text-xl">
+                            Vamos abrir o jogo e mostrar exatamente a estratégia que usamos para ultrapassar a impressionante marca de <strong class="text-white bg-black/20 px-2 py-1 rounded-md">+1 MILHÃO DE STREAMS</strong>. O que deu certo, o que deu errado e como você pode aplicar.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 4: QUEM VAI TE GUIAR (Palestrantes) -->
+    <section class="py-20 px-4 bg-brand-dark">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-heading font-bold text-white">Aprenda com quem vive de música <span class="text-brand-primary">na prática:</span></h2>
+                <div class="w-24 h-1 bg-brand-primary mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Palestrante 1 -->
+                <div class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800 text-center flex flex-col items-center hover:-translate-y-2 transition-transform duration-300">
+                    <img src="https://placehold.co/400x400/1e293b/ea580c?text=Amanda" alt="Amanda Miranda" class="w-32 h-32 rounded-full object-cover mb-6 border-4 border-slate-800 shadow-xl">
+                    <h3 class="text-xl font-bold text-white mb-1">Amanda Miranda</h3>
+                    <p class="text-brand-primary font-medium text-sm mb-4">Cantora e Compositora</p>
+                    <p class="text-slate-400 text-sm">A voz e a vivência de palco para te ajudar a encontrar sua própria identidade musical autêntica.</p>
+                </div>
+
+                <!-- Palestrante 2 -->
+                <div class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800 text-center flex flex-col items-center hover:-translate-y-2 transition-transform duration-300">
+                    <img src="https://placehold.co/400x400/1e293b/ea580c?text=Diekson" alt="Diekson Rosa" class="w-32 h-32 rounded-full object-cover mb-6 border-4 border-slate-800 shadow-xl">
+                    <h3 class="text-xl font-bold text-white mb-1">Diekson Rosa</h3>
+                    <p class="text-brand-primary font-medium text-sm mb-4">Produtor & Arquiteto Artístico</p>
+                    <p class="text-slate-400 text-sm">A visão técnica e estratégica de bastidores para posicionar seu talento no mercado de forma correta.</p>
+                </div>
+
+                <!-- Palestrante 3 -->
+                <div class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800 text-center flex flex-col items-center hover:-translate-y-2 transition-transform duration-300">
+                    <img src="https://placehold.co/400x400/1e293b/ea580c?text=Gabriel" alt="Gabriel Santos" class="w-32 h-32 rounded-full object-cover mb-6 border-4 border-slate-800 shadow-xl">
+                    <h3 class="text-xl font-bold text-white mb-1">Gabriel Santos</h3>
+                    <p class="text-brand-primary font-medium text-sm mb-4">Músico e Produtor</p>
+                    <p class="text-slate-400 text-sm">A ponte essencial entre a teoria musical, a execução prática e a gravação de excelência profissional.</p>
+                </div>
+
+                <!-- Palestrante 4 -->
+                <div class="bg-slate-900/50 p-6 rounded-2xl border border-slate-800 text-center flex flex-col items-center hover:-translate-y-2 transition-transform duration-300">
+                    <img src="https://placehold.co/400x400/1e293b/ea580c?text=Gustavo" alt="Gustavo Gomes" class="w-32 h-32 rounded-full object-cover mb-6 border-4 border-slate-800 shadow-xl">
+                    <h3 class="text-xl font-bold text-white mb-1">Gustavo Gomes</h3>
+                    <p class="text-brand-primary font-medium text-sm mb-4">Baterista</p>
+                    <p class="text-slate-400 text-sm">O pulso, a disciplina rítmica e a energia necessária para se destacar tocando em conjunto.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 5: PREÇO E ESCASSEZ -->
+    <section id="checkout" class="py-20 px-4 bg-brand-darker">
+        <div class="max-w-4xl mx-auto bg-slate-900 border-2 border-brand-primary/30 rounded-3xl p-8 md:p-14 text-center shadow-[0_0_40px_rgba(234,88,12,0.1)] relative overflow-hidden">
+            
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 bg-brand-primary text-white font-bold py-1 px-6 rounded-b-xl text-sm tracking-wider shadow-lg">
+                VAGAS LIMITADAS
+            </div>
+
+            <h2 class="text-3xl md:text-5xl font-heading font-900 text-white mt-4 mb-6">O seu acesso aos bastidores da música local.</h2>
+            
+            <p class="text-lg text-slate-400 mb-8 max-w-2xl mx-auto">
+                Você terá acesso a 4 horas de conteúdo direto, networking com profissionais da área e o passo a passo para começar sem erros.
+            </p>
+            
+            <div class="mb-10 flex flex-col items-center justify-center">
+                <span class="text-slate-400 font-medium mb-2">Ingresso Único:</span>
+                <div class="flex items-start justify-center gap-1">
+                    <span class="text-2xl font-bold text-brand-primary mt-2">R$</span>
+                    <span class="text-7xl font-heading font-900 text-white tracking-tighter">50</span>
+                    <span class="text-2xl font-bold text-brand-primary mt-8">,00</span>
+                </div>
+            </div>
+
+            <a href="#" class="group relative inline-flex w-full md:w-auto items-center justify-center gap-3 bg-brand-primary hover:bg-brand-primaryHover text-white font-heading font-bold text-xl md:text-2xl py-6 px-12 rounded-full transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(234,88,12,0.4)] mb-8">
+                <span>COMPRAR INGRESSO AGORA</span>
+                <i class="fa-solid fa-cart-shopping"></i>
+            </a>
+
+            <!-- Alerta de Escassez -->
+            <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-5 flex items-start md:items-center gap-4 text-left max-w-2xl mx-auto">
+                <div class="bg-red-500/20 text-red-500 p-3 rounded-full shrink-0">
+                    <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+                </div>
+                <div>
+                    <h4 class="font-bold text-red-400 mb-1">ATENÇÃO: Lotação do Espaço</h4>
+                    <p class="text-slate-300 text-sm">Como o evento é presencial, a capacidade do auditório/espaço é <strong>estritamente limitada</strong>. As vagas podem esgotar antes da data.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO 6: REALIZAÇÃO E DÚVIDAS -->
+    <footer class="bg-[#050810] pt-16 pb-8 px-4 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto">
+            
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-12 mb-16">
+                <!-- Logos Realização -->
+                <div class="w-full md:w-1/2">
+                    <h4 class="text-slate-500 text-sm uppercase tracking-widest font-semibold mb-6">Realização</h4>
+                    <div class="flex flex-wrap items-center gap-8">
+                        <div class="text-xl font-heading font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-leaf text-brand-primary"></i> Instituto Fonte Viva
+                        </div>
+                        <div class="text-xl font-heading font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-record-vinyl text-brand-primary"></i> Atoca Music
+                        </div>
+                        <div class="text-xl font-heading font-bold text-white flex items-center gap-2">
+                            <i class="fa-solid fa-water text-brand-primary"></i> Wave Escola
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Simples -->
+                <div class="w-full md:w-1/2">
+                    <h4 class="text-white text-xl font-bold mb-6 border-b border-slate-800 pb-2">Dúvidas Frequentes</h4>
+                    <div class="space-y-4">
+                        <div>
+                            <h5 class="text-brand-primary font-semibold mb-1"><i class="fa-solid fa-circle-question text-sm mr-2"></i>Preciso saber tocar?</h5>
+                            <p class="text-slate-400 text-sm">Não. O workshop foi estruturado justamente para quem quer dar os primeiros passos na música, do absoluto zero.</p>
+                        </div>
+                        <div>
+                            <h5 class="text-brand-primary font-semibold mb-1"><i class="fa-solid fa-ticket text-sm mr-2"></i>Como recebo o ingresso?</h5>
+                            <p class="text-slate-400 text-sm">Assim que o pagamento for confirmado, você receberá o comprovante e as instruções diretamente no seu e-mail e WhatsApp.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center pt-8 border-t border-slate-800/50">
+                <p class="text-slate-600 text-sm">© 2026 Wave Escola de Música & Atoca. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botão de Suporte Flutuante (WhatsApp) -->
+    <a href="https://api.whatsapp.com/send/?phone=5561982115374&text=Ol%C3%A1%2C+gostaria+de+mais+informa%C3%A7%C3%B5es+sobre+o+Workshop:+O+Desafio+de+Come%C3%A7ar.&type=phone_number&app_absent=0"_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 bg-brand-accent hover:bg-green-500 text-white px-5 py-3 rounded-full shadow-2xl flex items-center gap-3 transition-transform hover:scale-110 z-50 group border border-green-400/30">
+        <i class="fa-brands fa-whatsapp text-2xl"></i>
+        <span class="font-semibold hidden md:block max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 whitespace-nowrap">
+            Dúvidas? Chame no WhatsApp
+        </span>
+    </a>
+
+</body>
+</html>
